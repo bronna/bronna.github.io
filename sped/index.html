@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+        
+        <title>Special Education Inclusion Data Explorer</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+        
+        <!-- <link rel="stylesheet" href="./../css/styles.css"> -->
+
+        <style>
+
+            .observablehq { margin: 20px; }
+            .observablehq > :only-child { display: block; }
+
+            body {
+                color: #555555;
+                font-family: 'Inter', sans-serif;
+            }
+            svg {
+                overflow: visible;
+            }
+
+            h1 {
+                margin: 80px 0 50px 53px;
+            }
+
+            #observablehq-legendChart-59022193 {
+                width: 400px;
+                margin: auto;
+                padding: 50px;
+            }
+
+            #observablehq-viewof-numberRange-59022193 {
+                width: 400px;
+                margin: auto;
+                text-align: center;
+                padding: 50px;
+            }
+
+            .range {
+                margin: 80px 0 50px 53px;
+            }
+
+            .tooltip {
+                box-sizing: border-box;
+                position: absolute;
+                display: none;
+                top: 0;
+                left: -100000000px;
+                padding: 10px 14px;
+                font-size: 14px;
+                background-color: #ffffffef;
+                border-radius: 10px;
+                line-height: 1.6em;
+            }
+            .tooltip p {
+                margin: 0;
+            }
+
+            footer {
+                margin: 50px;
+            }
+
+            footer a {
+                text-decoration: none;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+
+        <header>
+            <h1>How Inclusive is Special Education in Oregon?</h1>
+        </header>
+        
+        <section id="charts">
+            <div id="observablehq-legendChart-59022193"></div>
+            <div id="observablehq-viewof-numberRange-59022193"></div>
+            <div id="observablehq-donutCharts-59022193"></div>
+        </section>
+
+        <footer>
+            <a href="https://www.ode.state.or.us/data/reportcard/media.aspx">Data</a> |
+            <a href="https://observablehq.com/@bronna/sped">Source Code</a> |
+            <a href="https://github.com/bronna/sped-news-app">Methodology</a>
+            <p>Contact: bronna@gmail.com</p>
+            <p>Last updated December 2021 with data from the 2018-2019 school year</p>
+        </footer>
+
+        <script type="module">
+            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js"
+            import define from "https://api.observablehq.com/d/cb705bf323932c69@1733.js?v=3"
+
+            new Runtime().module(define, name => {
+              if (name === "legendChart") return new Inspector(document.querySelector("#observablehq-legendChart-59022193"))
+              if (name === "viewof numberRange") return new Inspector(document.querySelector("#observablehq-viewof-numberRange-59022193"))
+              if (name === "donutCharts") return new Inspector(document.querySelector("#observablehq-donutCharts-59022193"))
+              return ["districtData"].includes(name);
+            });
+        </script>
+
+    </body>
+    
+</html>
+
+
