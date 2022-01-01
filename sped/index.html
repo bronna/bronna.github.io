@@ -6,7 +6,6 @@
         
         <title>Special Education Inclusion Data Explorer</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
         
         <!-- <link rel="stylesheet" href="./../css/styles.css"> -->
@@ -19,35 +18,26 @@
             body {
                 color: #555555;
                 font-family: 'Inter', sans-serif;
+                margin: 0px;
             }
 
             svg {
                 overflow: visible;
             }
 
+            header {
+                margin: 50px;
+                max-width: 700px;
+            }
+
             h1 {
-                margin: 80px 0 50px 53px;
+                font-size: 60px;
+                margin-top: 3px;
+                color: #008b8b;
             }
 
-            #observablehq-legendChart-59022193 {
-                width: 500px;
-                padding: 50px;
-                margin: auto;
-            }
-
-            #observablehq-viewof-numberRange-59022193 {
-                width: 400px;
-                padding: 50px;
-                margin: auto;
-            }
-
-            #observablehq-donutCharts-59022193 {
-                max-width: 800px;
-                margin: auto;
-            }
-
-            .range {
-                margin: 80px 0 50px 53px;
+            header p {
+                line-height: 1.5em;
             }
 
             .tooltip {
@@ -56,19 +46,67 @@
                 display: none;
                 top: 0;
                 left: -100000000px;
-                padding: 10px 14px;
+                padding: 6px 10px;
+                font-family: 'Inter', sans-serif;
                 font-size: 14px;
-                background-color: #ffffffef;
-                border-radius: 10px;
-                line-height: 1.6em;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #008b8b;
+                border-radius: 8px;
+                pointer-events: none;
+                z-index: 1;
+                /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
             }
             .tooltip p {
                 margin: 0;
             }
 
+            .observablehq-viewof-selectedDistrict {
+                display: block;
+                width: 700px;
+                margin: auto;
+            }
+
+            .district:hover {
+                fill: #008b8b80;
+            }
+
+            .observablehq-viewof-numberRange {
+                display: block;
+                width: 400px;
+                margin: auto;
+                padding: 20px 0 20px 0;
+            }
+
+            .observablehq-viewof-numberRange div[style] {
+                font-family: 'Inter', sans-serif !important;
+                font-weight: 400 !important;
+            }
+
+            .observablehq-donutCharts {
+                display: block;
+                max-width: 850px;
+                margin: auto;
+                padding-bottom: 50px;
+            }
+
+            .donutName {
+                font-family: 'Inter', sans-serif;
+            }
+
             footer {
-                margin: 50px;
-                padding-top: 50px;
+                padding: 50px 50px 50px 50px;
+                font-size: 14px;
+                background-color: rgb(236, 236, 236);
+            }
+
+            #settings {
+                padding: 0 0 20px 0;
+            }
+
+            #settings h3 {
+                font-weight: 400;
+                font-size: 20px;
             }
 
             footer a {
@@ -78,6 +116,12 @@
             footer a:hover {
                 text-decoration: underline;
             }
+
+            #data {
+                padding-top: 30px;
+                text-align: center;
+                font-size: 13px;
+            }
             
         </style>
     </head>
@@ -85,34 +129,41 @@
     <body>
 
         <header>
-            <h1>How Inclusive is Special Education in Oregon?</h1>
+            <h1>How Inclusive is Special Education in Your State?</h1>
+            <p>Find inclusion data on the school districts and local education agencies in your state. Currently showing data for the state of Oregon. Coming next: California and Washington</p>
         </header>
         
-        <section id="charts">
-            <div id="observablehq-legendChart-59022193"></div>
-            <div id="observablehq-viewof-numberRange-59022193"></div>
-            
-            <div id="observablehq-donutCharts-59022193"></div>
-        </section>
+        <div id="observablehq-d7aa5850">
+            <div class="observablehq-viewof-selectedDistrict"></div>
+            <div class="observablehq-viewof-numberRange"></div>
+            <div class="observablehq-donutCharts"></div>
+        </div>
 
         <footer>
-            <a href="https://www.ode.state.or.us/data/reportcard/media.aspx">Data</a> |
-            <a href="https://observablehq.com/@bronna/sped">Source Code</a> |
-            <a href="https://github.com/bronna/sped-news-app">Methodology</a>
-            <p>Data is from the 2018-2019 school year</p>
-            <p>Contact: bronna@gmail.com</p>
-            <p>Updated Dec 2021</p>
+            <div id="settings">
+                <h3>Inclusion Definitions</h3>
+                <p><strong>inclusive:</strong> in a regular classroom for more than 80% of the day</p>
+                <p><strong>semi-inclusive:</strong> in a regular classroom for between 40% and 80% of the day</p>
+                <p><strong>non-inclusive:</strong> in a regular classroom for less than 40% of the day</p>
+                <p><strong>separate:</strong> in a setting other than school (e.g. hospital, juvenile detention, etc.)</p>
+            </div>
+
+            <div id="data">
+                <a href="https://www.ode.state.or.us/data/reportcard/media.aspx">Data</a> |
+                <a href="https://observablehq.com/@bronna/sped">Source Code</a> |
+                <a href="https://github.com/bronna/sped-news-app">Methodology</a> |
+                <a href="mailto:bronna@gmail.com">Contact</a>
+                <p>Data is from the 2018-2019 school year, due to disruptions from Covid-19</p>
+            </div>
         </footer>
 
         <script type="module">
-            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js"
-            import define from "https://api.observablehq.com/d/cb705bf323932c69@1733.js?v=3"
-
-            new Runtime().module(define, name => {
-              if (name === "legendChart") return new Inspector(document.querySelector("#observablehq-legendChart-59022193"))
-              if (name === "viewof numberRange") return new Inspector(document.querySelector("#observablehq-viewof-numberRange-59022193"))
-              if (name === "donutCharts") return new Inspector(document.querySelector("#observablehq-donutCharts-59022193"))
-              return ["districtData"].includes(name);
+            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+            import define from "https://api.observablehq.com/@bronna/sped.js?v=3";
+            (new Runtime).module(define, name => {
+              if (name === "viewof selectedDistrict") return Inspector.into("#observablehq-d7aa5850 .observablehq-viewof-selectedDistrict")();
+              if (name === "viewof numberRange") return Inspector.into("#observablehq-d7aa5850 .observablehq-viewof-numberRange")();
+              if (name === "donutCharts") return Inspector.into("#observablehq-d7aa5850 .observablehq-donutCharts")();
             });
         </script>
 
