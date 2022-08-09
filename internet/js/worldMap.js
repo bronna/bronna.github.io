@@ -145,7 +145,7 @@ async function drawMap() {
     const tooltipWorld = d3.select("#tooltipWorld")
     
     function onMouseEnter(datum) {
-        console.log(datum)
+        // console.log(datum)
         tooltipWorld.style("opacity", 1)
         
         const metricValue = metricDataByCountry[countryIdAccessor(datum)]

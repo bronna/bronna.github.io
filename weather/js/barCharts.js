@@ -2,7 +2,7 @@ async function drawBars(data, location) {
 
   // 1. Access data
   const dataset = await d3.json(data)
-  console.log(dataset)
+  // console.log(dataset)
 
   // 2. Create chart dimensions
 
