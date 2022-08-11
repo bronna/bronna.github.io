@@ -153,7 +153,6 @@ footer {
 }
 
 .footer-element {
-    display: inline-block;
     margin-bottom: 60px;
 }
 
@@ -182,6 +181,14 @@ footer {
     .description {
         margin-top: 20px;
     }
+
+    .contact {
+        flex-direction: column;
+    }
+
+    .contactLink {
+        padding-bottom: 12px;
+    }
 }
 
 @media only screen and (min-width: 766px)
@@ -196,5 +203,5 @@ footer {
  }
 
 .contact {
-    display: block;
+    display: flex;
 }
