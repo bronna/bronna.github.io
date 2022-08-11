@@ -13,15 +13,15 @@ body {
 }
 
 header {
-    line-height: .85;
+    line-height: .15;
     margin-bottom: 100px;
     /*border-style: solid;
     border-width: 0 0 4px 0;
     border-color: salmon;*/
 }
 
-.visualizations {
-        align-items: center;
+.big-title {
+    margin-right: 4px;
 }
 
 h1 {
@@ -74,7 +74,6 @@ h3 {
 
 .description {
     display: inline-block;
-    margin-left: 20px;
     vertical-align: middle;
     max-width: 400px;
 }
@@ -174,7 +173,19 @@ footer {
     .about {
         width: 100%;
     }
+
+    .viz {
+        margin-top: 0px;
+        padding-bottom: 40px;
+    }
 }
+
+@media only screen and (min-width: 766px)
+ {  
+    .description {
+        margin-left: 20px;
+    }
+ }
 
 .contact {
     display: block;
