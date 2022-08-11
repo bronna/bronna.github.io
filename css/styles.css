@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    line-height: .15;
+    line-height: 1.15;
     margin-bottom: 100px;
     /*border-style: solid;
     border-width: 0 0 4px 0;
@@ -26,7 +26,7 @@ header {
 
 h1 {
     font-size: 1.5em;
-    display: inline-block;
+
     color: rgba(20.4, 28.6, 100, 0.8);
     font-weight: 900;
     text-transform: uppercase;
@@ -41,7 +41,7 @@ h1 {
 h2 {
     font-weight: 400;
     font-size: 1.3em;
-    display: inline-block;
+
     /* color: rgba(20.4, 28.6, 36.9, 0.6); */
     letter-spacing: 0em;
 }
@@ -53,6 +53,7 @@ h2 {
 
 h3 {
     color: rgba(20.4, 28.6, 100, 0.8);
+    margin-top: 0px;
 }
 
 .header-link {
@@ -62,18 +63,16 @@ h3 {
 
 .image-link {
     text-decoration: none;
-    display: inline-block;
     vertical-align: middle;
 }
 
 .thumbnail {
+    width: 100%;
     max-width: 400px;
-    display: inline-block;
     vertical-align:middle;
 }
 
 .description {
-    display: inline-block;
     vertical-align: middle;
     max-width: 400px;
 }
@@ -85,6 +84,7 @@ h3 {
 }
 
 .viz {
+    display: flex;
     margin: 40px 0;
     border: 0;
 }
@@ -161,7 +161,7 @@ footer {
     text-decoration: none;
     color: rgba(20.4, 28.6, 100, 0.6);
     font-weight: 400;
-    padding: 0 20px 0 0 ;
+    padding: 0 20px 0 0;
 }
 
 .about {
@@ -177,6 +177,10 @@ footer {
     .viz {
         margin-top: 0px;
         padding-bottom: 40px;
+        flex-direction: column;
+    }
+    .description {
+        margin-top: 20px;
     }
 }
 
@@ -184,6 +188,10 @@ footer {
  {  
     .description {
         margin-left: 20px;
+    }
+
+    .visualizations {
+        justify-content: center;
     }
  }
 
