@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Red Hat Mono', monospace;
+    color: #2E2F30;
+}
+
+#fade {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to top, transparent 0%, black 100%);
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#title {
+    max-width: fit-content;
+    max-width: -moz-fit-content;
+}
+
+.bullet-list {
+    list-style-type: circle;
+    margin-left: 32px;
+}
+
+#main-body p {
+    margin-bottom: 1rem;
+}
+
+.project-image p {
+    font-family: 'Public Sans', sans-serif;
+    letter-spacing: 0.2px;
+}
+
+.project-text p {
+    font-family: 'Public Sans', sans-serif;
+    letter-spacing: 0.2px;
+}
+
+.project-text li {
+    font-family: 'Public Sans', sans-serif;
+    letter-spacing: 0.2px;
+    list-style-type: disc;
+}
+
+#profile-pic {
+    
+}
+
+#biopic-outline {
+    transform: translate(-28px, -182px);
+}
+
+.project-text a {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+}
+
+.big-slash {
+    visibility: hidden;
+}
+
+.article-pic {
+    visibility: hidden;
+    display: none;
+}

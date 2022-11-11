@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,900&display=swap" rel="stylesheet"> 
+
+    <script src="https://kit.fontawesome.com/06e4565879.js" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <title>Brianna Wilson 3D & Data Visualization</title>
+
+    <link href="./../output.css" rel="stylesheet">
+</head>
+<body>
+    <div id="navigation" class="absolute top-9 max-sm:left-8 sm:left-16 md:left-36 font-medium text-sm">
+        <a href="/" class="text-[#2E2F30] tracking-wider hover:underline decoration-2">
+            <span class=""><<</span>
+            HOME
+        </a>
+    </div>
+        
+    <div id="main-body" class="mx-auto w-1/2 max-sm:w-full max-sm:px-8 max-sm:mt-16">
+        <header id="header" class="mt-8 mb-12">
+            <div id="title" class="">
+                <h2 class="text-[#2E2F30] text-lg font-bold">Brianna Wilson</h2>
+                <h2 class="text-[#2E2F30] text-lg font-light tracking-tight">3D & Data Visualization</h2>
+            </div>
+        </header> 
+        <div class="project-title mb-10">
+            <div class="flex flex-1">                
+                <div class="md:mt-16 lg:mt-4">  
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 tracking-wide py-1 lg:leading-tight">Create Your First Data Visualization in AR</h1>
+                </div>
+            </div>
+        </div>
+        <div class="project-image mt-16 mb-8">
+            <!-- <a href="https://observablehq.com/@bronna/parametric-seashell" target="_blank"><img class="h-80 md:h-96 opacity-80 mx-auto" src="./../assets/shell.gif" alt="A 3D wireframe model of a conch shell, rotating slowly in space"></a> -->
+        </div>
+        <div class="project-text">
+            <p>COMING SOON...</p>
+        </div>
+    </div>
+        
+        
+    <footer class="relative bg-[#2E2F30] mt-32 text-white">
+
+        <div id="about" class="pt-16 pb-16 max-sm:w-full max-sm:pl-8 sm:pl-36">
+            <div id="footer-title" class="">
+                <h3 class="font-bold tracking-wider text-lg">Brianna Wilson</h3>
+                <h3 class="text-lg">3D & Data Visualization</h3>
+            </div">
+            <div id="contact" class="mt-16">
+                <div id="profiles" class="md:space-y-1 font-medium flex sm:flex-col sm:gap-2">
+                    <a href="mailto:bronna@gmail.com" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">Email</span>
+                        <i class="fas fa-envelope sm:ml-4"></i>
+                    </a>
+                    <a href="https://twitter.com/bronna" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">Twitter</span>
+                        <i class="fab fa-twitter ml-4"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/briannawil" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">LinkedIn</span>
+                        <i class="fab fa-linkedin-in ml-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script type="text/javascript">
+        (function() {
+            // only want one resizer on the page
+            if (document.documentElement.className.indexOf("g-resizer-v3-init") > -1) return;
+            document.documentElement.className += " g-resizer-v3-init";
+            // require IE9+
+            if (!("querySelector" in document)) return;
+            function resizer() {
+                var elements = Array.prototype.slice.call(document.querySelectorAll(".g-artboard[data-min-width]")),
+                    widthById = {};
+                elements.forEach(function(el) {
+                    var parent = el.parentNode,
+                        width = widthById[parent.id] || parent.getBoundingClientRect().width,
+                        minwidth = el.getAttribute("data-min-width"),
+                        maxwidth = el.getAttribute("data-max-width");
+                    widthById[parent.id] = width;
+    
+                    if (+minwidth <= width && (+maxwidth >= width || maxwidth === null)) {
+                        el.style.display = "block";
+                    } else {
+                        el.style.display = "none";
+                    }
+                });
+                try {
+                    if (window.parent && window.parent.$) {
+                        window.parent.$("body").trigger("resizedcontent", [window]);
+                    }
+                    if (window.require) {
+                        require(['foundation/main'], function() {
+                            require(['shared/interactive/instances/app-communicator'], function(AppCommunicator) {
+                                AppCommunicator.triggerResize();
+                            });
+                        });
+                    }
+                } catch(e) { console.log(e); }
+            }
+    
+            document.addEventListener('DOMContentLoaded', resizer);
+            // feel free to replace throttle with _.throttle, if available
+            window.addEventListener('resize', throttle(resizer, 200));        
+    
+            function throttle(func, wait) {
+                // from underscore.js
+                var _now = Date.now || function() { return new Date().getTime(); },
+                    context, args, result, timeout = null, previous = 0;
+                var later = function() {
+                    previous = _now();
+                    timeout = null;
+                    result = func.apply(context, args);
+                    if (!timeout) context = args = null;
+                };
+                return function() {
+                    var now = _now(), remaining = wait - (now - previous);
+                    context = this;
+                    args = arguments;
+                    if (remaining <= 0 || remaining > wait) {
+                        if (timeout) {
+                            clearTimeout(timeout);
+                            timeout = null;
+                        }
+                        previous = now;
+                        result = func.apply(context, args);
+                        if (!timeout) context = args = null;
+                    } else if (!timeout && options.trailing !== false) {
+                        timeout = setTimeout(later, remaining);
+                    }
+                    return result;
+                };
+            }
+    
+           
+        })();
+    </script>
+        
+</body>
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,900&display=swap" rel="stylesheet"> 
+
+    <script src="https://kit.fontawesome.com/06e4565879.js" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <title>Brianna Wilson 3D & Data Visualization</title>
+
+    <link href="./../output.css" rel="stylesheet">
+</head>
+<body>
+    <div id="navigation" class="absolute top-9 max-sm:left-8 sm:left-16 md:left-36 font-medium text-sm">
+        <a href="/" class="text-[#2E2F30] tracking-wider hover:underline decoration-2">
+            <span class=""><<</span>
+            HOME
+        </a>
+    </div>
+        
+    <div id="main-body" class="mx-auto w-1/2 max-sm:w-full max-sm:px-8 max-sm:mt-16">
+        <header id="header" class="mt-8 mb-12">
+            <div id="title" class="">
+                <h2 class="text-[#2E2F30] text-lg font-bold">Brianna Wilson</h2>
+                <h2 class="text-[#2E2F30] text-lg font-light tracking-tight">3D & Data Visualization</h2>
+            </div>
+        </header> 
+        <div class="project-title mb-10">
+            <div class="flex flex-1">                
+                <div class="md:mt-16 lg:mt-4">  
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 tracking-wide py-1 lg:leading-tight">What do Comic Book Heroes Look Like?</h1>
+                    <ul class="flex flex-wrap gap-2 mt-3 uppercase tracking-wider"> <!--add sm:w-screen? -->
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Python</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Pandas</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Jupyter</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Illustrator</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Ai2html</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">API's</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="project-image mt-16 mb-8">
+            <img class="h-80 md:h-96 opacity-90 mx-auto" src="./../assets/ccchero.jpg" alt="A drawing of a muscular superhero with blond hair and light skin, wearing a blue bodysuit with yellow accents and a white cape, getting ready to jump off the ground with one fist in the air facing the viewer.">
+            <p class="source text-xs mt-4">Source: <a class="underline hover:font-semibold" href="https://commons.wikimedia.org/wiki/File:Connecticut_ComiCONN_Superhero_Mascot..jpg" target="_blank">wikimedia</a></p>
+        </div>
+        <div class="project-text">
+            <p>On first seeing a dataset of all Marvel characters (16,376 of them!), my mind filled with questions. Having a huge database of characters labeled ‘good’ or ‘bad,’ along with completely made-up attributes (hair color, sex, etc.), would be fertile ground for finding society’s biases reflected back at us. Doing more digging, I discovered a matching dataset for characters in the DC comics.</p>
+
+            <p>Loading in the data, I found predictable things, like that men appear far more than women in the the comic canons. Looking at some of the other fields, I wondered if characters with lighter hair and eye colors were more often portrayed as ‘good.’</p>
+            
+            <p>There were several lighter hair colors among the characters. Extracting those, I also filtered down to characters with blue eyes. Other lighter eye colors, like yellow and pink, I skipped, since they don’t occur naturally.</p>
+
+            <img class="my-16" src="./../assets/jupyter.png" alt="A screenshot of cells of code in a notebook, filtering the dataset of Marvel characters by hair and eye color.">
+
+            <p>In that filtered subset of characters there was, indeed, a strong bias:</p>
+
+            <div class="visualization my-16">
+                <h2 class="text-xl font-bold tracking-tight mb-8">Over Half of Marvel Characters with Light Hair and Eyes are ‘Good,’ Whereas Just Over Half of all Other Characters are ‘Bad’</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Generated by ai2html v0.115.1 - 2022-11-04 11:10 -->
+<!-- ai file: marvel2.ai -->
+<style media="screen,print">
+	#g-marvel2-box ,
+	#g-marvel2-box .g-artboard {
+		margin:0 auto;
+	}
+	#g-marvel2-box p {
+		margin:0;
+	}
+	#g-marvel2-box .g-aiAbs {
+		position:absolute;
+	}
+	#g-marvel2-box .g-aiImg {
+		position:absolute;
+		top:0;
+		display:block;
+		width:100% !important;
+	}
+	#g-marvel2-box .g-aiSymbol {
+		position: absolute;
+		box-sizing: border-box;
+	}
+	#g-marvel2-box .g-aiPointText p { white-space: nowrap; }
+	#g-marvel2-Artboard_1 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel2-Artboard_1 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:18px;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:16px;
+		text-align:left;
+		color:rgb(18,179,230);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		height:auto;
+		position:static;
+	}
+	#g-marvel2-Artboard_1 .g-pstyle0 {
+		line-height:17px;
+		height:17px;
+		letter-spacing:0.05em;
+		font-size:14px;
+		text-align:center;
+		color:rgb(38,38,38);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle1 {
+		line-height:17px;
+		height:17px;
+		letter-spacing:0em;
+		font-size:14px;
+		text-align:right;
+		color:rgb(179,179,179);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle2 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		text-align:right;
+		color:rgb(83,192,226);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle3 {
+		text-align:right;
+	}
+	#g-marvel2-Artboard_1 .g-pstyle4 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle5 {
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle6 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		text-align:right;
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle7 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		color:rgb(83,192,226);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle8 {
+		text-align:right;
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle9 {
+		line-height:16px;
+		font-size:14px;
+		text-align:right;
+		color:rgb(38,38,38);
+	}
+	#g-marvel2-Artboard_1 .g-pstyle10 {
+		line-height:16px;
+		height:16px;
+		letter-spacing:0em;
+		font-size:13px;
+		text-align:right;
+		color:rgb(179,179,179);
+	}
+	#g-marvel2-Artboard_1 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+	#g-marvel2-Artboard_2 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel2-Artboard_2 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:18px;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:16px;
+		text-align:left;
+		color:rgb(18,179,230);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		height:auto;
+		position:static;
+	}
+	#g-marvel2-Artboard_2 .g-pstyle0 {
+		line-height:17px;
+		height:17px;
+		letter-spacing:0.05em;
+		font-size:14px;
+		text-align:center;
+		color:rgb(38,38,38);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle1 {
+		line-height:17px;
+		height:17px;
+		letter-spacing:0em;
+		font-size:14px;
+		text-align:right;
+		color:rgb(179,179,179);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle2 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		text-align:right;
+		color:rgb(83,192,226);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle3 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle4 {
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle5 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		text-align:right;
+		color:rgb(238,115,33);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle6 {
+		font-family:Source Sans Pro;
+		font-weight:700;
+		line-height:24px;
+		height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+		color:rgb(83,192,226);
+	}
+	#g-marvel2-Artboard_2 .g-pstyle7 {
+		line-height:16px;
+		font-size:14px;
+		color:rgb(38,38,38);
+	}
+	#g-marvel2-Artboard_2 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+
+</style>
+
+<div id="g-marvel2-box" class="ai2html">
+
+	<!-- Artboard: Artboard_1 -->
+	<div id="g-marvel2-Artboard_1" class="g-artboard" style="width:442px; height:517.919999999999px;" data-aspect-ratio="0.853" data-min-width="442">
+<div style=""></div>
+		<img id="g-marvel2-Artboard_1-img" class="g-marvel2-Artboard_1-img g-aiImg" alt="" src="marvel2-Artboard_1.png"/>
+		<div id="g-ai0-1" class="g-AB_1 g-aiAbs g-aiPointText" style="top:7.5708%;margin-top:-9.2px;left:39.6336%;margin-left:-32.5px;width:65px;">
+			<p class="g-pstyle0">GOOD</p>
+		</div>
+		<div id="g-ai0-2" class="g-AB_1 g-aiAbs g-aiPointText" style="top:7.5708%;margin-top:-9.2px;left:79.5524%;margin-left:-26.5px;width:53px;">
+			<p class="g-pstyle0">BAD</p>
+		</div>
+		<div id="g-ai0-3" class="g-AB_1 g-aiAbs g-aiPointText" style="top:13.9424%;margin-top:-9.2px;right:62.8744%;width:52px;">
+			<p class="g-pstyle1">60%</p>
+		</div>
+		<div id="g-ai0-4" class="g-AB_1 g-aiAbs g-aiPointText" style="top:20.8555%;margin-top:-13px;right:63.2007%;width:67px;">
+			<p class="g-pstyle2">56%</p>
+		</div>
+		<div id="g-ai0-5" class="g-AB_1 g-aiAbs" style="top:22.7834%;right:63.5536%;width:35.9729%;">
+			<p class="g-pstyle3">of characters with light hair + eyes are <span class="g-cstyle0">good</span></p>
+		</div>
+		<div id="g-ai0-6" class="g-AB_1 g-aiAbs g-aiPointText" style="top:27.2271%;margin-top:-13px;left:82.103%;width:63px;">
+			<p class="g-pstyle4">51%</p>
+		</div>
+		<div id="g-ai0-7" class="g-AB_1 g-aiAbs" style="top:28.962%;left:82.2627%;width:36.1991%;">
+			<p class="g-pstyle5">are <span class="g-cstyle0">bad</span></p>
+		</div>
+		<div id="g-ai0-8" class="g-AB_1 g-aiAbs g-aiPointText" style="top:41.3598%;margin-top:-9.2px;right:62.9916%;width:39px;">
+			<p class="g-pstyle1">40</p>
+		</div>
+		<div id="g-ai0-9" class="g-AB_1 g-aiAbs g-aiPointText" style="top:51.7483%;margin-top:-13px;right:63.1625%;width:67px;">
+			<p class="g-pstyle6">33%</p>
+		</div>
+		<div id="g-ai0-10" class="g-AB_1 g-aiAbs g-aiPointText" style="top:55.803%;margin-top:-13px;left:82.103%;width:67px;">
+			<p class="g-pstyle7">29%</p>
+		</div>
+		<div id="g-ai0-11" class="g-AB_1 g-aiAbs" style="top:53.6762%;right:63.4037%;width:36.1991%;">
+			<p class="g-pstyle8">of all other characters are <span class="g-cstyle0">good</span></p>
+		</div>
+		<div id="g-ai0-12" class="g-AB_1 g-aiAbs" style="top:57.7309%;left:81.8905%;width:35.9729%;">
+			<p>are <span class="g-cstyle0">bad</span></p>
+		</div>
+		<div id="g-ai0-13" class="g-AB_1 g-aiAbs g-aiPointText" style="top:68.584%;margin-top:-9.2px;right:62.8889%;width:39px;">
+			<p class="g-pstyle1">20</p>
+		</div>
+		<div id="g-ai0-14" class="g-AB_1 g-aiAbs" style="top:82.6382%;right:62.9209%;width:33.9367%;">
+			<p class="g-pstyle9">(remaining characters are neutral)</p>
+		</div>
+		<div id="g-ai0-15" class="g-AB_1 g-aiAbs g-aiPointText" style="top:96.0881%;margin-top:-8.7px;right:62.8988%;width:30px;">
+			<p class="g-pstyle10">0</p>
+		</div>
+	</div>
+
+	<!-- Artboard: Artboard_2 -->
+	<div id="g-marvel2-Artboard_2" class="g-artboard" style="max-width: 340px;max-height: 519px" data-aspect-ratio="0.655" data-min-width="0" data-max-width="441">
+<div style="padding: 0 0 152.7412% 0;"></div>
+		<img id="g-marvel2-Artboard_2-img" class="g-marvel2-Artboard_2-img g-aiImg" alt="" src="marvel2-Artboard_2.png"/>
+		<div id="g-ai1-1" class="g-AB_1 g-aiAbs g-aiPointText" style="top:7.1652%;margin-top:-9.2px;left:21.7322%;margin-left:-32.5px;width:65px;">
+			<p class="g-pstyle0">GOOD</p>
+		</div>
+		<div id="g-ai1-2" class="g-AB_1 g-aiAbs g-aiPointText" style="top:7.1652%;margin-top:-9.2px;left:73.6265%;margin-left:-26.5px;width:53px;">
+			<p class="g-pstyle0">BAD</p>
+		</div>
+		<div id="g-ai1-3" class="g-AB_1 g-aiAbs g-aiPointText" style="top:14.2899%;margin-top:-9.2px;right:81.5282%;width:52px;">
+			<p class="g-pstyle1">60%</p>
+		</div>
+		<div id="g-ai1-4" class="g-AB_1 g-aiAbs g-aiPointText" style="top:20.9918%;margin-top:-13px;right:81.9526%;width:67px;">
+			<p class="g-pstyle2">56%</p>
+		</div>
+		<div id="g-ai1-5" class="g-AB_1 g-aiAbs" style="top:19.256%;left:25.0144%;width:41.4706%;">
+			<p>of characters with light hair + eyes are <span class="g-cstyle0">good</span></p>
+		</div>
+		<div id="g-ai1-6" class="g-AB_1 g-aiAbs g-aiPointText" style="top:27.3463%;margin-top:-13px;left:76.9423%;width:63px;">
+			<p class="g-pstyle3">51%</p>
+		</div>
+		<div id="g-ai1-7" class="g-AB_1 g-aiAbs" style="top:29.0765%;left:76.9423%;width:47.0588%;">
+			<p class="g-pstyle4">are <span class="g-cstyle0">bad</span></p>
+		</div>
+		<div id="g-ai1-8" class="g-AB_1 g-aiAbs g-aiPointText" style="top:41.4408%;margin-top:-9.2px;right:81.6807%;width:39px;">
+			<p class="g-pstyle1">40</p>
+		</div>
+		<div id="g-ai1-9" class="g-AB_1 g-aiAbs g-aiPointText" style="top:51.8013%;margin-top:-13px;right:81.9029%;width:67px;">
+			<p class="g-pstyle5">33%</p>
+		</div>
+		<div id="g-ai1-10" class="g-AB_1 g-aiAbs" style="top:50.4506%;left:25.3085%;width:34.1176%;">
+			<p class="g-pstyle4">of all other characters are <span class="g-cstyle0">good</span></p>
+		</div>
+		<div id="g-ai1-11" class="g-AB_1 g-aiAbs g-aiPointText" style="top:55.8451%;margin-top:-13px;left:76.9423%;width:67px;">
+			<p class="g-pstyle6">29%</p>
+		</div>
+		<div id="g-ai1-12" class="g-AB_1 g-aiAbs" style="top:57.7679%;left:76.9423%;width:46.7647%;">
+			<p>are <span class="g-cstyle0">bad</span></p>
+		</div>
+		<div id="g-ai1-13" class="g-AB_1 g-aiAbs g-aiPointText" style="top:68.7843%;margin-top:-9.2px;right:81.547%;width:39px;">
+			<p class="g-pstyle1">20</p>
+		</div>
+		<div id="g-ai1-14" class="g-AB_1 g-aiAbs" style="top:83.7634%;left:25.3085%;width:45.8824%;">
+			<p class="g-pstyle7">(remaining characters are neutral)</p>
+		</div>
+		<div id="g-ai1-15" class="g-AB_1 g-aiAbs g-aiPointText" style="top:95.9352%;margin-top:-9.2px;right:81.4458%;width:31px;">
+			<p class="g-pstyle1">0</p>
+		</div>
+	</div>
+
+</div>
+
+<!-- End ai2html - 2022-11-04 11:10 -->
+
+
+
+
+
+
+
+
+
+
+
+
+                <p class="source text-xs mt-4">Data: <a class="underline hover:font-semibold" href="https://github.com/fivethirtyeight/data/tree/master/comic-characters" target="_blank">fivethirtyeight</a></p>
+            </div>
+
+            <p>Showing this to a mentor in the Lede program, she suggested looking at if this had changed over time. Going back to the data, I found that it included the year of first appearance for each character.</p>
+
+            <p>Because Marvel introduces wildly varying numbers of characters each year, the data came out quite noisy. Adding trend lines indicated that, in general, there was a wide gap in the 1940s between who was portrayed as ‘good,’ which narrowed as time went on (data ends at 2014).</p>
+
+            <div class="visualization my-16">
+                <h2 class="text-xl font-bold tracking-tight mb-8">Over Time, the Bias Towards Introducing New Characters with Light Hair and Eyes as ‘Good’ Has Diminished</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Generated by ai2html v0.115.1 - 2022-11-04 11:13 -->
+<!-- ai file: marvel.ai -->
+<style media="screen,print">
+	#g-marvel-box ,
+	#g-marvel-box .g-artboard {
+		margin:0 auto;
+	}
+	#g-marvel-box p {
+		margin:0;
+	}
+	#g-marvel-box .g-aiAbs {
+		position:absolute;
+	}
+	#g-marvel-box .g-aiImg {
+		position:absolute;
+		top:0;
+		display:block;
+		width:100% !important;
+	}
+	#g-marvel-box .g-aiSymbol {
+		position: absolute;
+		box-sizing: border-box;
+	}
+	#g-marvel-box .g-aiPointText p { white-space: nowrap; }
+	#g-marvel-Artboard_1 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel-Artboard_1 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:17px;
+		height:auto;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:14px;
+		text-align:left;
+		color:rgb(38,38,38);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		position:static;
+	}
+	#g-marvel-Artboard_1 .g-pstyle0 {
+		height:17px;
+	}
+	#g-marvel-Artboard_1 .g-pstyle1 {
+		height:17px;
+		letter-spacing:0em;
+		text-align:right;
+	}
+	#g-marvel-Artboard_1 .g-pstyle2 {
+		font-family:Source Sans Pro;
+		font-weight:800;
+		line-height:24px;
+		letter-spacing:0em;
+		font-size:20px;
+	}
+	#g-marvel-Artboard_1 .g-pstyle3 {
+		font-family:Source Sans Pro;
+		font-weight:600;
+		line-height:19px;
+		height:19px;
+		letter-spacing:0em;
+		font-size:16px;
+	}
+	#g-marvel-Artboard_1 .g-pstyle4 {
+		height:17px;
+		letter-spacing:0em;
+		text-transform:uppercase;
+	}
+	#g-marvel-Artboard_1 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+	#g-marvel-Artboard_2 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel-Artboard_2 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:17px;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:14px;
+		text-align:left;
+		color:rgb(38,38,38);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		height:auto;
+		position:static;
+	}
+	#g-marvel-Artboard_2 .g-pstyle0 {
+		height:17px;
+		letter-spacing:0em;
+		text-align:right;
+	}
+	#g-marvel-Artboard_2 .g-pstyle1 {
+		font-family:Source Sans Pro;
+		font-weight:800;
+		line-height:22px;
+		letter-spacing:0em;
+		font-size:20px;
+	}
+	#g-marvel-Artboard_2 .g-pstyle2 {
+		font-family:Source Sans Pro;
+		font-weight:600;
+		line-height:19px;
+		height:19px;
+		letter-spacing:0em;
+		font-size:16px;
+	}
+	#g-marvel-Artboard_2 .g-pstyle3 {
+		height:17px;
+		letter-spacing:0em;
+		text-transform:uppercase;
+	}
+	#g-marvel-Artboard_2 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+
+</style>
+
+<div id="g-marvel-box" class="ai2html">
+
+	<!-- Artboard: Artboard_1 -->
+	<div id="g-marvel-Artboard_1" class="g-artboard" style="width:705px; height:502.72px;" data-aspect-ratio="1.402" data-min-width="705">
+<div style=""></div>
+		<img id="g-marvel-Artboard_1-img" class="g-marvel-Artboard_1-img g-aiImg" alt="" src="marvel-Artboard_1.png"/>
+		<div id="g-ai0-1" class="g-AB_1 g-aiAbs g-aiPointText" style="top:4.2191%;margin-top:-9.2px;left:10.4587%;width:500px;">
+			<p class="g-pstyle0">percent of new characters with light hair + eyes who are labeled <span class="g-cstyle0">Good</span></p>
+		</div>
+		<div id="g-ai0-2" class="g-AB_1 g-aiAbs g-aiPointText" style="top:8.7942%;margin-top:-9.2px;left:10.4587%;width:417px;">
+			<p class="g-pstyle0">percent of all other new characters who are labeled <span class="g-cstyle0">Good</span></p>
+		</div>
+		<div id="g-ai0-3" class="g-AB_1 g-aiAbs g-aiPointText" style="top:17.1488%;margin-top:-9.2px;right:92.6665%;width:57px;">
+			<p class="g-pstyle1">100%</p>
+		</div>
+		<div id="g-ai0-4" class="g-AB_1 g-aiAbs g-aiPointText" style="top:31.0731%;margin-top:-9.2px;right:92.5449%;width:40px;">
+			<p class="g-pstyle1">80</p>
+		</div>
+		<div id="g-ai0-5" class="g-AB_1 g-aiAbs" style="top:30.0366%;left:55.5934%;width:35.7447%;">
+			<p class="g-pstyle2">Gap has almost disappeared over time </p>
+		</div>
+		<div id="g-ai0-6" class="g-AB_1 g-aiAbs g-aiPointText" style="top:44.9973%;margin-top:-9.2px;right:92.6372%;width:39px;">
+			<p class="g-pstyle1">60</p>
+		</div>
+		<div id="g-ai0-7" class="g-AB_1 g-aiAbs g-aiPointText" style="top:58.9215%;margin-top:-9.2px;right:92.6619%;width:39px;">
+			<p class="g-pstyle1">40</p>
+		</div>
+		<div id="g-ai0-8" class="g-AB_1 g-aiAbs g-aiPointText" style="top:72.8458%;margin-top:-9.2px;right:92.5974%;width:39px;">
+			<p class="g-pstyle1">20</p>
+		</div>
+		<div id="g-ai0-9" class="g-AB_1 g-aiAbs g-aiPointText" style="top:86.7701%;margin-top:-9.2px;right:92.5486%;width:31px;">
+			<p class="g-pstyle1">0</p>
+		</div>
+		<div id="g-ai0-10" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:9.9281%;width:59px;">
+			<p class="g-pstyle3">1940</p>
+		</div>
+		<div id="g-ai0-11" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:21.4401%;width:60px;">
+			<p class="g-pstyle3">1950</p>
+		</div>
+		<div id="g-ai0-12" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:32.9522%;width:59px;">
+			<p class="g-pstyle3">1960</p>
+		</div>
+		<div id="g-ai0-13" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:44.4643%;width:58px;">
+			<p class="g-pstyle3">1970</p>
+		</div>
+		<div id="g-ai0-14" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:55.9761%;width:59px;">
+			<p class="g-pstyle3">1980</p>
+		</div>
+		<div id="g-ai0-15" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:67.4883%;width:59px;">
+			<p class="g-pstyle3">1990</p>
+		</div>
+		<div id="g-ai0-16" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:79.0003%;width:62px;">
+			<p class="g-pstyle3">2000</p>
+		</div>
+		<div id="g-ai0-17" class="g-AB_1 g-aiAbs g-aiPointText" style="top:90.9675%;margin-top:-10.3px;left:90.5122%;width:59px;">
+			<p class="g-pstyle3">2010</p>
+		</div>
+		<div id="g-ai0-18" class="g-AB_1 g-aiAbs g-aiPointText" style="top:95.5224%;margin-top:-9.2px;left:10.0851%;width:59px;">
+			<p class="g-pstyle4">year</p>
+		</div>
+	</div>
+
+	<!-- Artboard: Artboard_2 -->
+	<div id="g-marvel-Artboard_2" class="g-artboard" style="max-width: 396px;max-height: 531px" data-aspect-ratio="0.746" data-min-width="0" data-max-width="704">
+<div style="padding: 0 0 133.9672% 0;"></div>
+		<img id="g-marvel-Artboard_2-img" class="g-marvel-Artboard_2-img g-aiImg" alt="" src="marvel-Artboard_2.png"/>
+		<div id="g-ai1-1" class="g-AB_2 g-aiAbs" style="top:2.4505%;left:14.5324%;width:80.5556%;">
+			<p>percent of new characters with light hair + eyes who are labeled <span class="g-cstyle0">Good</span></p>
+		</div>
+		<div id="g-ai1-2" class="g-AB_2 g-aiAbs" style="top:13.3833%;left:14.5324%;width:80.0505%;">
+			<p>percent of all other new characters who are labeled <span class="g-cstyle0">Good</span></p>
+		</div>
+		<div id="g-ai1-3" class="g-AB_2 g-aiAbs g-aiPointText" style="top:27.3719%;margin-top:-9.2px;right:87.2294%;width:57px;">
+			<p class="g-pstyle0">100%</p>
+		</div>
+		<div id="g-ai1-4" class="g-AB_2 g-aiAbs" style="top:27.7092%;left:46.4671%;width:44.9495%;">
+			<p class="g-pstyle1">Gap has almost disappeared over time </p>
+		</div>
+		<div id="g-ai1-5" class="g-AB_2 g-aiAbs g-aiPointText" style="top:39.6242%;margin-top:-9.2px;right:87.2656%;width:40px;">
+			<p class="g-pstyle0">80</p>
+		</div>
+		<div id="g-ai1-6" class="g-AB_2 g-aiAbs g-aiPointText" style="top:51.8766%;margin-top:-9.2px;right:87.4298%;width:39px;">
+			<p class="g-pstyle0">60</p>
+		</div>
+		<div id="g-ai1-7" class="g-AB_2 g-aiAbs g-aiPointText" style="top:64.1289%;margin-top:-9.2px;right:87.4738%;width:39px;">
+			<p class="g-pstyle0">40</p>
+		</div>
+		<div id="g-ai1-8" class="g-AB_2 g-aiAbs g-aiPointText" style="top:76.3813%;margin-top:-9.2px;right:87.359%;width:39px;">
+			<p class="g-pstyle0">20</p>
+		</div>
+		<div id="g-ai1-9" class="g-AB_2 g-aiAbs g-aiPointText" style="top:88.6337%;margin-top:-9.2px;right:87.2721%;width:31px;">
+			<p class="g-pstyle0">0</p>
+		</div>
+		<div id="g-ai1-10" class="g-AB_2 g-aiAbs g-aiPointText" style="top:92.2343%;margin-top:-10.3px;left:14.803%;width:59px;">
+			<p class="g-pstyle2">1940</p>
+		</div>
+		<div id="g-ai1-11" class="g-AB_2 g-aiAbs g-aiPointText" style="top:92.2343%;margin-top:-10.3px;left:57.3573%;width:59px;">
+			<p class="g-pstyle2">1980</p>
+		</div>
+		<div id="g-ai1-12" class="g-AB_2 g-aiAbs g-aiPointText" style="top:92.2343%;margin-top:-10.3px;left:36.1528%;width:59px;">
+			<p class="g-pstyle2">1960</p>
+		</div>
+		<div id="g-ai1-13" class="g-AB_2 g-aiAbs g-aiPointText" style="top:92.2343%;margin-top:-10.3px;left:78.5617%;width:62px;">
+			<p class="g-pstyle2">2000</p>
+		</div>
+		<div id="g-ai1-14" class="g-AB_2 g-aiAbs g-aiPointText" style="top:95.7966%;margin-top:-9.2px;left:15.0691%;width:59px;">
+			<p class="g-pstyle3">year</p>
+		</div>
+	</div>
+
+</div>
+
+<!-- End ai2html - 2022-11-04 11:13 -->
+
+
+
+
+
+
+
+
+
+
+
+                <p class="source text-xs mt-4">Data: <a class="underline hover:font-semibold" href="https://github.com/fivethirtyeight/data/tree/master/comic-characters" target="_blank">fivethirtyeight</a></p>
+            </div>
+
+            <p>Since this just showed the year characters were introduced, I wondered if older characters were still having an outsized influence. I searched for anything else in the data to use, and didn’t find the ideal; the number of appearances for each character by year. Instead, using the overall number of appearances for each character as a substitute, I found a stark difference in representation:</p>
+
+            <div class="visualization my-16">
+                <h2 class="text-xl font-bold tracking-tight mb-8">‘Good’ Characters with Light Hair and Eyes Appear Over Three Times More than all Other ‘Good’ Characters</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Generated by ai2html v0.115.1 - 2022-11-04 11:15 -->
+<!-- ai file: marvel3.ai -->
+<style media="screen,print">
+	#g-marvel3-box ,
+	#g-marvel3-box .g-artboard {
+		margin:0 auto;
+	}
+	#g-marvel3-box p {
+		margin:0;
+	}
+	#g-marvel3-box .g-aiAbs {
+		position:absolute;
+	}
+	#g-marvel3-box .g-aiImg {
+		position:absolute;
+		top:0;
+		display:block;
+		width:100% !important;
+	}
+	#g-marvel3-box .g-aiSymbol {
+		position: absolute;
+		box-sizing: border-box;
+	}
+	#g-marvel3-box .g-aiPointText p { white-space: nowrap; }
+	#g-marvel3-Artboard_1 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel3-Artboard_1 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:19px;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:16px;
+		text-align:left;
+		color:rgb(38,38,38);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		height:auto;
+		position:static;
+	}
+	#g-marvel3-Artboard_1 .g-pstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:800;
+		line-height:22px;
+		height:22px;
+		letter-spacing:0em;
+		font-size:20px;
+	}
+	#g-marvel3-Artboard_1 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+	#g-marvel3-Artboard_2 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-marvel3-Artboard_2 p {
+		font-family:Public Sans;
+		font-weight:400;
+		line-height:19px;
+		opacity:1;
+		letter-spacing:0.02em;
+		font-size:16px;
+		text-align:left;
+		color:rgb(38,38,38);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		font-style:normal;
+		height:auto;
+		position:static;
+	}
+	#g-marvel3-Artboard_2 .g-pstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:800;
+		line-height:22px;
+		letter-spacing:0em;
+		font-size:20px;
+	}
+	#g-marvel3-Artboard_2 .g-cstyle0 {
+		font-family:Source Sans Pro;
+		font-weight:900;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+
+</style>
+
+<div id="g-marvel3-box" class="ai2html">
+
+	<!-- Artboard: Artboard_1 -->
+	<div id="g-marvel3-Artboard_1" class="g-artboard" style="width:522px; height:296.63px;" data-aspect-ratio="1.76" data-min-width="522">
+<div style=""></div>
+		<img id="g-marvel3-Artboard_1-img" class="g-marvel3-Artboard_1-img g-aiImg" alt="" src="marvel3-Artboard_1.png"/>
+		<div id="g-ai0-1" class="g-AB_2 g-aiAbs" style="top:2.697%;left:2.9287%;width:41.954%;">
+			<p><span class="g-cstyle0">good</span> characters with light hair + eyes</p>
+		</div>
+		<div id="g-ai0-2" class="g-AB_2 g-aiAbs" style="top:49.5567%;left:51.9326%;width:41.7625%;">
+			<p>all other <span class="g-cstyle0">good </span>characters</p>
+		</div>
+		<div id="g-ai0-3" class="g-AB_2 g-aiAbs g-aiPointText" style="top:91.7017%;margin-top:-12px;left:2.8734%;width:258px;">
+			<p class="g-pstyle0">89 average appearances</p>
+		</div>
+		<div id="g-ai0-4" class="g-AB_2 g-aiAbs g-aiPointText" style="top:91.7017%;margin-top:-12px;left:52.1654%;width:257px;">
+			<p class="g-pstyle0">27 average appearances</p>
+		</div>
+	</div>
+
+	<!-- Artboard: Artboard_2 -->
+	<div id="g-marvel3-Artboard_2" class="g-artboard" style="max-width: 375px;max-height: 287px" data-aspect-ratio="1.307" data-min-width="0" data-max-width="521">
+<div style="padding: 0 0 76.5307% 0;"></div>
+		<img id="g-marvel3-Artboard_2-img" class="g-marvel3-Artboard_2-img g-aiImg" alt="" src="marvel3-Artboard_2.png"/>
+		<div id="g-ai1-1" class="g-AB_2 g-aiAbs" style="top:2.7876%;left:3.9263%;width:42.1333%;">
+			<p><span class="g-cstyle0">good</span> characters with light hair + eyes</p>
+		</div>
+		<div id="g-ai1-2" class="g-AB_2 g-aiAbs" style="top:32.7538%;left:53.5715%;width:23.4667%;">
+			<p>all other <span class="g-cstyle0">good </span>characters</p>
+		</div>
+		<div id="g-ai1-3" class="g-AB_1 g-aiAbs" style="top:80.8391%;left:3.762%;width:34.4%;">
+			<p class="g-pstyle0">89 average appearances</p>
+		</div>
+		<div id="g-ai1-4" class="g-AB_1 g-aiAbs" style="top:80.8391%;left:53.4733%;width:34.4%;">
+			<p class="g-pstyle0">27 average appearances</p>
+		</div>
+	</div>
+
+</div>
+
+<!-- End ai2html - 2022-11-04 11:15 -->
+
+
+
+
+
+
+
+
+
+
+
+
+                <p class="source text-xs mt-4">Data: <a class="underline hover:font-semibold" href="https://github.com/fivethirtyeight/data/tree/master/comic-characters" target="_blank">fivethirtyeight</a></p>
+            </div>
+
+            <p>Loading in the dataset for DC characters, it had very similar findings.</p>
+
+            <p>In trialing ways to make insights from this data engaging, I found that it was much more effective to start from a place of finding the insights and visualizing those, rather than trying to visualize all of the data at once. However, an explorable database of superheroes and villains would be massively fun.</p>
+
+            <p>There’s tons more I want to explore and expand upon in this dataset:</p>
+            <ul class="space-y-3">
+                <li class="bullet-list">Using the MediaWiki API, download data from 2014 to now, to see how the trends play out</li>
+                <li class="bullet-list">Scrape the number of appearances for each character by year to see the influence of legacy characters</li>
+                <li class="bullet-list">Make an interactive database explorer!</li>
+                <li class="bullet-list">How does the gap-over-time look when based on ‘bad’ characters?</li>
+                <li class="bullet-list">Are the above findings similar with just hair color, or just eye color?</li>
+                <li class="bullet-list">What words are most associated with women, men, and nonbinary characters?</li>
+                <li class="bullet-list">What words are most associated with good and bad characters?</li>
+                <li class="bullet-list">From a cursory glance at the data, it looks like descriptions of sexual orientation and relationships show up more for women characters, is this true?</li>
+                <li class="bullet-list">Do women and nonbinary characters have more appearances over time?</li>
+                <li class="bullet-list">Do the eye and hair color associations with ‘goodness’ show up differently for nonbinary, women, and men characters?</li>
+                <li class="bullet-list">Do these findings apply to the movies?</li>
+            </ul>
+        </div>
+    </div>
+        
+        
+    <footer class="relative bg-[#2E2F30] mt-32 text-white">
+
+        <div id="about" class="pt-16 pb-16 max-sm:w-full max-sm:pl-8 sm:pl-36">
+            <div id="footer-title" class="">
+                <h3 class="font-bold tracking-wider text-lg">Brianna Wilson</h3>
+                <h3 class="text-lg">3D & Data Visualization</h3>
+            </div">
+            <div id="contact" class="mt-16">
+                <div id="profiles" class="md:space-y-1 font-medium flex sm:flex-col sm:gap-2">
+                    <a href="mailto:bronna@gmail.com" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">Email</span>
+                        <i class="fas fa-envelope sm:ml-4"></i>
+                    </a>
+                    <a href="https://twitter.com/bronna" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">Twitter</span>
+                        <i class="fab fa-twitter ml-4"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/briannawil" target="_blank" class="contactLink hover:underline decoration-2">
+                        <span class="max-sm:hidden sm:visible">LinkedIn</span>
+                        <i class="fab fa-linkedin-in ml-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script type="text/javascript">
+        (function() {
+            // only want one resizer on the page
+            if (document.documentElement.className.indexOf("g-resizer-v3-init") > -1) return;
+            document.documentElement.className += " g-resizer-v3-init";
+            // require IE9+
+            if (!("querySelector" in document)) return;
+            function resizer() {
+                var elements = Array.prototype.slice.call(document.querySelectorAll(".g-artboard[data-min-width]")),
+                    widthById = {};
+                elements.forEach(function(el) {
+                    var parent = el.parentNode,
+                        width = widthById[parent.id] || parent.getBoundingClientRect().width,
+                        minwidth = el.getAttribute("data-min-width"),
+                        maxwidth = el.getAttribute("data-max-width");
+                    widthById[parent.id] = width;
+    
+                    if (+minwidth <= width && (+maxwidth >= width || maxwidth === null)) {
+                        el.style.display = "block";
+                    } else {
+                        el.style.display = "none";
+                    }
+                });
+                try {
+                    if (window.parent && window.parent.$) {
+                        window.parent.$("body").trigger("resizedcontent", [window]);
+                    }
+                    if (window.require) {
+                        require(['foundation/main'], function() {
+                            require(['shared/interactive/instances/app-communicator'], function(AppCommunicator) {
+                                AppCommunicator.triggerResize();
+                            });
+                        });
+                    }
+                } catch(e) { console.log(e); }
+            }
+    
+            document.addEventListener('DOMContentLoaded', resizer);
+            // feel free to replace throttle with _.throttle, if available
+            window.addEventListener('resize', throttle(resizer, 200));        
+    
+            function throttle(func, wait) {
+                // from underscore.js
+                var _now = Date.now || function() { return new Date().getTime(); },
+                    context, args, result, timeout = null, previous = 0;
+                var later = function() {
+                    previous = _now();
+                    timeout = null;
+                    result = func.apply(context, args);
+                    if (!timeout) context = args = null;
+                };
+                return function() {
+                    var now = _now(), remaining = wait - (now - previous);
+                    context = this;
+                    args = arguments;
+                    if (remaining <= 0 || remaining > wait) {
+                        if (timeout) {
+                            clearTimeout(timeout);
+                            timeout = null;
+                        }
+                        previous = now;
+                        result = func.apply(context, args);
+                        if (!timeout) context = args = null;
+                    } else if (!timeout && options.trailing !== false) {
+                        timeout = setTimeout(later, remaining);
+                    }
+                    return result;
+                };
+            }
+    
+           
+        })();
+    </script>
+        
+</body>
+</html>
