@@ -69,3 +69,7 @@ body {
     visibility: hidden;
     display: none;
 }
+
+.project-button {
+    cursor: pointer;
+}
