@@ -6,7 +6,8 @@ function rainbowLava(section) {
         btmMargin = 64
         part = document.querySelector("#header-main")
         partHeight = part.offsetHeight
-        parterHeight = topMargin + partHeight + btmMargin
+        //parterHeight = topMargin + partHeight + btmMargin
+        parterHeight = window.innerHeight
     } else if (section === "lavaFooter") {
         topMargin = 128
         btmMargin = 64
