@@ -612,8 +612,8 @@ video {
   margin-bottom: 3.5rem;
 }
 
-.mt-16 {
-  margin-top: 4rem;
+.mt-32 {
+  margin-top: 8rem;
 }
 
 .mb-48 {
@@ -648,16 +648,16 @@ video {
   margin-top: 11rem;
 }
 
-.mt-32 {
-  margin-top: 8rem;
-}
-
 .mt-8 {
   margin-top: 2rem;
 }
 
 .ml-4 {
   margin-left: 1rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
 }
 
 .ml-6 {
@@ -1054,6 +1054,7 @@ body {
   left: 50%;
   margin-left: -30px;
   bottom: 20px;
+  opacity: 70%;
 }
 
 .arrows path {
