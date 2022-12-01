@@ -5,9 +5,10 @@
 body {
     font-family: 'Red Hat Mono', monospace;
     color: #2E2F30;
+    overflow-x: hidden;
 }
 
-#fade {
+/* #fade {
     position: absolute;
     width: 100px;
     height: 100px;
@@ -16,12 +17,26 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-}
+} */
 
 #title {
     max-width: fit-content;
     max-width: -moz-fit-content;
 }
+
+.divider path {
+    stroke: #fff;
+    fill: transparent;
+    stroke-width: 4px;
+}
+
+#biopic-outline {
+    transform: translate(-28px, -182px);
+}
+
+/* #profile-pic {
+    visibility: hidden;
+} */
 
 .arrows {
 	width: 60px;
@@ -30,13 +45,13 @@ body {
 	left: 50%;
 	margin-left: -30px;
 	bottom: 20px;
-    opacity: 70%;
+    opacity: 80%;
 }
 
 .arrows path {
 	stroke: #fff;
 	fill: transparent;
-	stroke-width: 2px;	
+	stroke-width: 2.5px;	
 }
 
 .bullet-list {
@@ -64,10 +79,6 @@ body {
     list-style-type: disc;
 }
 
-#biopic-outline {
-    transform: translate(-28px, -182px);
-}
-
 .project-text a {
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
@@ -77,10 +88,10 @@ body {
     visibility: hidden;
 }
 
-.article-pic {
+/* .article-pic {
     visibility: hidden;
     display: none;
-}
+} */
 
 .project-button {
     cursor: pointer;
