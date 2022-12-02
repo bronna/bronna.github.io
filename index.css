@@ -24,11 +24,27 @@ body {
     max-width: -moz-fit-content;
 }
 
-.divider path {
+hr.solid-white {
+    border-top: 2px solid #fff;
+}
+
+hr.solid-dark {
+    border-top: 2px solid #2E2F30;
+    margin-left: 9rem;
+    margin-right: 9rem;
+}
+
+/* .divider path {
     stroke: #fff;
     fill: transparent;
     stroke-width: 4px;
-}
+} */
+
+/* .divider2 path {
+    stroke: #2E2F30;
+    fill: transparent;
+    stroke-width: 4px;
+} */
 
 #biopic-outline {
     transform: translate(-28px, -182px);
