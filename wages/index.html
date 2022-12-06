@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Search Engine -->
+    <meta name="description" content="Since 1960 CEO pay has exploded, while worker wages have made only modest gains">
+    <meta name="image" content="https://bronna.github.io/assets/tagpic.png">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="How Has Worker & CEO Pay Changed Over Time?">
+    <meta itemprop="description" content="Since 1960 CEO pay has exploded, while worker wages have made only modest gains">
+    <meta itemprop="image" content="https://bronna.github.io/assets/tagpic.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How Has Worker & CEO Pay Changed Over Time?">
+    <meta name="twitter:description" content="Since 1960 CEO pay has exploded, while worker wages have made only modest gains">
+    <meta name="twitter:site" content="@bronna">
+    <meta name="twitter:image:src" content="https://bronna.github.io/tagpic.png">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="How Has Worker & CEO Pay Changed Over Time?">
+    <meta name="og:description" content="Since 1960 CEO pay has exploded, while worker wages have made only modest gains">
+    <meta name="og:image" content="https://bronna.github.io/assets/tagpic.png">
+    <meta name="og:url" content="https://bronna.github.io/">
+    <meta name="og:site_name" content="How Has Worker & CEO Pay Changed Over Time?">
+    <meta name="og:type" content="article">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,900&display=swap" rel="stylesheet"> 
+
+    <script src="https://kit.fontawesome.com/06e4565879.js" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <title>Brianna Wilson 3D & Data Visualization</title>
+
+    <link href="./../output.css" rel="stylesheet">
+</head>
+<body>
+    <div id="navigation" class="absolute top-9 max-sm:left-8 sm:left-16 md:left-36 font-medium text-sm">
+        <a href="/" class="text-[#2E2F30] tracking-wider hover:underline decoration-2">
+            <span class=""><<</span>
+            HOME
+        </a>
+    </div>
+        
+    <div id="main-body" class="mx-auto w-1/2 max-sm:w-full max-sm:px-8 max-sm:mt-16">
+        <header id="header" class="mt-8 mb-12">
+            <div id="title" class="">
+                <h2 class="text-[#2E2F30] text-lg font-bold">Brianna Wilson</h2>
+                <h2 class="text-[#2E2F30] text-lg font-light tracking-tight">3D & Data Visualization</h2>
+            </div>
+        </header> 
+        <div class="project-title mb-10">
+            <div class="flex flex-1">                
+                <div class="md:mt-16 lg:mt-4">  
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 tracking-wide py-1 lg:leading-tight">How Has Worker & CEO Pay Changed Over Time?</h1>
+                    <ul class="flex flex-wrap gap-2 mt-3 uppercase tracking-wider"> <!--add sm:w-screen? -->
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Javascript</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">D3.js</li>
+                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">Illustrator</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <form action="/ceopay1">
+            <input type="submit" value="Go to visualization" class="project-button mt-8 outline outline-1 p-2">
+        </form>
+
+        <div class="project-image mt-8 mb-16">
+            <a href="/ceopay1"><img class="h-80 md:h-96 opacity-80 mx-auto" src="./../assets/ceopay.png" alt="A line chart showing the wide difference in CEO vs worker pay that's grown over time"></a>
+        </div>
+
+        <div class="project-text">
+            <p>Sensing the growing inequality around the Bay Area, where I lived for many years, I found data from the Economic Policy Institute and used it to make an initial <a href="/ceopay1">visualization in D3</a>. Animating it opened my eyes to the challenge of visualizing exponential growth rates. It's not intuitive to grasp. Though a visualization helps with understanding, it has to be done carefully to show what exponential growth actually means. What I like about this approach is that the y-axis scales over time, giving a sense of how what looks like a huge rate of growth at one point in time, can end up being minuscule compared to future growth rates.</p>
+
+            <figure class="mt-16">
+                <img src="./../assets/ceopay1.png" style="height: 500px;" class="mx-auto" alt="A dark-gray background with white wireframes of different shell types: a snail shell, a clam, a conch, a nautilus, and a wentletrap">
+            </figure>
+            <form action="/ceopay">
+                <input type="submit" value="Go to interactive" class="project-button mt-8 mb-16 outline outline-1 p-2">
+            </form>
+
+            <p>I decided to try to make a more interactive version of the visualization. This was one of my first deep dives into Javascript, and taught me many things, including the joys of text wrapping in SVG (:P). In this version, I took a more storytelling perspective, showing how these numbers are directly relevant to someone's life.</p>
+        </div>
+    </div>
+        
+        
+    <footer class="relative bg-[#2E2F30] mt-32 text-white">
+
+        <div id="about" class="pt-16 pb-16 max-sm:w-full max-sm:pl-8 sm:pl-36">
+            <div id="footer-title" class="">
+                <h3 class="font-bold tracking-wider text-lg">Brianna Wilson</h3>
+                <h3 class="text-lg">3D & Data Visualization</h3>
+            </div">
+            <div id="contact" class="mt-16">
+                <div id="profiles" class="md:space-y-1 font-medium flex flex-col gap-2">
+                    <a href="mailto:bronna@gmail.com" target="_blank" class="contactLink hover:underline decoration-2 flex">
+                        <i class="fas fa-envelope sm fa-fw"></i>
+                        <span class="text-sm font-normal ml-6">Email: bronna@gmail.com</span>
+                    </a>
+                    <a href="https://twitter.com/bronna" target="_blank" class="contactLink hover:underline decoration-2">
+                        <i class="fab fa-twitter fa-fw"></i>
+                        <span class="text-sm font-normal ml-4">Twitter</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/briannawil" target="_blank" class="contactLink hover:underline decoration-2">
+                        <i class="fab fa-linkedin-in fa-fw"></i>
+                        <span class="text-sm font-normal ml-4">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+        
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    /*justify-content: center;*/
+    padding: 5em 1em;
+    font-family: Nunito Sans, sans-serif;
+    letter-spacing: 0.02em;
+}
+
+div {
+    position: relative;
+    display: block;
+    width: 375px;
+    /*margin: 0 auto;*/
+}
+
+.chart-label {
+    font-size: 1.4em;
+}
+
+.axis {
+    opacity: 0.3;
+}
+
+.axis line {
+    display: none;
+}
+
+.axis path {
+    display: none;
+}
+
+.axis-label {
+    text-anchor: end;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.source-label {
+    text-anchor: start;
+    font-size: 0.7em;
+    opacity: 0.5;
+}
+
+.data-label {
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+.info-label {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.percent-label {
+    font-size: 1.4em;
+    text-anchor: start;
+}
+
+.label {
+    opacity: 0.8;
+    text-anchor: end;
+    font-size: .8em;
+}
+
+.amount {
+    font-size: .9em;
+}
+
+.bg {
+    fill: black;
+    fill-opacity: 0.7;
+    mix-blend-mode: multiply;
+}
