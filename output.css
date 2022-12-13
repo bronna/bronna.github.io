@@ -732,6 +732,10 @@ video {
   max-height: 20rem;
 }
 
+.min-h-full {
+  min-height: 100%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -822,6 +826,14 @@ video {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-16 {
+  gap: 4rem;
+}
+
+.gap-48 {
+  gap: 12rem;
 }
 
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1388,6 +1400,14 @@ hr.solid-dark {
 
   .sm\:ml-4 {
     margin-left: 1rem;
+  }
+
+  .sm\:mb-44 {
+    margin-bottom: 11rem;
+  }
+
+  .sm\:mb-16 {
+    margin-bottom: 4rem;
   }
 
   .sm\:flex {
