@@ -597,6 +597,10 @@ video {
   top: 2.25rem;
 }
 
+.top-12 {
+  top: 3rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1366,6 +1370,10 @@ hr.solid-dark {
 
   .sm\:left-16 {
     left: 4rem;
+  }
+
+  .sm\:top-24 {
+    top: 6rem;
   }
 
   .sm\:mx-14 {
