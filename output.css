@@ -728,6 +728,10 @@ video {
   height: 20rem;
 }
 
+.max-h-80 {
+  max-height: 20rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1461,6 +1465,10 @@ hr.solid-dark {
 
   .md\:h-96 {
     height: 24rem;
+  }
+
+  .md\:max-h-96 {
+    max-height: 24rem;
   }
 
   .md\:flex-row-reverse {
