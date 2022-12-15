@@ -22,7 +22,7 @@ async function Frame8() {
     
     let sourceTitle1 = bounds.append("text")
         .attr("x", dimensions.boundedWidth / 2)
-        .attr("y", dimensions.boundedHeight / 2 + 100)
+        .attr("y", dimensions.boundedHeight / 2 + 80)
         .text("Data Source:")
         //.attr("fill", colors[0])
         .attr("font-size", "14px")
@@ -32,7 +32,7 @@ async function Frame8() {
     
     let source1 = bounds.append("text")
         .attr("x", dimensions.boundedWidth / 2)
-        .attr("y", dimensions.boundedHeight / 2 + 130)
+        .attr("y", dimensions.boundedHeight / 2 + 110)
         .html("'CEO compensation, CEO-to-worker compensation ratio, and stock prices (2018$), selected years, 1965-2018' Lawrence Mishel and Julia Wolfe at Economic Policy Institute")
         //.attr("fill", colors[0])
         .attr("font-size", "14px")
@@ -42,7 +42,7 @@ async function Frame8() {
     
     let sourceTitle2 = bounds.append("text")
         .attr("x", dimensions.boundedWidth / 2)
-        .attr("y", dimensions.boundedHeight / 2 + 250)
+        .attr("y", dimensions.boundedHeight / 2 + 230)
         .text("Data Viz Inspiration:")
         //.attr("fill", colors[0])
         .attr("font-size", "14px")
@@ -52,7 +52,7 @@ async function Frame8() {
     
     let source2 = bounds.append("text")
         .attr("x", dimensions.boundedWidth / 2)
-        .attr("y", dimensions.boundedHeight / 2 + 280)
+        .attr("y", dimensions.boundedHeight / 2 + 260)
         .html("'Switching between phone brands' by Nadieh Bremer")
         //.attr("fill", colors[0])
         .attr("font-size", "14px")
@@ -76,13 +76,13 @@ async function Frame8() {
     d3.selectAll(".caption-big-bg").remove()
     
 //Make source labels visible
-    sourceTitle1.transition().delay(fade*8).duration(fade)
+    sourceTitle1.transition().delay(fade).duration(fade)
         .attr("opacity", 1)
-    source1.transition().delay(fade*8).duration(fade)
+    source1.transition().delay(fade).duration(fade)
         .attr("opacity", 1)
     
-    sourceTitle2.transition().delay(fade*8).duration(fade)
+    sourceTitle2.transition().delay(fade).duration(fade)
         .attr("opacity", 1)
-    source2.transition().delay(fade*8).duration(fade)
+    source2.transition().delay(fade).duration(fade)
         .attr("opacity", 1)
 }

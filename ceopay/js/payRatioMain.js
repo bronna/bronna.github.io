@@ -17,7 +17,7 @@ let colors = ["#7477fa","#ef74ff","#3cc0dd"]
 //Dimensions of wrapper
 let dimensions = {
     width: 375,
-    height: 667,
+    height: 600,
     margin: {
         top: 65,
         right: 42,
