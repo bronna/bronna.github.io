@@ -19,13 +19,21 @@ async function drawLineChart() {
 // 2. Create chart dimensions
 
   let dimensions = {
-    width: 800,
-    height: 600,
+    // width: 800,
+    // height: 600,
+    // margin: {
+    //   top: 110,
+    //   right: 270,
+    //   bottom: 170,
+    //   left: 170,
+    // },
+    width: window.innerWidth > 1000 ? 800 : window.innerWidth,
+    height: window.innerWidth > 1000 ? 550 : window.innerWidth,
     margin: {
-      top: 110,
-      right: 270,
-      bottom: 170,
-      left: 170,
+      top: 50,
+      right: window.innerWidth > 1000 ? 270 : window.innerWidth * 0.17,
+      bottom: 70,
+      left: window.innerWidth > 1000 ? 170 : window.innerWidth * 0.17,
     },
   }
   dimensions.boundedWidth = dimensions.width
@@ -69,11 +77,11 @@ async function drawLineChart() {
   
 // 6. Draw peripherals
 
-  const chartLabel = bounds.append("text")
-    .attr("x", -70)
-    .attr("y", -80)
-    .html("How Has Worker & CEO Pay Changed Over Time?")
-    .attr("class", "chart-label")
+  // const chartLabel = bounds.append("text")
+  //   .attr("x", -70)
+  //   .attr("y", -80)
+  //   .html("How Has Worker & CEO Pay Changed Over Time?")
+  //   .attr("class", "chart-label")
   
   const yAxisGenerator = d3.axisLeft()
     .scale(yScale)
@@ -107,14 +115,14 @@ async function drawLineChart() {
   const yLabel = bounds.append("text")
     .attr("x", -9)
     .attr("y", -30)
-    .html("Dollars (US)")
+    .html("$ (US)")
     .attr("class", "axis-label")
   
-  const sourceLabel = bounds.append("text")
-    .attr("x", -9)
-    .attr("y", dimensions.boundedHeight + 80)
-    .html("Data: Economic Policy Institute")
-    .attr("class", "source-label")
+  // const sourceLabel = bounds.append("text")
+  //   .attr("x", -9)
+  //   .attr("y", dimensions.boundedHeight + 80)
+  //   .html("Data: Economic Policy Institute")
+  //   .attr("class", "source-label")
 
 // 5. Draw data
 
@@ -149,12 +157,12 @@ async function drawLineChart() {
   const workerStartInfo = bounds.append("text")
     .attr("x", -10)
     .attr("y", (yScale(dataset[0].workerIncome)) + 65)
-    .html("1965 Average Worker Pay")
+    .html("1965 Avg Worker Pay")
     .attr("class", "info-label")
     .style("opacity", 0)
   
   const workerNowPercent = bounds.append("text")
-    .attr("x", xScale(dateAccessor(dataset[10])) + 30)
+    .attr("x", xScale(dateAccessor(dataset[10])) - 70)
     .html("+%34")
     .attr("class", "percent-label")
     .style("opacity", 0)
@@ -201,7 +209,7 @@ async function drawLineChart() {
             .style("opacity", 1)
         
       workerNowLabel
-        .attr("x", xScale(dateAccessor(dataset[10])) - 10)
+        .attr("x", xScale(dateAccessor(dataset[10])) - 70)
         .attr("y", yScale(dataset[10].workerIncome) + 40)
         .html("$56,200")
         .attr("class", "data-label")
@@ -210,7 +218,7 @@ async function drawLineChart() {
             .style("opacity", 1)
         
       workerNowInfo
-        .attr("x", xScale(dateAccessor(dataset[10])) - 10)
+        .attr("x", xScale(dateAccessor(dataset[10])) - 70)
         .attr("y", yScale(dataset[10].workerIncome) + 65)
         .html("2018 Avg Worker Pay")
         .attr("class", "info-label")
@@ -250,15 +258,15 @@ async function drawLineChart() {
     .attr("fill", ceoColor)
   const ceoStartInfo = bounds.append("text")
     .attr("x", -10)
-    .attr("y", (yScale(dataset[0].ceoRealized)) - 60)
-    .html("1965 Average CEO Pay")
+    .attr("y", (yScale(dataset[0].ceoRealized)) - 70)
+    .html("1965 Avg CEO Pay")
     .attr("class", "info-label")
     .attr("fill", ceoColor)
   
   const ceoNowPercent = bounds.append("text")
-    .attr("x", xScale(dateAccessor(dataset[10])) + 56)
+    .attr("x", xScale(dateAccessor(dataset[10])) - 70)
     .html("+%1760")
-    .attr("class", "percent-label")
+    .attr("class", "percent-label-2")
     .style("opacity", 0)
   
   setTimeout(() => {
@@ -288,16 +296,16 @@ async function drawLineChart() {
             .style("opacity", 1)
         
       ceoNowLabel
-        .attr("x", xScale(dateAccessor(dataset[10])) - 10)
+        .attr("x", xScale(dateAccessor(dataset[10])) - 70)
         .attr("y", (yScale(dataset[10].ceoRealized)) - 28)
-        .html("$17,180,000")
+        .html("$17.2m")
         .attr("class", "data-label")
         .attr("fill", ceoColor)
         .transition().duration(fade)
             .style("opacity", 1)
         
       ceoNowInfo
-        .attr("x", xScale(dateAccessor(dataset[10])) - 10)
+        .attr("x", xScale(dateAccessor(dataset[10])) - 70)
         .attr("y", (yScale(dataset[10].ceoRealized)) - 60)
         .html("2018 Avg CEO Pay")
         .attr("class", "info-label")
@@ -305,7 +313,7 @@ async function drawLineChart() {
         .transition().duration(fade)
             .style("opacity", 1)
     }, 6000)
-  }, 9000)
+  }, 8000)
   
   // 7. Interactions & Animations
   setTimeout(() => {

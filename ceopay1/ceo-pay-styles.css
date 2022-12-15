@@ -5,24 +5,21 @@
 
 body {
     /*justify-content: center;*/
-    padding: 5em 1em;
+    padding: 1rem 0.5rem;
     font-family: Nunito Sans, sans-serif;
-    letter-spacing: 0.02em;
 }
 
 div {
     position: relative;
     display: block;
-    width: 375px;
-    /*margin: 0 auto;*/
 }
 
-.chart-label {
-    font-size: 1.4em;
-}
+/* .chart-label {
+    font-size: 1em;
+} */
 
 .axis {
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
 .axis line {
@@ -42,23 +39,29 @@ div {
 
 .source-label {
     text-anchor: start;
-    font-size: 0.7em;
+    font-size: 0.8em;
     opacity: 0.5;
 }
 
 .data-label {
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: 700;
 }
 
 .info-label {
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 0.8em;
 }
 
 .percent-label {
-    font-size: 1.4em;
+    font-size: 1em;
     text-anchor: start;
+    transform: translateY(-6px);
+}
+
+.percent-label-2 {
+    font-size: 1em;
+    text-anchor: start;
+    transform: translateY(-66px);
 }
 
 .label {
