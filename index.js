@@ -11,11 +11,14 @@ function rainbowLava(section) {
         cameraZ: 120,
         count: 300000,
         size: 1.0,
+        height: Math.max(950, window.innerHeight),
         fov: 85, //original is 85
         aspect: window.innerWidth / window.innerHeight,
         near: 0.1,
         far: 1000
     }
+
+    console.log(parameters.height)
     
     let camera = new THREE.PerspectiveCamera(
         parameters.fov,
@@ -28,7 +31,7 @@ function rainbowLava(section) {
     camera.lookAt(0, 0, -20)
   
     const renderer = new THREE.WebGLRenderer()
-    renderer.setSize( window.innerWidth, window.innerHeight )
+    renderer.setSize( window.innerWidth, parameters.height )
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     const container = document.getElementById(section)
     container.appendChild(renderer.domElement)
@@ -96,10 +99,14 @@ function rainbowLava(section) {
      * Handle Resize
      */
     function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight
+        parameters.height = Math.max(950, window.innerHeight)
+
+        camera.aspect = window.innerWidth / parameters.height
         camera.updateProjectionMatrix()
 
-        renderer.setSize(window.innerWidth, window.innerHeight)
+        console.log(parameters.height)
+
+        renderer.setSize(window.innerWidth, parameters.height)
   
         generateObjects()
     }
