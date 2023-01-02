@@ -17,8 +17,6 @@ function rainbowLava(section) {
         near: 0.1,
         far: 1000
     }
-
-    console.log(parameters.height)
     
     let camera = new THREE.PerspectiveCamera(
         parameters.fov,
@@ -29,6 +27,8 @@ function rainbowLava(section) {
     camera.position.set(parameters.cameraX, parameters.cameraY, parameters.cameraZ)
     camera.up.set(0, 1, 0)
     camera.lookAt(0, 0, -20)
+    camera.aspect = window.innerWidth / parameters.height
+    camera.updateProjectionMatrix()
   
     const renderer = new THREE.WebGLRenderer()
     renderer.setSize( window.innerWidth, parameters.height )
