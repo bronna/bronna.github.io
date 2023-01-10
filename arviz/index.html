@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 2
+        Dataviz in AR 4
         <br/>(Chrome Android 81+, Mozilla XRViewer on iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -31,6 +31,91 @@
     </script>
 
     <script type="module">
+        // import three.js, using the importmap script above
+        import * as THREE from "three"
+        import { ARButton } from "three/addons/webxr/ARButton.js"
+        import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+
+        // set up variables
+        let container
+        let camera, scene, renderer
+
+        let size = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+        // initiate and animate the model
+        init();
+        animate();
+
+        function init() {
+            // add model container to DOM
+            container = document.createElement( 'div' )
+            document.body.appendChild( container )
+
+            // initiate the scene
+            scene = new THREE.Scene()
+
+            // set up the camera
+            let fov = 70 // field of view
+            let aspectRatio = size.width / size.height
+            let near = 0.1
+            let far = 60
+            camera = new THREE.PerspectiveCamera( fov, aspectRatio, near, far )
+
+            // add ability to rotate the model manually
+            const controls = new OrbitControls( camera, container )
+            controls.minDistance = 0
+            controls.maxDistance = 40
+
+            // set up the renderer
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
+            renderer.setPixelRatio( window.devicePixelRatio )
+            renderer.setSize( size.width, size.height )
+            renderer.xr.enabled = true
+            container.appendChild( renderer.domElement )
+
+            // create the 3D elements
+            const sphereGeometry = new THREE.SphereGeometry(10, 32, 32)
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.12,
+                sizeAttenuation: true
+            })
+            particlesMaterial.color = new THREE.Color('#ff88cc')
+            const particles = new THREE.Points(sphereGeometry, particlesMaterial)
+            particles.position.z = -20
+            scene.add(particles)
+
+            // add button to start the AR experience
+            document.body.appendChild( ARButton.createButton( renderer ) )
+
+            // update viewer if window is resized
+            window.addEventListener( 'resize', onWindowResize )
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = size.width / size.height
+            camera.updateProjectionMatrix()
+
+            renderer.setSize( size.width, size.height )
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        }
+
+        // render the scene
+        function render() {
+            renderer.render( scene, camera )
+        }
+
+        // re-renders the scene once every frame rate
+        function animate() {
+            renderer.setAnimationLoop( render )
+        }
+
+    </script>
+
+    <!-- <script type="module">
 
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -244,96 +329,7 @@
 
         }
 
-    </script>
-
-    <!-- <script type="module">
-        // import three.js, using the importmap script above
-        import * as THREE from "three";
-        import { ARButton } from "three/addons/webxr/ARButton.js";
-        import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-
-        // set up variables
-        let container;
-        let camera, scene, renderer;
-        let controller;
-
-        let size = {
-            width: window.innerWidth,
-            height: window.innerHeight
-        }
-
-        let reticle;
-
-        let hitTestSource = null;
-        let hitTestSourceRequested = false;
-
-        // initiate and animate the model
-        init();
-        animate();
-
-        function init() {
-            // add model container to DOM
-            container = document.createElement( 'div' );
-            document.body.appendChild( container );
-
-            // initiate the scene
-            scene = new THREE.Scene();
-
-            // set up the camera
-            let fov = 70 // field of view
-            let aspectRatio = size.width / size.height
-            let near = 0.1
-            let far = 20
-            camera = new THREE.PerspectiveCamera( fov, aspectRatio, near, far );
-
-            // add lights, if necessary
-            // const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-            // light.position.set( 0.5, 1, 0.25 );
-            // scene.add( light );
-
-            // set up the renderer
-            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( size.width, size.height );
-            renderer.xr.enabled = true;
-            container.appendChild( renderer.domElement );
-
-            // create the 3D elements
-            const sphereGeometry = new THREE.SphereGeometry(10, 32, 32)
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.12,
-                sizeAttenuation: true
-            })
-            particlesMaterial.color = new THREE.Color('#ff88cc')
-            const particles = new THREE.Points(sphereGeometry, particlesMaterial)
-            scene.add(particles)
-
-            // add button to start the AR experience
-            document.body.appendChild( ARButton.createButton( renderer ) );
-
-            // update viewer if window is resized
-            window.addEventListener( 'resize', onWindowResize );
-        }
-
-        function onWindowResize() {
-
-            camera.aspect = size.width / size.height;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize( size.width, size.height );
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-        }
-
-        //
-
-        function animate() {
-            renderer.setAnimationLoop( render );
-        }
-
-        function render() {
-            renderer.render( scene, camera );
-        }
-
     </script> -->
+
 </body>
 </html>
