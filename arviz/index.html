@@ -25,7 +25,7 @@
         {
             "imports": {
                 "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
-                "three/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+                "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
             }
         }
     </script>
@@ -33,7 +33,8 @@
     <script type="module">
         // import three.js, using the importmap script above
         import * as THREE from "three";
-        import { ARButton } from "three/webxr/ARButton.js";
+        import { ARButton } from "three/addons/webxr/ARButton.js";
+        import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
         // set up variables
         let container;
@@ -58,9 +59,6 @@
             // add model container to DOM
             container = document.createElement( 'div' );
             document.body.appendChild( container );
-
-            // add button to start the AR experience
-            document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
             // initiate the scene
             scene = new THREE.Scene();
@@ -94,32 +92,10 @@
             const particles = new THREE.Points(sphereGeometry, particlesMaterial)
             scene.add(particles)
 
-            // const geometry = new THREE.CylinderGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
+            // add button to start the AR experience
+            document.body.appendChild( ARButton.createButton( renderer ) );
 
-            // function onSelect() {
-            //     if ( reticle.visible ) {
-            //         const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-            //         const mesh = new THREE.Mesh( geometry, material );
-            //         reticle.matrix.decompose( mesh.position, mesh.quaternion, mesh.scale );
-            //         mesh.scale.y = Math.random() * 2 + 1;
-            //         scene.add( mesh );
-            //     }
-            // }
-
-            // controller = renderer.xr.getController( 0 );
-            // controller.addEventListener( 'select', onSelect );
-            // scene.add( controller );
-
-            // reticle = new THREE.Mesh(
-            //     new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
-            //     new THREE.MeshBasicMaterial()
-            // );
-            // reticle.matrixAutoUpdate = false;
-            // reticle.visible = false;
-            // scene.add( reticle );
-
-            //
-
+            // update viewer if window is resized
             window.addEventListener( 'resize', onWindowResize );
         }
 
