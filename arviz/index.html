@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+
+    <title>Make Your First Data Visualization in AR</title>
+</head>
+<body>
+    <div id="info">
+        Dataviz in AR
+        <br/>(Chrome Android 81+, Mozilla XRViewer on iOS)
+        <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
+    </div>
+
+    <!-- <script src="js/libs/ammo.wasm.js"></script> -->
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+                "three/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        // import three.js, using the importmap script above
+        import * as THREE from "three";
+        import { ARButton } from "three/webxr/ARButton.js";
+
+        // set up variables
+        let container;
+        let camera, scene, renderer;
+        let controller;
+
+        let size = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+        let reticle;
+
+        let hitTestSource = null;
+        let hitTestSourceRequested = false;
+
+        // initiate and animate the model
+        init();
+        animate();
+
+        function init() {
+            // add model container to DOM
+            container = document.createElement( 'div' );
+            document.body.appendChild( container );
+
+            // add button to start the AR experience
+            document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+
+            // initiate the scene
+            scene = new THREE.Scene();
+
+            // set up the camera
+            let fov = 70 // field of view
+            let aspectRatio = size.width / size.height
+            let near = 0.1
+            let far = 20
+            camera = new THREE.PerspectiveCamera( fov, aspectRatio, near, far );
+
+            // add lights, if necessary
+            // const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+            // light.position.set( 0.5, 1, 0.25 );
+            // scene.add( light );
+
+            // set up the renderer
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( size.width, size.height );
+            renderer.xr.enabled = true;
+            container.appendChild( renderer.domElement );
+
+            // create the 3D elements
+            const sphereGeometry = new THREE.SphereGeometry(10, 32, 32)
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.12,
+                sizeAttenuation: true
+            })
+            particlesMaterial.color = new THREE.Color('#ff88cc')
+            const particles = new THREE.Points(sphereGeometry, particlesMaterial)
+            scene.add(particles)
+
+            // const geometry = new THREE.CylinderGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
+
+            // function onSelect() {
+            //     if ( reticle.visible ) {
+            //         const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+            //         const mesh = new THREE.Mesh( geometry, material );
+            //         reticle.matrix.decompose( mesh.position, mesh.quaternion, mesh.scale );
+            //         mesh.scale.y = Math.random() * 2 + 1;
+            //         scene.add( mesh );
+            //     }
+            // }
+
+            // controller = renderer.xr.getController( 0 );
+            // controller.addEventListener( 'select', onSelect );
+            // scene.add( controller );
+
+            // reticle = new THREE.Mesh(
+            //     new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+            //     new THREE.MeshBasicMaterial()
+            // );
+            // reticle.matrixAutoUpdate = false;
+            // reticle.visible = false;
+            // scene.add( reticle );
+
+            //
+
+            window.addEventListener( 'resize', onWindowResize );
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = size.width / size.height;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( size.width, size.height );
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        }
+
+        //
+
+        function animate() {
+            renderer.setAnimationLoop( render );
+        }
+
+        function render() {
+            renderer.render( scene, camera );
+        }
+
+    </script>
+</body>
+</html>
