@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 7
+        Dataviz in AR 8
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -62,7 +62,7 @@
 
             // set up the camera
             camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 20 );
-            camera.position.set( 0, 8, 14 );
+            camera.position.set( 0, 0, 14 );
 
             // allow user interaction
             const controls = new OrbitControls( camera, container );
@@ -148,7 +148,7 @@
                 const forest = new THREE.Mesh( geometry, material )
 
                 forest.position.x = boundary + (radius / 40)
-                forest.position.y = -2
+                forest.position.y = 0
                 forest.position.z = 0
 
                 //forest.rotation.x = Math.PI / 2
@@ -173,7 +173,7 @@
                 const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
 
                 forestProtected.position.x = boundary + (radius / 40)
-                forestProtected.position.y = -2
+                forestProtected.position.y = 0
                 forestProtected.position.z = 0.01
 
                 //forestProtected.rotation.x = Math.PI / 2
@@ -183,7 +183,14 @@
                 group.add( forestProtected )
             }
 
-            camera.position.setX(boundary / 2)
+            let bb = new THREE.Box3().setFromObject(group)
+            let size = bb.getSize(new THREE.Vector3())
+
+            group.position.set(
+                - (size.x / 2),
+                - (size.y / 2),
+                - (size.z / 2)
+            )
 
             // for ( let i = 0; i < 50; i ++ ) {
 
