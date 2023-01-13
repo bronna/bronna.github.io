@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 6
+        Dataviz in AR 7
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -34,6 +34,7 @@
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { ARButton } from 'three/addons/webxr/ARButton.js';
+        import { FontLoader } from 'three/addons/loaders/FontLoader.js'
 
         let container;
         let camera, scene, renderer;
@@ -44,31 +45,38 @@
         const intersected = [];
         const tempMatrix = new THREE.Matrix4();
 
+        const fontLoader = new FontLoader()
+
         let group;
 
         init();
         animate();
 
         function init() {
-
+            // container for the graphical elements
             container = document.createElement( 'div' );
             document.body.appendChild( container );
 
+            // initiate the scene
             scene = new THREE.Scene();
 
+            // set up the camera
             camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 20 );
             camera.position.set( 0, 8, 14 );
 
+            // allow user interaction
             const controls = new OrbitControls( camera, container );
             controls.minDistance = 0;
-            controls.maxDistance = 8;
+            controls.maxDistance = 20;
 
+            // add lights
             scene.add( new THREE.HemisphereLight( 0x808080, 0x606060 ) );
 
             const light = new THREE.DirectionalLight( 0xffffff );
             light.position.set( 0, 6, 0 );
             scene.add( light );
 
+            // add graphical elements
             group = new THREE.Group();
             scene.add( group );
 
@@ -120,21 +128,19 @@
                 { "type": "flooded saline water forest ", "protected": 6 , "total": 19 }
             ]
 
-            forestTypes.forEach((element, index) => cylinder(element, index))
+            forestTypes.forEach((element, index) => circle(element, index))
 
-            function cylinder(element, index) {
+            function circle(element, index) {
                 // add area of total forest for each type
                 // calculate radius to get a disc with area of the land
                 const radius = Math.sqrt( element.total / Math.PI )
 
-                const geometry = new THREE.CylinderGeometry( 
-                    (radius / 40), // radius top
-                    (radius / 40), // radius bottom
-                    0.02, // height
+                const geometry = new THREE.CircleGeometry( 
+                    (radius / 40), // radius
                     64 // radial segments
                 )
                 const material = new THREE.MeshStandardMaterial({
-                    color: 0xa7c954,
+                    color: 0xF9483A,
                     roughness: 0.7,
                     metalness: 0.0
                 })
@@ -142,7 +148,7 @@
                 const forest = new THREE.Mesh( geometry, material )
 
                 forest.position.x = boundary + (radius / 40)
-                forest.position.y = 0
+                forest.position.y = -2
                 forest.position.z = 0
 
                 //forest.rotation.x = Math.PI / 2
@@ -154,14 +160,12 @@
                 // add area of protected forest for each type
                 const radiusProtected = Math.sqrt( element.protected / Math.PI )
 
-                const geometryProtected = new THREE.CylinderGeometry( 
-                    (radiusProtected / 40), // radius top
-                    (radiusProtected / 40), // radius bottom
-                    0.022, // height
+                const geometryProtected = new THREE.CircleGeometry( 
+                    (radiusProtected / 40), // radius
                     64 // radial segments
                 )
                 const materialProtected = new THREE.MeshStandardMaterial({
-                    color: 0xF9483A,
+                    color: 0xA7C954,
                     roughness: 0.7,
                     metalness: 0.0
                 })
@@ -169,8 +173,8 @@
                 const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
 
                 forestProtected.position.x = boundary + (radius / 40)
-                forestProtected.position.y = 0
-                forestProtected.position.z = 0
+                forestProtected.position.y = -2
+                forestProtected.position.z = 0.01
 
                 //forestProtected.rotation.x = Math.PI / 2
 
@@ -206,8 +210,7 @@
 
             // }
 
-            //
-
+            // set up renderer
             renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
             renderer.setSize( window.innerWidth, window.innerHeight );
@@ -218,7 +221,6 @@
             document.body.appendChild( ARButton.createButton( renderer ) );
 
             // controllers
-
             controller1 = renderer.xr.getController( 0 );
             controller1.addEventListener( 'selectstart', onSelectStart );
             controller1.addEventListener( 'selectend', onSelectEnd );
@@ -231,8 +233,7 @@
 
             raycaster = new THREE.Raycaster();
 
-            //
-
+            // re-render scene when window size changes
             window.addEventListener( 'resize', onWindowResize );
 
         }
