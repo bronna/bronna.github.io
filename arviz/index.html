@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 8
+        Dataviz in AR 9
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -99,17 +99,6 @@
             //     new THREE.TorusGeometry( 0.2, 0.04, 64, 32 )
             // ];
 
-            // const types = [
-            //     "coniferous evergreen",
-            //     "broadleaved evergreen",
-            //     "coniferous deciduous",
-            //     "broadleaved deciduous",
-            //     "mixed",
-            //     "mosaic of tree and shrub cover",
-            //     "flooded fresh or brackish water",
-            //     "flooded saline water"
-            // ]
-
             // area = pi * r^2
             // area / pi = r^2
             // sqrt( area / pi ) = r
@@ -142,7 +131,10 @@
                 const material = new THREE.MeshStandardMaterial({
                     color: 0xF9483A,
                     roughness: 0.7,
-                    metalness: 0.0
+                    metalness: 0.0,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.5
                 })
 
                 const forest = new THREE.Mesh( geometry, material )
@@ -167,7 +159,10 @@
                 const materialProtected = new THREE.MeshStandardMaterial({
                     color: 0xA7C954,
                     roughness: 0.7,
-                    metalness: 0.0
+                    metalness: 0.0,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.5
                 })
 
                 const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
