@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 10
+        Dataviz in AR 13
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -34,9 +34,21 @@
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { ARButton } from 'three/addons/webxr/ARButton.js';
-        import { FontLoader } from 'three/addons/loaders/FontLoader.js'
+
+        // The data we're working with
+        const forestTypes = [
+            { "type": "coniferous evergreen", "protected": 119 , "total": 886 },
+            { "type": "broadleaved evergreen", "protected": 397 , "total": 1270 },
+            { "type": "coniferous deciduous", "protected": 47 , "total": 510 },
+            { "type": "broadleaved deciduous", "protected": 165 , "total": 1037 },
+            { "type": "mixed", "protected": 27 , "total": 217 },
+            { "type": "mosaic of tree and shrub cover", "protected": 52 , "total": 346 },
+            { "type": "flooded fresh or brackish water", "protected": 20 , "total": 89 },
+            { "type": "flooded saline water", "protected": 6 , "total": 19 }
+        ]
 
         let container;
+        let labels;
         let camera, scene, renderer;
         let controller1, controller2;
 
@@ -45,29 +57,41 @@
         const intersected = [];
         const tempMatrix = new THREE.Matrix4();
 
-        const fontLoader = new FontLoader()
-
-        let group;
+        let group = new THREE.Group()
 
         init();
         animate();
 
         function init() {
-            // container for the graphical elements
+            // html container for the graphical elements
             container = document.createElement( 'div' );
+            container.classList.add("container")
             document.body.appendChild( container );
 
-            // initiate the scene
+            // // add html elements for the labels
+            // labels = document.createElement( 'div' )
+            // labels.classList.add("labels")
+            // container.appendChild( labels )
+
+            // for (let i = 0; i < forestTypes.length; i++) {
+            //     let labelDiv = document.createElement("div")
+            //     labelDiv.innerHTML = forestTypes[i].type
+            //     labelDiv.classList.add("label")
+            //     labelDiv.id = "label" + i
+            //     labels.appendChild(labelDiv)
+            // }
+
+            // initiate the Three.js scene
             scene = new THREE.Scene();
 
             // set up the camera
-            camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 20 );
-            camera.position.set( 0, 0, 14 );
+            camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 100 );
+            camera.position.set( 0, 0, 30 );
 
             // allow user interaction
             const controls = new OrbitControls( camera, container );
             controls.minDistance = 0;
-            controls.maxDistance = 20;
+            controls.maxDistance = 100;
 
             // add lights
             scene.add( new THREE.HemisphereLight( 0x808080, 0x606060 ) );
@@ -76,11 +100,19 @@
             light.position.set( 0, 6, 0 );
             scene.add( light );
 
-            // add graphical elements
-            group = new THREE.Group();
+            // set up renderer
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.xr.enabled = true;
+            container.appendChild( renderer.domElement );
+
+            document.body.appendChild( ARButton.createButton( renderer ) );
+
+            // add group to scene elements
             scene.add( group );
 
-            // // create the 3D sphere of particles
             // const sphereGeometry = new THREE.SphereGeometry(10, 32, 32)
             // const particlesMaterial = new THREE.PointsMaterial({
             //     size: 0.12,
@@ -104,31 +136,19 @@
             // sqrt( area / pi ) = r
 
             // define variable that keeps track of x position of last element's boundary
-            let boundary = 0
+            let previousCircle = null
 
-            const forestTypes = [
-                { "type": "coniferous evergreen", "protected": 119 , "total": 886 },
-                { "type": "broadleaved evergreen", "protected": 397 , "total": 1270 },
-                { "type": "coniferous deciduous", "protected": 47 , "total": 510 },
-                { "type": "broadleaved deciduous", "protected": 165 , "total": 1037 },
-                { "type": "mixed", "protected": 27 , "total": 217 },
-                { "type": "mosaic of tree and shrub cover", "protected": 52 , "total": 346 },
-                { "type": "flooded fresh or brackish water", "protected": 20 , "total": 89 },
-                { "type": "flooded saline water forest ", "protected": 6 , "total": 19 }
-            ]
+            for (let i = 0; i < forestTypes.length; i++) {
+                const forest = forestTypes[i];
 
-            forestTypes.forEach((element, index) => circle(element, index))
-
-            function circle(element, index) {
                 // add area of total forest for each type
                 // calculate radius to get a disc with area of the land
-                const radius = Math.sqrt( element.total / Math.PI )
+                const radius = Math.sqrt( forest.total / Math.PI )
 
-                const geometry = new THREE.CircleGeometry( 
-                    (radius / 40), // radius
-                    64 // radial segments
-                )
-                const material = new THREE.MeshStandardMaterial({
+                // Create the circle
+                const circleGeometry = new THREE.CircleGeometry(radius / 40, 64);
+                //const circleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                const circleMaterial = new THREE.MeshStandardMaterial({
                     color: 0xF9483A,
                     roughness: 0.7,
                     metalness: 0.0,
@@ -136,59 +156,138 @@
                     transparent: true,
                     opacity: 0.5
                 })
+                const circle = new THREE.Mesh(circleGeometry, circleMaterial);
 
-                const forest = new THREE.Mesh( geometry, material )
+                if (previousCircle) {
+                    const previousCircleSize = new THREE.Box3().setFromObject(previousCircle)
+                    
+                    circle.position.x = previousCircle.position.x + ((previousCircleSize.max.x - previousCircleSize.min.x) / 2) + (radius / 40) + 0.5
+                }
+                previousCircle = circle
+                
+                // Create the label sprite
+                const labelCanvas = document.createElement('canvas');
+                labelCanvas.width = 160
+                labelCanvas.height = 160
+                const labelCtx = labelCanvas.getContext('2d');
+                labelCtx.font = '20px Helvetica';
+                labelCtx.fillStyle = 'white';
+                labelCtx.textAlign = 'center';
 
-                forest.position.x = boundary + (radius / 40)
-                forest.position.y = 0
-                forest.position.z = 0
+                // wrap the label text onto multiple lines
+                const maxWidth = 160;
+                const text = forest.type;
+                const words = text.split(' ');
+                let line = '';
+                let y = 25;
 
-                //forest.rotation.x = Math.PI / 2
-                //mesh.scale.setScalar( Math.random() + 0.5)
+                for(let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = labelCtx.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    labelCtx.fillText(line, labelCanvas.width / 2, y);
+                    line = words[n] + ' ';
+                    y += 20;
+                } else {
+                    line = testLine;
+                }
+                }
 
-                group.add( forest )
+                labelCtx.fillText(line, labelCanvas.width / 2, y);
 
-
-                // add area of protected forest for each type
-                const radiusProtected = Math.sqrt( element.protected / Math.PI )
-
-                const geometryProtected = new THREE.CircleGeometry( 
-                    (radiusProtected / 40), // radius
-                    64 // radial segments
-                )
-                const materialProtected = new THREE.MeshStandardMaterial({
-                    color: 0xA7C954,
-                    roughness: 0.7,
-                    metalness: 0.0,
-                    side: THREE.DoubleSide,
-                    transparent: true,
-                    opacity: 0.5
-                })
-
-                const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
-
-                forestProtected.position.x = boundary + (radius / 40)
-                forestProtected.position.y = 0
-                forestProtected.position.z = 0.01
-
-                //forestProtected.rotation.x = Math.PI / 2
-
-                boundary = boundary + (radius * 2 / 40) + 0.2
-
-                group.add( forestProtected )
+                const labelTexture = new THREE.CanvasTexture(labelCanvas);
+                const labelMaterial = new THREE.SpriteMaterial({ map: labelTexture });
+                const labelSprite = new THREE.Sprite(labelMaterial);
+                labelSprite.position.set(circle.position.x, circle.position.y + circle.geometry.parameters.radius, circle.position.z);
+                
+                // Add the circle and label sprite to the scene
+                group.add(circle);
+                group.add(labelSprite);
             }
 
+            ////////////////////previous version
+            // forestTypes.forEach((element, index) => circle(element, index))
+
+            // function circle(element, index) {
+            //     // // add html element for label
+            //     // let labelDiv = document.createElement("div")
+            //     // labelDiv.innerHTML = forestTypes[index].type
+            //     // labelDiv.classList.add("label")
+            //     // labelDiv.id = "label" + index
+            //     // labelDiv.style.position = "absolute"
+            //     // labelDiv.style.top = (window.innerHeight / 2 + 100) + "px"
+            //     // labelDiv.style.left = (boundary * 90 + 312) + "px"
+            //     // labels.appendChild(labelDiv)
+
+            //     // add area of total forest for each type
+            //     // calculate radius to get a disc with area of the land
+            //     const radius = Math.sqrt( element.total / Math.PI )
+
+            //     const geometry = new THREE.CircleGeometry( 
+            //         (radius / 40), // radius
+            //         64 // radial segments
+            //     )
+            //     const material = new THREE.MeshStandardMaterial({
+            //         color: 0xF9483A,
+            //         roughness: 0.7,
+            //         metalness: 0.0,
+            //         side: THREE.DoubleSide,
+            //         transparent: true,
+            //         opacity: 0.5
+            //     })
+
+            //     const forest = new THREE.Mesh( geometry, material )
+
+            //     forest.position.x = boundary + (radius / 40)
+            //     forest.position.y = 0
+            //     forest.position.z = 0
+
+            //     //forest.rotation.x = Math.PI / 2
+            //     //mesh.scale.setScalar( Math.random() + 0.5)
+
+            //     group.add( forest )
+
+            //     // add area of protected forest for each type
+            //     const radiusProtected = Math.sqrt( element.protected / Math.PI )
+
+            //     const geometryProtected = new THREE.CircleGeometry( 
+            //         (radiusProtected / 40), // radius
+            //         64 // radial segments
+            //     )
+            //     const materialProtected = new THREE.MeshStandardMaterial({
+            //         color: 0xA7C954,
+            //         roughness: 0.7,
+            //         metalness: 0.0,
+            //         side: THREE.DoubleSide,
+            //         transparent: true,
+            //         opacity: 0.5
+            //     })
+
+            //     const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
+
+            //     forestProtected.position.x = boundary + (radius / 40)
+            //     forestProtected.position.y = 0
+            //     forestProtected.position.z = 0.01
+
+            //     //forestProtected.rotation.x = Math.PI / 2
+
+            //     boundary = boundary + (radius * 2 / 40) + 0.4
+
+            //     group.add( forestProtected )
+            // }
+
             let bb = new THREE.Box3().setFromObject(group)
-            let size = bb.getSize(new THREE.Vector3())
+            let bbSize = bb.getSize(new THREE.Vector3())
 
             group.position.set(
-                - (size.x / 2),
-                - (size.y / 2),
-                - 2
+                - (bbSize.x / 2 + bb.min.x),
+                - (bbSize.y / 2 + bb.min.y),
+                - 0
             )
+            ///////////////end previous version
 
             // for ( let i = 0; i < 50; i ++ ) {
-
             //     const geometry = new THREE.CylinderGeometry( 0.2, 0.2, 0.2, 64 )
             //     const material = new THREE.MeshStandardMaterial( {
             //         color: Math.random() * 0xffffff, // var
@@ -209,18 +308,7 @@
             //     object.scale.setScalar( Math.random() + 0.5 ); // var
 
             //     group.add( object );
-
             // }
-
-            // set up renderer
-            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            renderer.outputEncoding = THREE.sRGBEncoding;
-            renderer.xr.enabled = true;
-            container.appendChild( renderer.domElement );
-
-            document.body.appendChild( ARButton.createButton( renderer ) );
 
             // controllers
             controller1 = renderer.xr.getController( 0 );
@@ -234,6 +322,7 @@
             scene.add( controller2 );
 
             raycaster = new THREE.Raycaster();
+            raycaster.camera = camera
 
             // re-render scene when window size changes
             window.addEventListener( 'resize', onWindowResize );
