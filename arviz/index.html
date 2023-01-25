@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 15
+        Dataviz in AR 16
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -50,6 +50,7 @@
         let container;
         let labels;
         let camera, scene, renderer;
+        // Controller1 and Controller2 are the two controllers used in the WebXR API. They are used to interact with the 3D scene and can be used to select objects, move objects, and perform other actions. A controller is an input device used to interact with a 3D scene. It can be used to select objects, move objects, and perform other actions. Controllers are commonly used in virtual reality and augmented reality applications.
         let controller1, controller2;
 
         let raycaster;
@@ -86,7 +87,7 @@
 
             // set up the camera
             camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 100 );
-            camera.position.set( 0, 0, 50 );
+            camera.position.set( 0, 0, -20 );
 
             // allow user interaction
             const controls = new OrbitControls( camera, container );
@@ -338,6 +339,7 @@
 
         }
 
+        // The onSelectStart function is triggered when the user presses down on the controller. It is used to detect if the controller is intersecting with any objects in the scene. If it is, it attaches the object to the controller and sets the object's material to be emissive.
         function onSelectStart( event ) {
 
             const controller = event.target;
@@ -358,6 +360,7 @@
 
         }
 
+        // The onSelectEnd function is triggered when the user releases the select button on the controller. It is used to reset the color of the object that was previously selected and reattach it to the group.
         function onSelectEnd( event ) {
 
             const controller = event.target;
@@ -375,6 +378,7 @@
 
         }
 
+        // The getIntersections function is used to determine if the controller is intersecting with any of the objects in the group. It takes the controller as an argument and uses the raycaster to check if the controller is intersecting with any of the objects in the group. It then returns an array of the objects that the controller is intersecting with.
         function getIntersections( controller ) {
 
             tempMatrix.identity().extractRotation( controller.matrixWorld );
@@ -386,6 +390,7 @@
 
         }
 
+        // The intersectObjects function is used to detect when a controller is pointing at an object in the scene. It uses the getIntersections function to get an array of intersections between the controller and the objects in the scene. If the array is not empty, the first object in the array is set to have an emissive color of red, and is added to the intersected array.
         function intersectObjects( controller ) {
 
             // Do not highlight when already selected
@@ -406,6 +411,7 @@
 
         }
 
+        // The cleanIntersected function is removing all objects from the intersected array and resetting the emissive color of the objects to 0.
         function cleanIntersected() {
 
             while ( intersected.length ) {
