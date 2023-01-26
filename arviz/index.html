@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 16
+        Dataviz in AR 17
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -437,6 +437,8 @@
 
             intersectObjects( controller1 );
             intersectObjects( controller2 );
+
+            camera.position.z -= 0.1;
 
             renderer.render( scene, camera );
 
