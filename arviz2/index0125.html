@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+
+    <title>Making Your First Data Visualization in AR</title>
+</head>
+<body>
+    <div id="info">
+        Dataviz in AR 17
+        <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
+        <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
+    </div>
+
+    <!-- <script src="js/libs/ammo.wasm.js"></script> -->
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { ARButton } from 'three/addons/webxr/ARButton.js';
+
+        // Data to visualize
+        const forestTypes = [
+            { "type": "coniferous evergreen", "protected": 119 , "total": 886 },
+            { "type": "broadleaved evergreen", "protected": 397 , "total": 1270 },
+            { "type": "coniferous deciduous", "protected": 47 , "total": 510 },
+            { "type": "broadleaved deciduous", "protected": 165 , "total": 1037 },
+            { "type": "mixed", "protected": 27 , "total": 217 },
+            { "type": "mosaic of tree and shrub cover", "protected": 52 , "total": 346 },
+            { "type": "flooded fresh or brackish water", "protected": 20 , "total": 89 },
+            { "type": "flooded saline water", "protected": 6 , "total": 19 }
+        ]
+
+        let container;
+        let labels;
+        let camera, scene, renderer;
+        // Controller1 and Controller2 are the two controllers used in the WebXR API. They are used to interact with the 3D scene and can be used to select objects, move objects, and perform other actions. A controller is an input device used to interact with a 3D scene. It can be used to select objects, move objects, and perform other actions. Controllers are commonly used in virtual reality and augmented reality applications.
+        let controller1, controller2;
+
+        let raycaster;
+
+        const intersected = [];
+        const tempMatrix = new THREE.Matrix4();
+
+        let group = new THREE.Group()
+
+        init();
+        animate();
+
+        function init() {
+            // html container for the graphical elements
+            container = document.createElement( 'div' );
+            container.classList.add("container")
+            document.body.appendChild( container );
+
+            // // add html elements for the labels
+            // labels = document.createElement( 'div' )
+            // labels.classList.add("labels")
+            // container.appendChild( labels )
+
+            // for (let i = 0; i < forestTypes.length; i++) {
+            //     let labelDiv = document.createElement("div")
+            //     labelDiv.innerHTML = forestTypes[i].type
+            //     labelDiv.classList.add("label")
+            //     labelDiv.id = "label" + i
+            //     labels.appendChild(labelDiv)
+            // }
+
+            // initiate the Three.js scene
+            scene = new THREE.Scene();
+
+            // set up the camera
+            camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 100 );
+            camera.position.set( 0, 0, -20 );
+
+            // allow user interaction
+            const controls = new OrbitControls( camera, container );
+            controls.minDistance = 0;
+            controls.maxDistance = 100;
+
+            // add lights
+            scene.add( new THREE.HemisphereLight( 0x808080, 0x606060 ) );
+
+            const light = new THREE.DirectionalLight( 0xffffff );
+            light.position.set( 0, 6, 0 );
+            scene.add( light );
+
+            // set up renderer
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.xr.enabled = true;
+            container.appendChild( renderer.domElement );
+
+            document.body.appendChild( ARButton.createButton( renderer ) );
+
+            // add group to scene elements
+            scene.add( group );
+
+            // const sphereGeometry = new THREE.SphereGeometry(10, 32, 32)
+            // const particlesMaterial = new THREE.PointsMaterial({
+            //     size: 0.12,
+            //     sizeAttenuation: true
+            // })
+            // particlesMaterial.color = new THREE.Color('#ff88cc')
+            // const particles = new THREE.Points(sphereGeometry, particlesMaterial)
+            // particles.position.z = -20
+            // group.add(particles)
+
+            // const geometries = [
+            //     new THREE.BoxGeometry( 0.2, 0.2, 0.2 ),
+            //     new THREE.ConeGeometry( 0.2, 0.2, 64 ),
+            //     new THREE.CylinderGeometry( 0.2, 0.2, 0.2, 64 ),
+            //     new THREE.IcosahedronGeometry( 0.2, 8 ),
+            //     new THREE.TorusGeometry( 0.2, 0.04, 64, 32 )
+            // ];
+
+            // area = pi * r^2
+            // area / pi = r^2
+            // sqrt( area / pi ) = r
+
+            // define variable that keeps track of x position of last element's boundary
+            let previousCircle = null
+
+            for (let i = 0; i < forestTypes.length; i++) {
+                const forest = forestTypes[i];
+
+                // add area of total forest for each type
+                // calculate radius to get a disc with area of the land
+                const radius = Math.sqrt( forest.total / Math.PI )
+
+                // Create the circle
+                const circleGeometry = new THREE.CircleGeometry(radius / 40, 64);
+                //const circleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                const circleMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xF9483A,
+                    roughness: 0.7,
+                    metalness: 0.0,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.5
+                })
+                const circle = new THREE.Mesh(circleGeometry, circleMaterial);
+
+                if (previousCircle) {
+                    const previousCircleSize = new THREE.Box3().setFromObject(previousCircle)
+                    
+                    circle.position.x = previousCircle.position.x + ((previousCircleSize.max.x - previousCircleSize.min.x) / 2) + (radius / 40) + 0.5
+                }
+                previousCircle = circle
+                
+                // Create the label sprite
+                const labelCanvas = document.createElement('canvas');
+                labelCanvas.width = 160
+                labelCanvas.height = 160
+                const labelCtx = labelCanvas.getContext('2d');
+                labelCtx.font = '20px Helvetica';
+                labelCtx.fillStyle = 'white';
+                labelCtx.textAlign = 'center';
+
+                // wrap the label text onto multiple lines
+                const maxWidth = 160;
+                const text = forest.type;
+                const words = text.split(' ');
+                let line = '';
+                let y = 25;
+
+                for(let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = labelCtx.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    labelCtx.fillText(line, labelCanvas.width / 2, y);
+                    line = words[n] + ' ';
+                    y += 20;
+                } else {
+                    line = testLine;
+                }
+                }
+
+                labelCtx.fillText(line, labelCanvas.width / 2, y);
+
+                const labelTexture = new THREE.CanvasTexture(labelCanvas);
+                const labelMaterial = new THREE.SpriteMaterial({ map: labelTexture });
+                const labelSprite = new THREE.Sprite(labelMaterial);
+                labelSprite.position.set(circle.position.x, circle.position.y + circle.geometry.parameters.radius, circle.position.z);
+                
+                // Add the circle and label sprite to the scene
+                group.add(circle);
+                group.add(labelSprite);
+            }
+
+            ////////////////////previous version
+            // forestTypes.forEach((element, index) => circle(element, index))
+
+            // function circle(element, index) {
+            //     // // add html element for label
+            //     // let labelDiv = document.createElement("div")
+            //     // labelDiv.innerHTML = forestTypes[index].type
+            //     // labelDiv.classList.add("label")
+            //     // labelDiv.id = "label" + index
+            //     // labelDiv.style.position = "absolute"
+            //     // labelDiv.style.top = (window.innerHeight / 2 + 100) + "px"
+            //     // labelDiv.style.left = (boundary * 90 + 312) + "px"
+            //     // labels.appendChild(labelDiv)
+
+            //     // add area of total forest for each type
+            //     // calculate radius to get a disc with area of the land
+            //     const radius = Math.sqrt( element.total / Math.PI )
+
+            //     const geometry = new THREE.CircleGeometry( 
+            //         (radius / 40), // radius
+            //         64 // radial segments
+            //     )
+            //     const material = new THREE.MeshStandardMaterial({
+            //         color: 0xF9483A,
+            //         roughness: 0.7,
+            //         metalness: 0.0,
+            //         side: THREE.DoubleSide,
+            //         transparent: true,
+            //         opacity: 0.5
+            //     })
+
+            //     const forest = new THREE.Mesh( geometry, material )
+
+            //     forest.position.x = boundary + (radius / 40)
+            //     forest.position.y = 0
+            //     forest.position.z = 0
+
+            //     //forest.rotation.x = Math.PI / 2
+            //     //mesh.scale.setScalar( Math.random() + 0.5)
+
+            //     group.add( forest )
+
+            //     // add area of protected forest for each type
+            //     const radiusProtected = Math.sqrt( element.protected / Math.PI )
+
+            //     const geometryProtected = new THREE.CircleGeometry( 
+            //         (radiusProtected / 40), // radius
+            //         64 // radial segments
+            //     )
+            //     const materialProtected = new THREE.MeshStandardMaterial({
+            //         color: 0xA7C954,
+            //         roughness: 0.7,
+            //         metalness: 0.0,
+            //         side: THREE.DoubleSide,
+            //         transparent: true,
+            //         opacity: 0.5
+            //     })
+
+            //     const forestProtected = new THREE.Mesh( geometryProtected, materialProtected )
+
+            //     forestProtected.position.x = boundary + (radius / 40)
+            //     forestProtected.position.y = 0
+            //     forestProtected.position.z = 0.01
+
+            //     //forestProtected.rotation.x = Math.PI / 2
+
+            //     boundary = boundary + (radius * 2 / 40) + 0.4
+
+            //     group.add( forestProtected )
+            // }
+
+            let bb = new THREE.Box3().setFromObject(group)
+            let bbSize = bb.getSize(new THREE.Vector3())
+
+            group.position.set(
+                - (bbSize.x / 2 + bb.min.x),
+                - (bbSize.y / 2 + bb.min.y),
+                - 0
+            )
+            ///////////////end previous version
+
+            // for ( let i = 0; i < 50; i ++ ) {
+            //     const geometry = new THREE.CylinderGeometry( 0.2, 0.2, 0.2, 64 )
+            //     const material = new THREE.MeshStandardMaterial( {
+            //         color: Math.random() * 0xffffff, // var
+            //         roughness: 0.7,
+            //         metalness: 0.0
+            //     } );
+
+            //     const object = new THREE.Mesh( geometry, material );
+
+            //     object.position.x = Math.random() * 4 - 2; // var
+            //     object.position.y = Math.random() * 4 - 2; // var
+            //     object.position.z = Math.random() * 4 - 2; // var
+
+            //     object.rotation.x = Math.random() * 2 * Math.PI; // var
+            //     object.rotation.y = Math.random() * 2 * Math.PI; // var
+            //     object.rotation.z = Math.random() * 2 * Math.PI; // var
+
+            //     object.scale.setScalar( Math.random() + 0.5 ); // var
+
+            //     group.add( object );
+            // }
+
+            // controllers
+            controller1 = renderer.xr.getController( 0 );
+            controller1.addEventListener( 'selectstart', onSelectStart );
+            controller1.addEventListener( 'selectend', onSelectEnd );
+            scene.add( controller1 );
+
+            controller2 = renderer.xr.getController( 1 );
+            controller2.addEventListener( 'selectstart', onSelectStart );
+            controller2.addEventListener( 'selectend', onSelectEnd );
+            scene.add( controller2 );
+
+            raycaster = new THREE.Raycaster();
+            raycaster.camera = camera
+
+            // re-render scene when window size changes
+            window.addEventListener( 'resize', onWindowResize );
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+
+        // The onSelectStart function is triggered when the user presses down on the controller. It is used to detect if the controller is intersecting with any objects in the scene. If it is, it attaches the object to the controller and sets the object's material to be emissive.
+        function onSelectStart( event ) {
+
+            const controller = event.target;
+
+            const intersections = getIntersections( controller );
+
+            if ( intersections.length > 0 ) {
+
+                const intersection = intersections[ 0 ];
+
+                const object = intersection.object;
+                object.material.emissive.b = 1;
+                controller.attach( object );
+
+                controller.userData.selected = object;
+
+            }
+
+        }
+
+        // The onSelectEnd function is triggered when the user releases the select button on the controller. It is used to reset the color of the object that was previously selected and reattach it to the group.
+        function onSelectEnd( event ) {
+
+            const controller = event.target;
+
+            if ( controller.userData.selected !== undefined ) {
+
+                const object = controller.userData.selected;
+                object.material.emissive.b = 0;
+                group.attach( object );
+
+                controller.userData.selected = undefined;
+
+            }
+
+
+        }
+
+        // The getIntersections function is used to determine if the controller is intersecting with any of the objects in the group. It takes the controller as an argument and uses the raycaster to check if the controller is intersecting with any of the objects in the group. It then returns an array of the objects that the controller is intersecting with.
+        function getIntersections( controller ) {
+
+            tempMatrix.identity().extractRotation( controller.matrixWorld );
+
+            raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+            raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+
+            return raycaster.intersectObjects( group.children, false );
+
+        }
+
+        // The intersectObjects function is used to detect when a controller is pointing at an object in the scene. It uses the getIntersections function to get an array of intersections between the controller and the objects in the scene. If the array is not empty, the first object in the array is set to have an emissive color of red, and is added to the intersected array.
+        function intersectObjects( controller ) {
+
+            // Do not highlight when already selected
+
+            if ( controller.userData.selected !== undefined ) return;
+
+            const intersections = getIntersections( controller );
+
+            if ( intersections.length > 0 ) {
+
+                const intersection = intersections[ 0 ];
+
+                const object = intersection.object;
+                object.material.emissive.r = 1;
+                intersected.push( object );
+
+            }
+
+        }
+
+        // The cleanIntersected function is removing all objects from the intersected array and resetting the emissive color of the objects to 0.
+        function cleanIntersected() {
+
+            while ( intersected.length ) {
+
+                const object = intersected.pop();
+                object.material.emissive.r = 0;
+
+            }
+
+        }
+
+        //
+
+        function animate() {
+
+            renderer.setAnimationLoop( render );
+
+        }
+
+        function render() {
+
+            cleanIntersected();
+
+            intersectObjects( controller1 );
+            intersectObjects( controller2 );
+
+            camera.position.z -= 0.1;
+
+            renderer.render( scene, camera );
+
+        }
+    </script>
+
+</body>
+</html>

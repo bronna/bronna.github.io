@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+
+    <title>Making Your First Data Visualization in AR</title>
+</head>
+<body>
+    <div id="info">
+        Dataviz in AR 21
+        <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
+        <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
+    </div>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { ARButton } from 'three/addons/webxr/ARButton.js';
+
+        // Data to visualize
+        const forestTypes = [
+            { "type": "coniferous evergreen", "protected": 119 , "total": 886 },
+            { "type": "broadleaved evergreen", "protected": 397 , "total": 1270 },
+            { "type": "coniferous deciduous", "protected": 47 , "total": 510 },
+            { "type": "broadleaved deciduous", "protected": 165 , "total": 1037 },
+            { "type": "mixed", "protected": 27 , "total": 217 },
+            { "type": "mosaic of tree and shrub cover", "protected": 52 , "total": 346 },
+            { "type": "flooded fresh or brackish water", "protected": 20 , "total": 89 },
+            { "type": "flooded saline water", "protected": 6 , "total": 19 }
+        ]
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        const sphereGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
+        const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+
+        const spheres = [];
+        for (let i = 0; i < 5; i++) {
+        const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+        sphere.position.set(i, 0, -5);
+        spheres.push(sphere);
+        scene.add(sphere);
+        }
+
+        camera.position.z = 5;
+
+        const xrButton = ARButton.createButton( renderer );
+        document.body.appendChild( xrButton );
+
+        // const xrButton = new ARButton({ renderer });
+        // document.body.appendChild( xrButton.domElement );
+
+        const xrSession = null;
+        let frame = null;
+
+        xrButton.addEventListener( 'click', () => {
+        renderer.xr.enabled = true;
+        renderer.xr.requestSession().then((session) => {
+            xrSession = session;
+            xrSession.addEventListener('end', () => {
+            renderer.xr.enabled = false;
+            });
+            xrSession.requestAnimationFrame(onXRFrame);
+        });
+        });
+
+        function onXRFrame( time, frame ) {
+        for (let i = 0; i < spheres.length; i++) {
+            spheres[i].rotation.x += 0.01;
+            spheres[i].rotation.y += 0.01;
+        }
+        xrSession.requestAnimationFrame(onXRFrame);
+        xrSession.render(scene, camera);
+        }
+
+        function animate() {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+        }
+        animate();
+    </script>
+
+</body>
+</html>
