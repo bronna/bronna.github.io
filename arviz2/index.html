@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 23
+        Dataviz in AR 24
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -46,7 +46,12 @@
         ]
 
         const scene = new THREE.Scene();
+
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        camera.position.x = 0
+        camera.position.y = 0
+        camera.position.z = 2
+
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
@@ -56,13 +61,11 @@
 
         const circles = [];
         for (let i = 0; i < 5; i++) {
-        const circle = new THREE.Mesh( circleGeometry, circleMaterial );
-        circle.position.set(i*2, 0, -5);
-        circles.push(circle);
-        scene.add(circle);
+            const circle = new THREE.Mesh( circleGeometry, circleMaterial );
+            circle.position.set(i * 2, 0, 0);
+            circles.push(circle);
+            scene.add(circle);
         }
-
-        camera.position.z = 5;
 
         const xrButton = ARButton.createButton( renderer );
         document.body.appendChild( xrButton );
@@ -88,7 +91,7 @@
             }
 
             if (xrSession) {
-                camera.position.z = 0.5;
+                camera.position.z = 2;
             }
 
             xrSession.requestAnimationFrame(onXRFrame);
