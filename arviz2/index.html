@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 21
+        Dataviz in AR 22
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -85,6 +85,10 @@
         for (let i = 0; i < circles.length; i++) {
             circles[i].rotation.x += 0.01;
             circles[i].rotation.y += 0.01;
+
+            if (xrSession) {
+                camera.position.z = 0.5;
+            }
         }
         xrSession.requestAnimationFrame(onXRFrame);
         xrSession.render(scene, camera);
