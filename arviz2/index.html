@@ -51,24 +51,21 @@
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
 
-        const sphereGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
-        const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        const circleGeometry = new THREE.CircleGeometry( 0.5, 32 );
+        const circleMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
 
-        const spheres = [];
+        const circles = [];
         for (let i = 0; i < 5; i++) {
-        const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-        sphere.position.set(i, 0, -5);
-        spheres.push(sphere);
-        scene.add(sphere);
+        const circle = new THREE.Mesh( circleGeometry, circleMaterial );
+        circle.position.set(i*2, 0, -5);
+        circles.push(circle);
+        scene.add(circle);
         }
 
         camera.position.z = 5;
 
         const xrButton = ARButton.createButton( renderer );
         document.body.appendChild( xrButton );
-
-        // const xrButton = new ARButton({ renderer });
-        // document.body.appendChild( xrButton.domElement );
 
         const xrSession = null;
         let frame = null;
@@ -85,17 +82,17 @@
         });
 
         function onXRFrame( time, frame ) {
-        for (let i = 0; i < spheres.length; i++) {
-            spheres[i].rotation.x += 0.01;
-            spheres[i].rotation.y += 0.01;
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].rotation.x += 0.01;
+            circles[i].rotation.y += 0.01;
         }
         xrSession.requestAnimationFrame(onXRFrame);
         xrSession.render(scene, camera);
         }
 
         function animate() {
-        requestAnimationFrame( animate );
-        renderer.render( scene, camera );
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
         }
         animate();
     </script>
