@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 22
+        Dataviz in AR 23
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -71,32 +71,33 @@
         let frame = null;
 
         xrButton.addEventListener( 'click', () => {
-        renderer.xr.enabled = true;
-        renderer.xr.requestSession().then((session) => {
-            xrSession = session;
-            xrSession.addEventListener('end', () => {
-            renderer.xr.enabled = false;
+            renderer.xr.enabled = true;
+            renderer.xr.requestSession().then((session) => {
+                xrSession = session;
+                xrSession.addEventListener('end', () => {
+                    renderer.xr.enabled = false;
+                });
+                xrSession.requestAnimationFrame(onXRFrame);
             });
-            xrSession.requestAnimationFrame(onXRFrame);
-        });
         });
 
         function onXRFrame( time, frame ) {
-        for (let i = 0; i < circles.length; i++) {
-            circles[i].rotation.x += 0.01;
-            circles[i].rotation.y += 0.01;
+            for (let i = 0; i < circles.length; i++) {
+                circles[i].rotation.x += 0.01;
+                circles[i].rotation.y += 0.01;
+            }
 
             if (xrSession) {
                 camera.position.z = 0.5;
             }
-        }
-        xrSession.requestAnimationFrame(onXRFrame);
-        xrSession.render(scene, camera);
+
+            xrSession.requestAnimationFrame(onXRFrame);
+            xrSession.render(scene, camera);
         }
 
         function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
         }
         animate();
     </script>
