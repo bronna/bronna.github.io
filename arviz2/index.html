@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 24
+        Dataviz in AR 25
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -47,17 +47,35 @@
 
         const scene = new THREE.Scene();
 
-        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        const camera = new THREE.PerspectiveCamera( 
+            75, 
+            window.innerWidth / window.innerHeight, 
+            0.1, 
+            1000 
+        );
         camera.position.x = 0
         camera.position.y = 0
-        camera.position.z = 2
+        camera.position.z = 5
+
+        scene.add( new THREE.HemisphereLight(0x606060, 0x404040) );
+        const light = new THREE.DirectionalLight(0xffffff);
+        light.position.set(1, 1, 1).normalize();
+        scene.add(light)
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
 
-        const circleGeometry = new THREE.CircleGeometry( 0.5, 32 );
-        const circleMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+        const circleGeometry = new THREE.CircleGeometry( 0.5, 64 );
+        //const circleMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+        const circleMaterial = new THREE.MeshStandardMaterial({
+            color: 0x00ffff,
+            roughness: 0.7,
+            metalness: 0.0,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.75
+        })
 
         const circles = [];
         for (let i = 0; i < 5; i++) {
@@ -91,7 +109,7 @@
             }
 
             if (xrSession) {
-                camera.position.z = 2;
+                camera.position.z = 5;
             }
 
             xrSession.requestAnimationFrame(onXRFrame);
