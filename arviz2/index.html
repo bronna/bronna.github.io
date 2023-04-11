@@ -29,99 +29,480 @@
     </script>
 
     <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { ARButton } from 'three/addons/webxr/ARButton.js';
+        import * as THREE from 'three'
+        import { ARButton } from 'three/addons/webxr/ARButton.js'
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
-        // Data to visualize
-        const forestTypes = [
-            { "type": "coniferous evergreen", "protected": 119 , "total": 886 },
-            { "type": "broadleaved evergreen", "protected": 397 , "total": 1270 },
-            { "type": "coniferous deciduous", "protected": 47 , "total": 510 },
-            { "type": "broadleaved deciduous", "protected": 165 , "total": 1037 },
-            { "type": "mixed", "protected": 27 , "total": 217 },
-            { "type": "mosaic of tree and shrub cover", "protected": 52 , "total": 346 },
-            { "type": "flooded fresh or brackish water", "protected": 20 , "total": 89 },
-            { "type": "flooded saline water", "protected": 6 , "total": 19 }
+        function createNameCanvas(name) {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const size = 256;
+            const lineHeight = 60; // adjust this to change the line height
+            canvas.width = size;
+            canvas.height = size;
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.font = "40px Monospace";
+            // ctx.strokeStyle = "black";
+            // ctx.lineWidth = "1px";
+            // const letterSpacing = 1.2;
+            ctx.shadowColor = "rgba(0, 0, 0, 0.5)"; // Set the shadow color to semi-transparent black
+            ctx.shadowOffsetX = 2; // Set the horizontal offset of the shadow
+            ctx.shadowOffsetY = 2; // Set the vertical offset of the shadow
+            ctx.shadowBlur = 5; // Set the blur level of the shadow
+
+            // split the name into words
+            const words = name.split(" ");
+            const maxLineWidth = size * 0.8; // 80% of canvas width
+            let currentLine = words[0];
+            let y = size / 2 - lineHeight / 2; // start at vertical center
+
+            for (let i = 1; i < words.length; i++) {
+                const word = words[i];
+                const width = ctx.measureText(currentLine + " " + word).width;
+                if (width < maxLineWidth) {
+                    currentLine += " " + word;
+                } else {
+                    //drawLineWithLetterSpacing(ctx, currentLine, size / 2, y, letterSpacing);
+                    ctx.fillText(currentLine, size / 2, y);
+                    y += lineHeight;
+                    currentLine = word;
+                }
+            }
+            //drawLineWithLetterSpacing(ctx, currentLine, size / 2, y, letterSpacing); // draw the last line
+            ctx.fillText(currentLine, size / 2, y); // draw the last line
+
+            return canvas;
+            }
+
+            // function drawLineWithLetterSpacing(ctx, text, x, y, letterSpacing) {
+            //     for (let i = 0; i < text.length; i++) {
+            //         const char = text.charAt(i);
+            //         const xPos = x + (i * (ctx.measureText(char).width + letterSpacing)) - ((ctx.measureText(text).width + (text.length - 1) * letterSpacing) / 2);
+            //         ctx.fillText(char, xPos, y);
+            //         // ctx.strokeText(char, xPos, y);
+            //     }
+            // }
+
+        /**
+         * Data
+         */
+        const carbonStores = [
+            {
+                "name": "Boreal forests",
+                "vegetation": 64,
+                "soil": 344,
+            },
+            {
+                "name": "Temperate forests",
+                "vegetation": 57,
+                "soil": 96,
+            },
+            {
+                "name": "Temperate grasslands",
+                "vegetation": 7,
+                "soil": 236,
+            },
+            {
+                "name": "Tropical forests",
+                "vegetation": 120,
+                "soil": 123,
+            },
+            {
+                "name": "Deserts and semideserts",
+                "vegetation": 2,
+                "soil": 42,
+            },
+            {
+                "name": "Tundra",
+                "vegetation": 6,
+                "soil": 127,
+            },
+            {
+                "name": "Wetlands",
+                "vegetation": 43,
+                "soil": 643,
+            },
+            {
+                "name": "Tropical savannas",
+                "vegetation": 29,
+                "soil": 117,
+            },
+            {
+                "name": "Croplands",
+                "vegetation": 2,
+                "soil": 80,
+            },
         ]
 
-        const scene = new THREE.Scene();
+        carbonStores.sort((a, b) => (b.soil + b.vegetation) - (a.soil + a.vegetation))
 
-        const camera = new THREE.PerspectiveCamera( 
-            75, 
-            window.innerWidth / window.innerHeight, 
-            0.1, 
-            1000 
-        );
-        camera.position.x = 0
-        camera.position.y = 0
-        camera.position.z = 5
-
-        scene.add( new THREE.HemisphereLight(0x606060, 0x404040) );
-        const light = new THREE.DirectionalLight(0xffffff);
-        light.position.set(1, 1, 1).normalize();
-        scene.add(light)
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
-
-        const circleGeometry = new THREE.CircleGeometry( 0.5, 64 );
-        //const circleMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
-        const circleMaterial = new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
-            roughness: 0.7,
-            metalness: 0.0,
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0.75
-        })
-
-        const circles = [];
-        for (let i = 0; i < 5; i++) {
-            const circle = new THREE.Mesh( circleGeometry, circleMaterial );
-            circle.position.set(i * 2, 0, 0);
-            circles.push(circle);
-            scene.add(circle);
+        function findRadiusOfSphere(volume) {
+            // return the radius of the sphere based on the volume parameter
+            return Math.pow((3 * volume) / (4 * Math.PI), 1 / 3)
         }
 
-        const xrButton = ARButton.createButton( renderer );
-        document.body.appendChild( xrButton );
+        // function that calculates the x-position of the Hemisphere group, creating equal gap between each Hemisphere group
+        function findXPosition(index) {
+            // gap between each group
+            const gap = 2.3
 
-        const xrSession = null;
-        let frame = null;
+            // calculate the total width of all the spheres
+            let totalWidth = 0
+            for (let i = 0; i < carbonStores.length; i++) {
+                totalWidth += findRadiusOfSphere(carbonStores[i].soil * 2) * 0.2 + gap
+            }
 
-        xrButton.addEventListener( 'click', () => {
+            // calculate the total width of all the spheres before the current index
+            let totalWidthBefore = 0
+            for (let i = 0; i < index; i++) {
+                totalWidthBefore += findRadiusOfSphere(carbonStores[i].soil * 2) * 0.2 + gap
+            }
+
+            // calculate the total width of all the spheres after the current index
+            let totalWidthAfter = 0
+            for (let i = index + 1; i < carbonStores.length; i++) {
+                totalWidthAfter += findRadiusOfSphere(carbonStores[i].soil * 2) * 0.2 + gap
+            }
+
+            // calculate the x-position of the current index
+            return (totalWidthBefore - totalWidthAfter) / 2
+        }
+        
+        let container
+        let camera, scene, renderer
+        let sphere
+
+        init()
+        animate()
+
+        const customUniforms = {
+            uTime: { value: 0 }
+        }
+
+        function init() {
+
+            container = document.createElement( 'div' )
+            container.classList.add('container')
+            document.body.appendChild( container )
+
+            scene = new THREE.Scene()
+
+            camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.01, 200 )
+            // Debug settings
+            //camera.position.set( 0, 0, -30 )
+            // AR settings
+            camera.position.set( 0, 0, 0 )
+
+            //
+
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
+            renderer.setPixelRatio( window.devicePixelRatio )
+            renderer.setSize( window.innerWidth, window.innerHeight )
             renderer.xr.enabled = true;
-            renderer.xr.requestSession().then((session) => {
-                xrSession = session;
-                xrSession.addEventListener('end', () => {
-                    renderer.xr.enabled = false;
-                });
-                xrSession.requestAnimationFrame(onXRFrame);
-            });
-        });
+            container.appendChild( renderer.domElement )
 
-        function onXRFrame( time, frame ) {
-            for (let i = 0; i < circles.length; i++) {
-                circles[i].rotation.x += 0.01;
-                circles[i].rotation.y += 0.01;
-            }
+            //
 
-            if (xrSession) {
-                camera.position.z = 5;
-            }
+            document.body.appendChild( ARButton.createButton( renderer ) )
 
-            xrSession.requestAnimationFrame(onXRFrame);
-            xrSession.render(scene, camera);
+            const controls = new OrbitControls( camera, container )
+            controls.minDistance = 0
+            controls.maxDistance = 100
+
+            // light
+
+            const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 )
+            light.position.set( 0, 1, 0 )
+            scene.add( light )
+
+            // model
+
+            carbonStores.forEach((store, index) => {
+                const group = new THREE.Group()
+
+                const nameTexture = new THREE.CanvasTexture(createNameCanvas(store.name))
+                const nameMaterial = new THREE.SpriteMaterial({ map: nameTexture })
+                const nameSprite = new THREE.Sprite(nameMaterial)
+                nameSprite.scale.set(1.7, 1.7, 1.7)
+                nameSprite.position.setY(-2)
+                group.add(nameSprite)
+
+                // soil hemisphere
+
+                const soilMaterial = new THREE.MeshNormalMaterial()
+                soilMaterial.onBeforeCompile = (shader) => {
+                    shader.uniforms.uTime = customUniforms.uTime
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <common>',
+                        `
+                            #include <common>
+
+                            uniform float uTime;
+
+                            mat2 get2dRotateMatrix(float _angle)
+                            {
+                                return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+                            }
+                        `
+                    )
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <beginnormal_vertex>',
+                        `
+                            #include <beginnormal_vertex>
+
+                            float angle = (position.y + uTime) * 0.9;
+                            mat2 rotateMatrix = get2dRotateMatrix(angle);
+
+                            objectNormal.xz = rotateMatrix * objectNormal.xz;
+                        `
+                    )
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <begin_vertex>',
+                        `
+                        #include <begin_vertex>
+
+                        transformed.xz = rotateMatrix * transformed.xz;
+                        `
+                    )
+
+                    shader.fragmentShader = shader.fragmentShader.replace(
+                        '#include <normal_fragment_begin>',
+                        `
+                        #include <normal_fragment_begin>
+
+                        vec3 color = vec3(0.0, 0.0, 0.0);
+                        `
+                    )
+                }
+
+                const soilSphereGeo = new THREE.SphereGeometry(
+                    findRadiusOfSphere(store.soil) * 0.2,
+                    32,
+                    16,
+                    0,
+                    Math.PI * 2,
+                    Math.PI / 2,
+                    Math.PI / 2
+                )
+                const soilSphere = new THREE.Mesh(soilSphereGeo, soilMaterial)
+                group.add(soilSphere)
+
+                const soilCircleGeo = new THREE.CircleGeometry(
+                    findRadiusOfSphere(store.soil) * 0.2,
+                    32
+                )
+                const soilCircle = new THREE.Mesh(soilCircleGeo, soilMaterial)
+                soilCircle.rotation.x = -Math.PI / 2
+                group.add(soilCircle)
+
+                // vegetation hemisphere
+
+                const vegetationMaterial = new THREE.MeshNormalMaterial()
+                vegetationMaterial.onBeforeCompile = (shader) => {
+                    shader.uniforms.uTime = customUniforms.uTime
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <common>',
+                        `
+                            #include <common>
+
+                            uniform float uTime;
+
+                            mat2 get2dRotateMatrix(float _angle)
+                            {
+                                return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+                            }
+                        `
+                    )
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <beginnormal_vertex>',
+                        `
+                            #include <beginnormal_vertex>
+
+                            float angle = (position.y + uTime) * 0.9;
+                            mat2 rotateMatrix = get2dRotateMatrix(angle);
+
+                            objectNormal.xz = rotateMatrix * objectNormal.xz;
+                        `
+                    )
+
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <begin_vertex>',
+                        `
+                        #include <begin_vertex>
+
+                        transformed.xz = rotateMatrix * transformed.xz;
+                        `
+                    )
+                }
+
+                const vegetationSphereGeo = new THREE.SphereGeometry(
+                    findRadiusOfSphere(store.vegetation) * 0.2,
+                    32,
+                    16,
+                    0,
+                    Math.PI * 2,
+                    0,
+                    Math.PI / 2
+                )
+                const vegetationSphere = new THREE.Mesh(
+                    vegetationSphereGeo,
+                    soilMaterial
+                )
+                vegetationSphere.position.setY(0.07)
+                group.add(vegetationSphere)
+
+                const vegetationCircleGeo = new THREE.CircleGeometry(
+                    findRadiusOfSphere(store.vegetation) * 0.2,
+                    32
+                )
+                const vegetationCircle = new THREE.Mesh(
+                    vegetationCircleGeo,
+                    vegetationMaterial
+                )
+                vegetationCircle.rotation.x = Math.PI / 2
+                vegetationCircle.position.setY(0.07)
+                group.add(vegetationCircle)
+
+                let xPos = findXPosition(index)
+                let xPosLabel = -xPos * 0.84 + 16.6 + 'cm'
+
+                group.position.setX(xPos)
+
+                // AR settings
+                group.position.setZ(-10)
+
+                scene.add(group)
+
+                // let label = document.createElement('div')
+                // label.classList.add('labelStyle', 'label-' + index)
+                // label.innerHTML = store.name
+                // label.style.top = '62%'
+                // label.style.left = xPosLabel
+                // document.body.appendChild(label)
+
+            })
+
+            // resize
+
+            window.addEventListener( 'resize', onWindowResize )
+
+        }
+
+        // const labels = [
+        //     {
+        //         position: new THREE.Vector3(0, 0, 0),
+        //         element: document.querySelector('.label-0')
+        //     }
+        // ]
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight
+            camera.updateProjectionMatrix()
+
+            renderer.setSize( window.innerWidth, window.innerHeight )
+
         }
 
         function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
+
+            renderer.setAnimationLoop( render )
+
         }
-        animate();
+
+        const clock = new THREE.Clock()
+
+        function render() {
+
+            const elapsedTime = clock.getElapsedTime()
+
+            customUniforms.uTime.value = elapsedTime
+
+            //cube.rotation.y = elapsedTime * 0.2
+
+            renderer.render( scene, camera )
+
+        }
     </script>
 
 </body>
 </html>
+
+
+<!--camera.lookAt(circle.position)
+
+if ( renderer.xr && renderer.xr.setReferenceSpaceType ) {
+    renderer.xr.setReferenceSpaceType( 'local' ).then( () => {
+        camera.position.set( 0, 0, 0 );
+    });
+}
+
+renderer.xr.updateCamera(camera)
+
+if (navigator.xr) {
+    console.log('XR supported')
+} else {
+    console.log('XR not supported')
+}
+
+
+
+import * as THREE from 'three';
+        import { ARButton } from 'three/addons/webxr/ARButton.js';
+
+        let container
+        let camera, scene, renderer
+        let circle
+
+        init()
+        animate()
+
+        function init() {
+            container = document.createElement( 'div' );
+            document.body.appendChild( container );
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 400 );
+            camera.position.z = 2
+
+            renderer = new THREE.WebGLRenderer( { antialias: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.xr.enabled = true
+            container.appendChild( renderer.domElement );
+
+            document.body.appendChild( ARButton.createButton( renderer ) );
+
+            const circleGeometry = new THREE.CircleGeometry( 0.1, 32 );
+            const circleMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+            circle = new THREE.Mesh( circleGeometry, circleMaterial );
+            circle.position.z = -2
+            scene.add( circle );
+        }
+
+        const clock = new THREE.Clock()
+
+        function render() {
+            const elapsedTime = clock.getElapsedTime()
+
+            circle.rotation.y = elapsedTime * 0.5
+
+            //renderer.xr.getCamera(camera)
+            renderer.render( scene, camera );
+        }
+        
+        function animate() {
+            renderer.setAnimationLoop( render );
+        }
+        
+        // renderer.xr.setReferenceSpaceType('local').then(() => {
+        //     //camera.position.set(0, 0, 0)
+        //     animate()
+        // })

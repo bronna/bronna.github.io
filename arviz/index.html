@@ -48,10 +48,13 @@
         let container;
         let labels;
         let camera, scene, renderer;
+
         // Controller1 and Controller2 are the two controllers used in the WebXR API. They are used to interact with the 3D scene and can be used to select objects, move objects, and perform other actions. A controller is an input device used to interact with a 3D scene. It can be used to select objects, move objects, and perform other actions. Controllers are commonly used in virtual reality and augmented reality applications.
         let controller1, controller2;
 
         let raycaster;
+
+        let startTime;
 
         const intersected = [];
         const tempMatrix = new THREE.Matrix4();
@@ -72,7 +75,7 @@
 
             // set up the camera
             camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 0.1, 400 );
-            camera.position.set( 0, 0, -200 );
+            camera.position.set( 0, 0, -80 );
 
             // allow user interaction
             const controls = new OrbitControls( camera, container );
@@ -112,7 +115,7 @@
                 // Create the circle
                 const circleGeometry = new THREE.CircleGeometry(radius / 40, 64);
                 const circleMaterial = new THREE.MeshStandardMaterial({
-                    color: 0xF9483A,
+                    color: 0x00ff00,
                     roughness: 0.7,
                     metalness: 0.0,
                     side: THREE.DoubleSide,
@@ -124,7 +127,7 @@
                 if (previousCircle) {
                     const previousCircleSize = new THREE.Box3().setFromObject(previousCircle)
                     
-                    circle.position.x = previousCircle.position.x + ((previousCircleSize.max.x - previousCircleSize.min.x) / 2) + (radius / 40) + 0.5
+                    circle.position.x = previousCircle.position.x + ((previousCircleSize.max.x - previousCircleSize.min.x) / 2) + (radius / 40) + 0.7
                 }
                 previousCircle = circle
                 
@@ -194,6 +197,9 @@
 
             // re-render scene when window size changes
             window.addEventListener( 'resize', onWindowResize );
+
+            // record the start time
+            startTime = Date.now();
         }
 
         function onWindowResize() {
@@ -256,7 +262,7 @@
                 const intersection = intersections[ 0 ];
 
                 const object = intersection.object;
-                object.material.emissive.r = 1;
+                //object.material.emissive.r = 1;
                 intersected.push( object );
             }
         }
@@ -265,7 +271,7 @@
         function cleanIntersected() {
             while ( intersected.length ) {
                 const object = intersected.pop();
-                object.material.emissive.r = 0;
+                //object.material.emissive.r = 0;
             }
         }
 
@@ -274,7 +280,14 @@
         }
 
         function render() {
+            const currentTime = Date.now()
+            const time = ( currentTime - startTime ) / 1000
             cleanIntersected();
+
+            //rotate the elements
+            group.children.forEach((child) => {
+                child.rotation.y = time * 0.4
+            })
 
             intersectObjects( controller1 );
             intersectObjects( controller2 );

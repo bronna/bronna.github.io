@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+
+    <title>Making Your First Data Visualization in AR</title>
+</head>
+<body>
+    <div id="info">
+        Dataviz in AR 25
+        <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
+        <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
+    </div>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three'
+        //import { TubePainter } from 'three/addons/misc/TubePainter.js'
+        import { ARButton } from 'three/addons/webxr/ARButton.js'
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
+        /**
+         * Data
+         */
+        const carbonStores = [
+            {
+                "name": "Boreal forests",
+                "vegetation": 64,
+                "soil": 344,
+            },
+            {
+                "name": "Temperate forests",
+                "vegetation": 57,
+                "soil": 96,
+            },
+            {
+                "name": "Temperate grasslands",
+                "vegetation": 7,
+                "soil": 236,
+            },
+            {
+                "name": "Tropical forests",
+                "vegetation": 120,
+                "soil": 123,
+            },
+            {
+                "name": "Deserts and semideserts",
+                "vegetation": 2,
+                "soil": 42,
+            },
+            {
+                "name": "Tundra",
+                "vegetation": 6,
+                "soil": 127,
+            },
+            {
+                "name": "Wetlands",
+                "vegetation": 43,
+                "soil": 643,
+            },
+            {
+                "name": "Tropical savannas",
+                "vegetation": 29,
+                "soil": 117,
+            },
+            {
+                "name": "Croplands",
+                "vegetation": 2,
+                "soil": 80,
+            },
+        ]
+        
+        let container
+        let camera, scene, renderer
+        let sphere
+
+        init()
+        animate()
+
+        function init() {
+
+            container = document.createElement( 'div' );
+            document.body.appendChild( container );
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 )
+            camera.position.set( 0, 0, -4 )
+
+            //
+
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.xr.enabled = true;
+            container.appendChild( renderer.domElement );
+
+            //
+
+            document.body.appendChild( ARButton.createButton( renderer ) )
+
+            const controls = new OrbitControls( camera, container );
+            controls.minDistance = 0;
+            controls.maxDistance = 100;
+
+            // light
+
+            const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+            light.position.set( 0, 1, 0 );
+            scene.add( light );
+
+            // model
+
+            const sphereGeometry = new THREE.SphereGeometry( .1, 16, 16 );
+            const sphereMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
+
+            carbonStores.forEach((carbonStore, index) => {
+                const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+                sphere.position.x = carbonStore.vegetation * 0.1 - 0.5
+                sphere.position.z = -0.5
+                scene.add( sphere );
+            })
+
+            window.addEventListener( 'resize', onWindowResize );
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+
+        function animate() {
+
+            renderer.setAnimationLoop( render );
+
+        }
+
+        const clock = new THREE.Clock()
+
+        function render() {
+
+            const elapsedTime = clock.getElapsedTime()
+
+            //cube.rotation.y = elapsedTime * 0.2
+
+            renderer.render( scene, camera );
+
+        }
+    </script>
+
+</body>
+</html>
+
+
+<!--camera.lookAt(circle.position)
+
+if ( renderer.xr && renderer.xr.setReferenceSpaceType ) {
+    renderer.xr.setReferenceSpaceType( 'local' ).then( () => {
+        camera.position.set( 0, 0, 0 );
+    });
+}
+
+renderer.xr.updateCamera(camera)
+
+if (navigator.xr) {
+    console.log('XR supported')
+} else {
+    console.log('XR not supported')
+}
+
+
+
+import * as THREE from 'three';
+        import { ARButton } from 'three/addons/webxr/ARButton.js';
+
+        let container
+        let camera, scene, renderer
+        let circle
+
+        init()
+        animate()
+
+        function init() {
+            container = document.createElement( 'div' );
+            document.body.appendChild( container );
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 400 );
+            camera.position.z = 2
+
+            renderer = new THREE.WebGLRenderer( { antialias: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.xr.enabled = true
+            container.appendChild( renderer.domElement );
+
+            document.body.appendChild( ARButton.createButton( renderer ) );
+
+            const circleGeometry = new THREE.CircleGeometry( 0.1, 32 );
+            const circleMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+            circle = new THREE.Mesh( circleGeometry, circleMaterial );
+            circle.position.z = -2
+            scene.add( circle );
+        }
+
+        const clock = new THREE.Clock()
+
+        function render() {
+            const elapsedTime = clock.getElapsedTime()
+
+            circle.rotation.y = elapsedTime * 0.5
+
+            //renderer.xr.getCamera(camera)
+            renderer.render( scene, camera );
+        }
+        
+        function animate() {
+            renderer.setAnimationLoop( render );
+        }
+        
+        // renderer.xr.setReferenceSpaceType('local').then(() => {
+        //     //camera.position.set(0, 0, 0)
+        //     animate()
+        // })
