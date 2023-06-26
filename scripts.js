@@ -4,6 +4,6 @@ function navigate(event) {
     } else {
         // Otherwise, prevent the default action and navigate to the project page
         event.preventDefault();
-        window.location.href = 'https://observablehq.com/@bronna/parametric-seashell';
+        window.open = ('https://observablehq.com/@bronna/parametric-seashell', '_blank');
     }
 }
