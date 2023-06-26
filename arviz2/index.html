@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="info">
-        Dataviz in AR 28
+        Dataviz in AR 27
         <br/>(Chrome Android 81+, Mozilla XRViewer iOS)
         <br/>Using <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> 
     </div>
@@ -190,9 +190,9 @@
 
             camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.01, 200 )
             // Debug settings
-            camera.position.set( 0, 0, -30 )
+            //camera.position.set( 0, 0, -30 )
             // AR settings
-            //camera.position.set( 0, 0, 0 )
+            camera.position.set( 0, 0, 0 )
 
             //
 
@@ -217,6 +217,7 @@
             scene.add( light )
 
             // model
+            // TODO: lower models below eye level, more at table level. make models closer/bigger to camera/user...make them feel more tangible. make spacing closer so they can be taken in, and compared, at once
 
             carbonStores.forEach((store, index) => {
                 const group = new THREE.Group()
@@ -245,11 +246,6 @@
                             {
                                 return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
                             }
-
-                            // mat2 getWarpMatrix(float _angle)
-                            // {
-                            //     return mat2()
-                            // }
                         `
                     )
 
@@ -258,8 +254,7 @@
                         `
                             #include <beginnormal_vertex>
 
-                            float angle = (position.y) * 0.9;
-                            //float angle = (position.y + uTime) * 0.9;
+                            float angle = (position.y + uTime) * 0.9;
                             mat2 rotateMatrix = get2dRotateMatrix(angle);
 
                             objectNormal.xz = rotateMatrix * objectNormal.xz;
@@ -285,9 +280,6 @@
                     )
                 }
 
-                // make soilMaterial double sided
-                soilMaterial.side = THREE.DoubleSide
-
                 const soilSphereGeo = new THREE.SphereGeometry(
                     findRadiusOfSphere(store.soil) * 0.2,
                     32,
@@ -310,73 +302,73 @@
 
                 // vegetation hemisphere
 
-                // const vegetationMaterial = new THREE.MeshNormalMaterial()
-                // vegetationMaterial.onBeforeCompile = (shader) => {
-                //     shader.uniforms.uTime = customUniforms.uTime
+                const vegetationMaterial = new THREE.MeshNormalMaterial()
+                vegetationMaterial.onBeforeCompile = (shader) => {
+                    shader.uniforms.uTime = customUniforms.uTime
 
-                //     shader.vertexShader = shader.vertexShader.replace(
-                //         '#include <common>',
-                //         `
-                //             #include <common>
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <common>',
+                        `
+                            #include <common>
 
-                //             uniform float uTime;
+                            uniform float uTime;
 
-                //             mat2 get2dRotateMatrix(float _angle)
-                //             {
-                //                 return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
-                //             }
-                //         `
-                //     )
+                            mat2 get2dRotateMatrix(float _angle)
+                            {
+                                return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+                            }
+                        `
+                    )
 
-                //     shader.vertexShader = shader.vertexShader.replace(
-                //         '#include <beginnormal_vertex>',
-                //         `
-                //             #include <beginnormal_vertex>
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <beginnormal_vertex>',
+                        `
+                            #include <beginnormal_vertex>
 
-                //             float angle = (position.y + uTime) * 0.9;
-                //             mat2 rotateMatrix = get2dRotateMatrix(angle);
+                            float angle = (position.y + uTime) * 0.9;
+                            mat2 rotateMatrix = get2dRotateMatrix(angle);
 
-                //             objectNormal.xz = rotateMatrix * objectNormal.xz;
-                //         `
-                //     )
+                            objectNormal.xz = rotateMatrix * objectNormal.xz;
+                        `
+                    )
 
-                //     shader.vertexShader = shader.vertexShader.replace(
-                //         '#include <begin_vertex>',
-                //         `
-                //         #include <begin_vertex>
+                    shader.vertexShader = shader.vertexShader.replace(
+                        '#include <begin_vertex>',
+                        `
+                        #include <begin_vertex>
 
-                //         transformed.xz = rotateMatrix * transformed.xz;
-                //         `
-                //     )
-                // }
+                        transformed.xz = rotateMatrix * transformed.xz;
+                        `
+                    )
+                }
 
-                // const vegetationSphereGeo = new THREE.SphereGeometry(
-                //     findRadiusOfSphere(store.vegetation) * 0.2,
-                //     32,
-                //     16,
-                //     0,
-                //     Math.PI * 2,
-                //     0,
-                //     Math.PI / 2
-                // )
-                // const vegetationSphere = new THREE.Mesh(
-                //     vegetationSphereGeo,
-                //     soilMaterial
-                // )
-                // vegetationSphere.position.setY(0.07)
-                // group.add(vegetationSphere)
+                const vegetationSphereGeo = new THREE.SphereGeometry(
+                    findRadiusOfSphere(store.vegetation) * 0.2,
+                    32,
+                    16,
+                    0,
+                    Math.PI * 2,
+                    0,
+                    Math.PI / 2
+                )
+                const vegetationSphere = new THREE.Mesh(
+                    vegetationSphereGeo,
+                    soilMaterial
+                )
+                vegetationSphere.position.setY(0.07)
+                group.add(vegetationSphere)
 
-                // const vegetationCircleGeo = new THREE.CircleGeometry(
-                //     findRadiusOfSphere(store.vegetation) * 0.2,
-                //     32
-                // )
-                // const vegetationCircle = new THREE.Mesh(
-                //     vegetationCircleGeo,
-                //     vegetationMaterial
-                // )
-                // vegetationCircle.rotation.x = Math.PI / 2
-                // vegetationCircle.position.setY(0.07)
-                // group.add(vegetationCircle)
+                const vegetationCircleGeo = new THREE.CircleGeometry(
+                    findRadiusOfSphere(store.vegetation) * 0.2,
+                    32
+                )
+                const vegetationCircle = new THREE.Mesh(
+                    vegetationCircleGeo,
+                    vegetationMaterial
+                )
+                vegetationCircle.rotation.x = Math.PI / 2
+                vegetationCircle.position.setY(0.07)
+                group.add(vegetationCircle)
 
                 let xPos = findXPosition(index)
                 let xPosLabel = -xPos * 0.84 + 16.6 + 'cm'

@@ -1,0 +1,176 @@
+body {
+    font-family: 'Playfair', serif;
+    padding: 0 6rem 0 6rem;
+    color: rgb(63, 63, 70);
+    font-size: 1.2rem;
+    font-weight: 400;
+    background-color: rgb(246, 245, 242);
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 0 2rem 0 2rem;
+    }
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: 0.1rem;
+    color: #22577A;
+    margin-bottom: 0rem;
+}
+
+header h2 {
+    margin-top: 0.8rem;
+    letter-spacing: 0.1rem;
+}
+
+h2, h3 {
+    font-family: 'Wix Madefor Display', serif;
+    letter-spacing: 0.02rem;
+    color: #38A3A5;
+}
+
+header {
+    text-align: left;
+    padding: 6rem 0 6rem 0;
+}
+
+#project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+@media (max-width: 800px) {
+    #project-grid {
+        gap: 60px;
+    }
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.project:hover {
+    transform: scale(1.02);
+}
+
+.project-text {
+    padding: 1.8rem 1.2rem 2rem 1.2rem;
+    background: #fff;
+    text-align: center;
+    font-family: 'Wix Madefor Display', serif;
+    font-weight: 800;
+    letter-spacing: 0.03rem;
+}
+
+.publication {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-family: 'Playfair', serif;
+    letter-spacing: 0.01rem;
+    font-weight: 400;
+    margin-top: 0.8rem;
+    margin-bottom: 0;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+footer {
+    text-align: center;
+    padding: 10rem 0 24rem 0;
+}
+
+#about {
+    max-width: 700px;
+}
+
+footer h3 {
+    font-weight: 800;
+    letter-spacing: 0.04rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+    margin-top: 1.7rem;
+}
+
+footer p {
+    margin-top: 0rem;
+    font-family: 'Playfair', serif;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer i {
+    font-size: 22px;
+}
+
+footer a i {
+    transition: color 0.2s ease-in-out;
+}
+
+footer a:hover i {
+    color: #38A3A5;
+}
+
+#connect a:not(:last-child) {
+    margin-right: 16px;
+}
+
+.article {
+    background-color: white;
+}
+
+.home {
+    text-decoration: none;
+    color: inherit;
+    font-family: 'Wix Madefor Display', serif;
+    font-weight: 600;
+    letter-spacing: 0.03rem;
+    font-size: 1rem;
+}
+
+.article-image {
+    display: block;
+}
+
+.article-image img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.article-viz {
+    padding: 1rem 0 1rem 0;
+}
+
+.article-viz-headline {
+    color: rgb(63, 63, 70);
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+
+.source {
+    font-size: 0.9rem;
+    font-family: 'Wix Madefor Display', serif;
+    letter-spacing: 0.01rem;
+    font-weight: 400;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}

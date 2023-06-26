@@ -1,598 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Search Engine -->
-    <meta name="description" content="Data interactions designed for insight and broad reach">
-    <meta name="image" content="https://bronna.github.io/assets/tagpic.png">
-    <!-- Schema.org for Google -->
-    <meta itemprop="name" content="3D & Data Visualization by Brianna Wilson">
-    <meta itemprop="description" content="Data interactions designed for insight and broad reach">
-    <meta itemprop="image" content="https://bronna.github.io/assets/tagpic.png">
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="3D & Data Visualization by Brianna Wilson">
-    <meta name="twitter:description" content="Data interactions designed for insight and broad reach">
-    <meta name="twitter:site" content="@bronna">
-    <meta name="twitter:image:src" content="https://bronna.github.io/biopic3.png">
-    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:title" content="3D & Data Visualization by Brianna Wilson">
-    <meta name="og:description" content="Data interactions designed for insight and broad reach">
-    <meta name="og:image" content="https://bronna.github.io/assets/tagpic.png">
-    <meta name="og:url" content="https://bronna.github.io">
-    <meta name="og:site_name" content="3D & Data Visualization by Brianna Wilson">
-    <meta name="og:type" content="website">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;700;800&display=swap" rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/06e4565879.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-
-    <title>Brianna Wilson 3D & Data Visualization</title>
-
-    <link href="output.css" rel="stylesheet">
-
-    <script defer data-domain="bronna.github.io" src="https://plausible.io/js/script.js"></script>
+    <title>Brianna Wilson Data Visualization & Journalism</title>
 </head>
+
 <body>
-    <header class="bg-[#2E2F30]">
-  
-        <div id="lavaHeader"></div>
-
-        <!-- <div id="fade"></div> -->
-
-        <div id="navigation" class="absolute top-8 max-md:left-1/2 max-md:translate-x-[-50%] md:right-36 font-medium text-sm text-white">
-            <ul class="flex space-x-6 sm:space-x-16 tracking-wider">
-                <li class="">
-                    <a href="#work"><span class="nav-slash max-md:hidden">// </span><span class="hover:underline decoration-2">WORK</span></a>
-                </li>
-                <li class="">
-                    <a href="#articles"><span class="nav-slash max-md:hidden">// </span><span class="hover:underline decoration-2">ARTICLES</span></a>
-                </li>
-                <li class="">
-                    <a href="#about"><span class="nav-slash max-md:hidden">// </span><span class="hover:underline decoration-2">ABOUT</span></a>
-                </li>
-                <li class="">
-                    <a href="#contact"><span class="nav-slash max-md:hidden">// </span><span class="hover:underline decoration-2">CONTACT</span></a>
-                </li>
-            </ul>
-        </div>
-
-        <div id="header-main" class="absolute top-28 sm:top-1/3 left-6 mr-6 sm:left-14 sm:right-14 md:left-36 md:mr-36">
-            <div class="wrapper flex max-sm:flex-col-reverse gap-0 md:gap-16">
-                <div class="title-wrapper">
-                    <div id="title" class="pb-6">
-                        <h1 class="text-white text-6xl font-light pb-6 translate-x-[-4px]">Brianna Wilson</h1>
-                        <!-- <h1 class="text-white text-3xl xl:text-4xl font-light tracking-tight">3D & Data Visualization</h1> -->
-                        <h2 class="text-white text-xl font-bold tracking-wide leading-10">Hi! I use <span class="text-2xl bg-white text-[#2E2F30] font-normal px-2">DESIGN</span> <span class="font-normal tracking-tight text-lg">(<span class="tracking-wide">& engineering</span>)</span> to make <span class="text-2xl bg-white text-[#2E2F30] font-normal px-2">DATA</span> more <span class="italic text-2xl">insightful</span> and <span class="italic text-2xl">accessible</span></h2>
-                    </div>
-                    <!-- <div id="divider">
-                        <svg class="max-sm:hidden divider w-full">
-                            <path d="M0 0 L480 0"></path>
-                        </svg>
-                    </div> -->
-                    <hr class="solid-white" aria-hidden=”true”>
-                </div>
-                <div id="profile-pic" class="max-sm:mx-auto max-sm:mb-8 h-52">
-                    <img src="/assets/biopic3.png" alt="black and white headshot of a white woman with brown hair smiling and looking to the left" width="124" class="translate-x-[30px] translate-y-8">
-                    <svg width=183 height=183 class="" id="biopic-outline" aria-hidden=”true”>
-                        <circle cx="91.5" cy="91.5" r="90" stroke="white" stroke-width="3" fill="none" />
-                    </svg>
-                </div>
-            </div>
-            
-        </div>
-            
-        <!-- <div id="arrow">
-            <svg class="arrows">
-                <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                <path class="a2" d="M0 25 L30 57 L60 25"></path>
-            </svg>
-        </div> -->
-
+    <header>
+        <h1>Brianna Wilson</h1>
+        <h2>data journalism & visualization</h2>
+        <p id="about">Brianna uses her background in design and engineering to build data experiences that engage and delight. Her work has been featured in the Washington Post, Nightingale Journal of Data Visualization, and in the Observable community. She's passionate about experimenting with new ways to make data stories compelling, including with 3D, interactives, and WebXR.</p>
     </header>
-        
-        
-    <div id="work" class="pb-24 max-sm:mx-6 sm:mx-14 md:mx-36">
-        <!-- <h3 class="flex font-bold text-xl underline decoration-2 underline-offset-[12px] py-2 px-2 mt-16 italic md:justify-center max-sm:pl-6 max-md:pl-[3.75rem]">// SELECTED WORKS</h3> -->
-        <h3 class="flex font-bold text-xl py-2 mt-16 italic pb-4 tracking-wide">// SELECTED WORKS</h3>
-        <hr class="solid-dark" aria-hidden=”true”>
 
-        <div class="work-section relative mt-12 sm:mt-20 mb-32 sm:mb-48">
-            <div class="h-80 md:h-96">
-                <img class="max-h-80 md:max-h-96 opacity-60 mx-auto" src="/assets/shell.gif" alt="A 3D wireframe model of a conch shell, rotating slowly in space">
-            </div>
-            
-            <div class="absolute flex flex-1 lg:w-1/2 md:right-36 lg:right-0 bottom-0 translate-y-12">
-                <svg width=75 height=175 fill="#2E2F30" class="big-slash translate-y-4 mr-2 scale-75 lg:scale-90 hidden md:block md:visible" aria-hidden=”true”><polygon points="8.45 175 0 172.11 66.55 0 75 2.89 8.45 175"/></svg>
-                <div class="md:mt-8 lg:mt-4 w-full sm:w-96">  
-                    <h3 class="text-4xl lg:text-5xl font-bold mb-3 tracking-wide py-1 lg:leading-tight hover:underline"><a href="https://observablehq.com/@bronna/parametric-seashell" target="_blank">Building a Parametric Seashell</a></h3>
-                    <p class="mb-6 bg-white px-1">Nearly every seashell can be modeled with one parametric equation. Build your own in this tool. Featured in <a class="underline" href="https://observablehq.com/@tomlarkworthy/notebooks2021" target="_blank">100 Beautiful and Informative Notebooks of 2021</a>. About <a class="underline" href="/shells">the process</a></p>
-                    <ul class="flex flex-wrap gap-2 mt-3 tracking-wider">
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">WEBGL</li>
-						<li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">REGL</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">THREEjs</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">SHADERS</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">OBSERVABLE</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">JAVASCRIPT</li>
-                    </ul>
+    <main>
+        <div id="project-grid">
+            <a href="https://www.washingtonpost.com/home/2023/04/05/peat-soil-mixes-harm-environment/?pwapi_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWJpZCI6IjU3MTk3Njk2IiwicmVhc29uIjoiZ2lmdCIsIm5iZiI6MTY4MDY2NzIwMCwiaXNzIjoic3Vic2NyaXB0aW9ucyIsImV4cCI6MTY4MTk2MzE5OSwiaWF0IjoxNjgwNjY3MjAwLCJqdGkiOiIxMjk2M2E3MC02NzFiLTRjMWUtYTVkYS1hNGI3YmNkNGZkOTciLCJ1cmwiOiJodHRwczovL3d3dy53YXNoaW5ndG9ucG9zdC5jb20vaG9tZS8yMDIzLzA0LzA1L3BlYXQtc29pbC1taXhlcy1oYXJtLWVudmlyb25tZW50LyJ9.h0PNpKWEcEjNy2rfWK4kdhtNaam04EzCWVYL651K5ms" class="project">
+                <div class="project-text">
+                    The environmental dangers of gardening with peat-based soils
+                    <!-- <p class="publication">
+                        The Washington Post
+                    </p> -->
                 </div>
-            </div>
-        </div>
-
-        <div class="work-section relative my-24 sm:my-48">
-            <div class="h-80 md:h-96">
-                <img class="max-h-80 md:max-h-96 mx-auto opacity-70" src="/assets/oregon.png" alt="A map outlining the school districts in the state of Oregon, with selected districts filled in">
-            </div>
-            
-            <div class="absolute flex flex-1 lg:w-1/2 md:left-36 lg:left-0 bottom-0 translate-y-12">
-                <svg width=75 height=175 fill="#2E2F30" class="big-slash translate-y-4 mr-2 scale-75 lg:scale-90 hidden md:block md:visible" aria-hidden=”true”><polygon points="8.45 175 0 172.11 66.55 0 75 2.89 8.45 175"/></svg>
-                <div class="md:mt-8 lg:mt-4 w-full sm:w-96">  
-                    <h3 class="text-4xl lg:text-5xl font-bold mb-3 tracking-wide py-1 lg:leading-tight hover:underline"><a href="https://specialeducationdata.org/" target="_blank">Data for Inclusion in Special Education</a></h3>
-                    <p class="mb-6 bg-white px-1">Inclusion standards vary widely between school districts. This app makes government data easy-to-access for advocates. About <a class="underline" href="/sped">the process</a></p>
-
-                    <ul class="flex flex-wrap gap-2 mt-3 tracking-wider">
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">PYTHON</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">APIs</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">JAVASCRIPT</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">D3js</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">OBSERVABLE</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">D3js</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">REACT</li>
-                    </ul>
+                <img src="projects/soil.jpg" class="project-image" alt="Project 3 Image">
+            </a>
+            <a href="https://specialeducationdata.org/" class="project">
+                <div class="project-text">
+                    Special education inclusion by district and state
+                    <!-- <p class="publication">
+                        Special Education Data.org
+                    </p> -->
                 </div>
-            </div>
-        </div>
-
-        <div class="work-section relative mt-32 sm:mt-48 mb-24">
-            <div class="h-80 md:h-96">
-                <img class="max-h-80 md:max-h-96 mx-auto opacity-40" src="/assets/ccchero.jpg" alt="A drawing of a muscular superhero with light hair and skin, wearing a bodysuit and a white cape, jumping off the ground with one fist in the air">
-            </div>
-            
-            <div class="absolute flex flex-1 lg:w-1/2 md:right-36 lg:right-0 bottom-0 translate-y-12">
-                <svg width=75 height=175 fill="#2E2F30" class="big-slash translate-y-4 mr-2 scale-75 lg:scale-90 hidden md:block md:visible" aria-hidden=”true”><polygon points="8.45 175 0 172.11 66.55 0 75 2.89 8.45 175"/></svg>
-                <div class="md:mt-8 lg:mt-4 w-full sm:w-96">  
-                    <h3 class="text-4xl lg:text-5xl font-bold mb-3 tracking-wide py-1 lg:leading-tight hover:underline"><a href="/comics">What do Comic Book Heroes Look Like?</a></h3>
-                    <p class="mb-6 bg-white px-1">Do lighter hair and eye colors show up more for "good" characters than for "bad?" An analysis of over 16,000 comic book characters</p>
-                    <ul class="flex flex-wrap gap-2 mt-3 tracking-wider">
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">PYTHON</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">PANDAS</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">JUPYTER</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">ILLUSTRATOR</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">AI2HTML</li>
-                        <li class="bg-[#2E2F30] text-white text-xs py-1 px-2 leading-4">APIs</li>
-                    </ul>
+                <img src="projects/donuts.png" class="project-image" alt="Project 6 Image">
+            </a>
+            <div class="project" onclick="navigate(event)">
+                <div class="project-text">
+                    How to build a seashell
+                    <!-- <p class="publication">
+                        Featured in <a href="https://observablehq.com/@tomlarkworthy/notebooks2021" class="nested-link" target="_blank">100 Beautiful and Informative Notebooks of 2021</a>
+                    </p> -->
                 </div>
+                <img src="projects/parametric_shells.png" class="project-image" alt="Project 1 Image">
             </div>
+            <a href="https://nightingaledvs.com/embracing-mobile-to-make-your-data-visualizations-more-equitable/" class="project" target="_blank">
+                <div class="project-text">
+                    Embracing mobile for more equitable data visualizations
+                    <!-- <p class="publication">
+                        Nightingale Journal of the Data Visualization Society
+                    </p> -->
+                </div>
+                <img src="projects/cavephones.png" class="project-image" alt="Project 2 Image">
+            </a>
+            <a href="projects/ceopay/index.html" class="project">
+                <div class="project-text">
+                    How has worker & CEO pay changed over time?
+                </div>
+                <img src="projects/ceopay.png" class="project-image" alt="Project 5 Image">
+            </a>
+            <a href="projects/comics/index.html" class="project">
+                <div class="project-text">
+                    The complexion of comic book heroes
+                </div>
+                <img src="projects/ccchero.jpg" class="project-image" alt="Project 4 Image">
+            </a>
+            <!-- <a href="project-link-7.html" class="project">
+                <div class="project-text">
+                    Shader landscapes
+                </div>
+                <img src="projects/rainbowlava.png" class="project-image" alt="Project 7 Image">
+            </a> -->
+            <!-- <a href="project-link-8.html" class="project">
+                <div class="project-text">
+                    Income and commuting choices
+                </div>
+                <img src="projects/NREL.png" class="project-image" alt="Project 8 Image">
+            </a> -->
+            <!-- <a href="project-link-9.html" class="project">
+                <div class="project-text">
+                    Should you use SVG, Canvas, or WebGL for your data visualization?
+                </div>
+                <img src="projects/NREL.png" class="project-image" alt="Project 9 Image">
+            </a> -->
+            
         </div>
-
-        <div id="more" class="mt-32 mb-24 sm:mt-44 text-md lg:text-lg flex flex-col">
-            <h3 class="flex italic pb-9 md:justify-center text-md lg:text-lg">// MORE WORK WITH</h3>
-            <ul class="flex flex-wrap gap-4 md:gap-8 tracking-wider md:justify-center text-sm lg:text-base max-md:pr-12">
-                <li class="bg-[#2E2F30] text-white font-medium py-2 px-3">
-                    <a href="/3d/">3D</a>
-                </li>
-                <li class="bg-[#2E2F30] text-white font-medium py-2 px-3">
-                    <a href="/d3/">D3js</a>
-                </li>
-                <li class="bg-[#2E2F30] text-white font-medium py-2 px-3">
-                    <a href="/illustrator/">ILLUSTRATOR</a>
-                </li>
-                <li class="bg-[#2E2F30] text-white font-medium py-2 px-3">
-                    <a href="/analysis/">DATA ANALYSIS</a>
-                </li>
-                <li class="bg-[#2E2F30] text-white font-medium py-2 px-3">
-                    <a href="/uiux/">UX/UI</a>
-                </li>
-            </ul>
-        </div>
-
-        <div id="articles">
-            <!-- <h3 class="flex font-bold text-xl underline decoration-2 underline-offset-[12px] py-2 px-2 mt-32 italic md:justify-center max-sm:pl-6 max-md:pl-[3.75rem] tracking-wide">// SELECTED ARTICLES</h3> -->
-            <!-- <h3 class="flex font-bold text-xl py-2 mt-16 italic pl-36 max-md:pl-[3.75rem] pb-4 tracking-wide">// SELECTED ARTICLES</h3>
-            <hr class="solid-dark"> -->
+    </main>
     
-            <h3 class="flex italic pb-9 md:justify-center text-md lg:text-lg">// ARTICLES</h3>
-    
-            <div id="articles" class="max-sm:pr-6">
-                <div id="article" class="leading-snug text-lg md:text-xl font-medium tracking-tight">
-                    <a href="https://nightingaledvs.com/embracing-mobile-to-make-your-data-visualizations-more-equitable/" target="_blank">
-                        <div class="sm:flex gap-4">
-                            <h2 class="hover:underline decoration-2">
-                                Embracing Mobile to Make Your Data Visualizations More Equitable
-                                <span class="text-base font-normal">(Nightingale - Journal of the Data Visualization Society)</span>
-                            </h2>
-                            <img src="/assets/cavephones.png" class="article-pic max-sm:mt-4 w-52" alt="drawings of people exploring a dark cave by the light of their cell phones">
-                        </div>
-                    </a>
-                </div>
+
+    <footer>
+        <!-- <div id="about">
+            <h2>About me</h2>
+            <p>Brianna uses her background in design and engineering to build data experiences that engage and delight. Her work has been featured in the Washington Post, Nightingale Journal of Data Visualization, and in the Observable community. She’s constantly experimenting with new ways to make information more compelling, including 3D, interactives, and WebXR.</p>
+        </div> -->
+        <div id="contact">
+            <h2>Thanks for stopping by</h2>
+            <div id="hi">
+                <h3>Say hi</h3>
+                <p>bronna@gmail.com</p>
+            </div>
+            <div id="connect">
+                <h3>Connect</h3>
+                <a href="https://linkedin.com/in/briannawil" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/bronna" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
-        
-    </div>
-        
-    <footer class="relative bg-[#2E2F30] mt-20">
-        
-        <div id="lavaFooter" class="top-0 left-0"></div>
-
-        <div id="about" class="absolute max-md:pr-6 top-12 sm:top-24 max-sm:pl-6 sm:left-[3.75rem] md:left-36 sm:right-16 md:right-36 md:flex md:flex-row-reverse md:gap-x-16">
-            <div id="bio" class="text-white">
-                <h3 class="text-sm italic pb-5 tracking-wide">// ABOUT</h3>
-                <div class="max-sm:space-y-8 text-lg font-medium tracking-tight sm:flex sm:gap-8">
-                    <p class="sm:pl-6">Brianna Wilson creates data experiences that shine light on society and the natural world. Previously, she was a designer of children’s toys, a Product Design Engineer on Apple’s iPad team, and a graduate of Stanford’s Product Design Engineering program and Columbia's Lede Program in Data Journalism. She’s based out of Portland, Oregon, USA, and in her free time loves to design sustainable landscapes, take dance classes, and wander through forests.</p>
-                    
-                </div>
-
-                <div id="contact" class="mt-8 sm:mt-16">
-                    <h3 class="max-sm:hidden text-sm italic pb-5 mb-2 tracking-wide">// CONTACT</h3>
-                    <div id="profiles" class="sm:pl-6 md:space-y-1 flex sm:flex-col gap-2 font-medium tracking-wide">
-                        <a href="mailto:bronna@gmail.com" target="_blank" class="contactLink flex">
-                            <i class="fas fa-envelope sm fa-fw translate-y-1 pr-6"></i>
-                            <span class="max-sm:hidden ml-6 hover:underline decoration-2 ">bronna@gmail.com</span>
-                        </a>
-                        <a href="https://github.com/bronna" target="_blank" class="contactLink">
-                            <i class="fab fa-github fa-fw"></i>
-                            <span class="ml-4 max-sm:hidden hover:underline decoration-2 ">Github</span>
-                        </a>
-                        <a href="https://twitter.com/bronna" target="_blank" class="contactLink">
-                            <i class="fab fa-twitter fa-fw"></i>
-                            <span class="ml-4 max-sm:hidden hover:underline decoration-2 ">Twitter</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/briannawil" target="_blank" class="contactLink">
-                            <i class="fab fa-linkedin-in fa-fw"></i>
-                            <span class="ml-4 max-sm:hidden  hover:underline decoration-2 ">LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
+        <!-- <div id="update">
+            <h2>Get updates</h2>
+            <form action="">
+                <input type="text" placeholder="Your email">
+                <input type="submit" value="Subscribe">
+            </form>
+            <p>Last updated: June 2023</p>
+            <p>All rights reserved</p>
+        </div> -->
     </footer>
-        
-        
-    <script id="vertex" type="x-shader/x-vertex">
-        // Perlin noise
-        // Classic Perlin 3D Noise 
-        // by Stefan Gustavson
-        //
-        vec4 permute(vec4 x)
-        {
-            return mod(((x*34.0)+1.0)*x, 289.0);
-        }
-        vec4 taylorInvSqrt(vec4 r)
-        {
-            return 1.79284291400159 - 0.85373472095314 * r;
-        }
-        vec3 fade(vec3 t)
-        {
-            return t*t*t*(t*(t*6.0-15.0)+10.0);
-        }
-        
-        float cnoise(vec3 P)
-        {
-            vec3 Pi0 = floor(P); // Integer part for indexing
-            vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
-            Pi0 = mod(Pi0, 289.0);
-            Pi1 = mod(Pi1, 289.0);
-            vec3 Pf0 = fract(P); // Fractional part for interpolation
-            vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
-            vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-            vec4 iy = vec4(Pi0.yy, Pi1.yy);
-            vec4 iz0 = Pi0.zzzz;
-            vec4 iz1 = Pi1.zzzz;
-        
-            vec4 ixy = permute(permute(ix) + iy);
-            vec4 ixy0 = permute(ixy + iz0);
-            vec4 ixy1 = permute(ixy + iz1);
-        
-            vec4 gx0 = ixy0 / 7.0;
-            vec4 gy0 = fract(floor(gx0) / 7.0) - 0.5;
-            gx0 = fract(gx0);
-            vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-            vec4 sz0 = step(gz0, vec4(0.0));
-            gx0 -= sz0 * (step(0.0, gx0) - 0.5);
-            gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-        
-            vec4 gx1 = ixy1 / 7.0;
-            vec4 gy1 = fract(floor(gx1) / 7.0) - 0.5;
-            gx1 = fract(gx1);
-            vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-            vec4 sz1 = step(gz1, vec4(0.0));
-            gx1 -= sz1 * (step(0.0, gx1) - 0.5);
-            gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-        
-            vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
-            vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
-            vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
-            vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
-            vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
-            vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
-            vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
-            vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
-        
-            vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-            g000 *= norm0.x;
-            g010 *= norm0.y;
-            g100 *= norm0.z;
-            g110 *= norm0.w;
-            vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-            g001 *= norm1.x;
-            g011 *= norm1.y;
-            g101 *= norm1.z;
-            g111 *= norm1.w;
-        
-            float n000 = dot(g000, Pf0);
-            float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-            float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
-            float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-            float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
-            float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-            float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
-            float n111 = dot(g111, Pf1);
-        
-            vec3 fade_xyz = fade(Pf0);
-            vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-            vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-            float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
-            return 2.2 * n_xyz;
-        }
-        
-        #define PI 3.1415926535897932384626433832795
-        
-        uniform float uTime;
-        uniform float uSpeed;
-        uniform float uMountainFrequency;
-        uniform float uMountainHeight;
-        
-        varying float vDisplace;
-        varying vec2 vUv;
-        
-        void main()
-        {
-            float t = uTime * uSpeed / 2.5;
-        
-            vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-        
-            // Add in the noise
-            vec2 modifiedPos = modelPosition.zx / uMountainFrequency;
-            //float noise = cnoise(vec3(modifiedPos.x, modifiedPos.y, 1.0)); //make it static
-            float noise = cnoise(vec3(modifiedPos.x - t, modifiedPos.y, 1.0));
-            noise += 1.0;
-            float elevation = noise * uMountainHeight;
-            modelPosition.y += elevation;
-        
-            vDisplace = noise * 0.4;
-            vUv = uv;
-        
-            vec4 viewPosition = viewMatrix * modelPosition;
-            vec4 projectedPosition = projectionMatrix * viewPosition;
-            gl_Position = projectedPosition;
-        }
-    </script>
 
-    <script id="particle-vertex" type="x-shader/x-vertex">
-        // Perlin noise
-        // Classic Perlin 3D Noise 
-        // by Stefan Gustavson
-        //
-        vec4 permute(vec4 x)
-        {
-            return mod(((x*34.0)+1.0)*x, 289.0);
-        }
-        vec4 taylorInvSqrt(vec4 r)
-        {
-            return 1.79284291400159 - 0.85373472095314 * r;
-        }
-        vec3 fade(vec3 t)
-        {
-            return t*t*t*(t*(t*6.0-15.0)+10.0);
-        }
-
-        float cnoise(vec3 P)
-        {
-            vec3 Pi0 = floor(P); // Integer part for indexing
-            vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
-            Pi0 = mod(Pi0, 289.0);
-            Pi1 = mod(Pi1, 289.0);
-            vec3 Pf0 = fract(P); // Fractional part for interpolation
-            vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
-            vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-            vec4 iy = vec4(Pi0.yy, Pi1.yy);
-            vec4 iz0 = Pi0.zzzz;
-            vec4 iz1 = Pi1.zzzz;
-
-            vec4 ixy = permute(permute(ix) + iy);
-            vec4 ixy0 = permute(ixy + iz0);
-            vec4 ixy1 = permute(ixy + iz1);
-
-            vec4 gx0 = ixy0 / 7.0;
-            vec4 gy0 = fract(floor(gx0) / 7.0) - 0.5;
-            gx0 = fract(gx0);
-            vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-            vec4 sz0 = step(gz0, vec4(0.0));
-            gx0 -= sz0 * (step(0.0, gx0) - 0.5);
-            gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-
-            vec4 gx1 = ixy1 / 7.0;
-            vec4 gy1 = fract(floor(gx1) / 7.0) - 0.5;
-            gx1 = fract(gx1);
-            vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-            vec4 sz1 = step(gz1, vec4(0.0));
-            gx1 -= sz1 * (step(0.0, gx1) - 0.5);
-            gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-
-            vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
-            vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
-            vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
-            vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
-            vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
-            vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
-            vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
-            vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
-
-            vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-            g000 *= norm0.x;
-            g010 *= norm0.y;
-            g100 *= norm0.z;
-            g110 *= norm0.w;
-            vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-            g001 *= norm1.x;
-            g011 *= norm1.y;
-            g101 *= norm1.z;
-            g111 *= norm1.w;
-
-            float n000 = dot(g000, Pf0);
-            float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-            float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
-            float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-            float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
-            float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-            float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
-            float n111 = dot(g111, Pf1);
-
-            vec3 fade_xyz = fade(Pf0);
-            vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-            vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-            float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
-            return 2.2 * n_xyz;
-        }
-
-        #define PI 3.1415926535897932384626433832795
-
-        uniform float uTime;
-        uniform float uSpeed;
-        uniform float uMountainFrequency;
-        uniform float uMountainHeight;
-        uniform float uSize;
-
-        varying float vDisplace;
-        varying vec2 vUv;
-
-        void main()
-        {
-            float t = uTime * uSpeed - 1.5;
-
-            vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-
-            // Add in the noise
-            vec2 modifiedPos = modelPosition.zx / 300.0;
-            //float noise = cnoise(vec3(modifiedPos.x, modifiedPos.y, 1.0));  //make it static
-            float noise = cnoise(vec3(modifiedPos.x - t, modifiedPos.y, 1.0));
-            noise += 1.0;
-            float elevation = noise * 140.0;
-            modelPosition.y += elevation;
-
-            vDisplace = noise * 0.4;
-            vUv = uv;
-
-            vec4 viewPosition = viewMatrix * modelPosition;
-            vec4 projectedPosition = projectionMatrix * viewPosition;
-            gl_Position = projectedPosition;
-
-            //gl_PointSize = uSize * (1.0 / - viewPosition.z); // why is this not working?
-            gl_PointSize = uSize;
-        }
-    </script>
-        
-    <script id="lava-fragment" type="x-shader/x-fragment">
-        uniform sampler2D uPallete;
-        uniform vec3 uDepthColor;
-        uniform vec3 uSurfaceColor;
-        uniform float uColorOffset;
-        uniform float uColorMultiplier;
-        
-        varying float vDisplace;
-        varying vec2 vUv;
-        
-        void main()
-        {
-            //////// RAINBOW LAVA
-            float color1 = vDisplace * 2.05;
-        
-            float color2 = vUv[0];
-            float color3 = vUv[1];
-        
-            gl_FragColor = vec4(color1, color2, color3, 1.0);
-        }
-    </script>
-
-    <script id="glow-fragment" type="x-shader/x-fragment">
-        uniform sampler2D uPallete;
-        uniform vec3 uDepthColor;
-        uniform vec3 uSurfaceColor;
-        uniform float uColorOffset;
-        uniform float uColorMultiplier;
-
-        varying float vDisplace;
-        varying vec2 vUv;
-
-        void main()
-        {
-            ////////// HIGH CONTRAST STRIPES
-            float glowBandReducerOut = 60.0;
-            float glowBandReducerIn = 150.0;
-
-            float stripesTop = mod(vDisplace * 20.0, 1.0);
-            float stripesBottom = mod(vDisplace * 20.0 + 0.13, 1.0);
-
-            //top glow
-            float strength = pow(1.0 - stripesTop, glowBandReducerOut);
-            strength += pow(stripesTop, glowBandReducerIn);
-
-            //bottom glow
-            strength += pow(stripesBottom, glowBandReducerOut);
-            strength += pow(1.0 - stripesBottom, glowBandReducerIn);
-
-            //solid stripe
-            strength += step(0.87, stripesTop);
-            gl_FragColor = vec4(vec3(strength), 1.0);
-
-            //////// SUBTLE COLORS
-            vec3 blackColor = vec3(0.0);
-
-            float elevation = (vDisplace + uColorOffset) * uColorMultiplier;
-            vec3 depthColor = mix(uSurfaceColor, uDepthColor, elevation);
-
-            vec3 mixedColor = mix(blackColor, depthColor, strength);
-            gl_FragColor = vec4(mixedColor, 1.0);
-        }
-    </script>
-
-    <script id="particle-fragment" type="x-shader/x-fragment">
-        uniform sampler2D uPallete;
-        uniform vec3 uDepthColor;
-        uniform vec3 uSurfaceColor;
-        uniform float uColorOffset;
-        uniform float uColorMultiplier;
-
-        varying float vDisplace;
-        varying vec2 vUv;
-
-        void main()
-        {
-            // ////////// HIGH CONTRAST STRIPES
-            float strength = mod(vDisplace * 20.0 - 0.1, 1.0);
-            strength = step(0.7, strength); // do 0.9 for black + white, 0.8 for rainbow
-
-            //////// SUBTLE COLORS
-            vec3 blackColor = vec3(0.0);
-
-            float elevation = (vDisplace + uColorOffset) * uColorMultiplier;
-            vec3 depthColor = mix(uSurfaceColor, uDepthColor, elevation);
-
-            vec3 mixedColor = mix(blackColor, depthColor, strength);
-            gl_FragColor = vec4(mixedColor, 1.0);
-        }
-    </script>
-
-    <script src="three.min.js"></script>
-    <script src="index.js"></script>
+    <script src="scripts.js"></script>
 </body>
+
 </html>
+
+<!--TO DO: Add meta tags-->
