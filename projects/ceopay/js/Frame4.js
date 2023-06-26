@@ -20,7 +20,7 @@ async function Frame4() {
 	loc = 4/2, delayDisappear = 0, delayAppear = 1, finalText = true, xloc = dimensions.boundedWidth / 2, w = 350);
     
   //Add bottom text
-    changeBottomText(newText = "let's compare this to hours worked",
+    changeBottomText(newText = "let's compare to hours worked",
 	loc = 1/2, delayDisappear = 0, delayAppear = 3, finalText = true, xloc = dimensions.boundedWidth / 2, w = 350);
     
 }
