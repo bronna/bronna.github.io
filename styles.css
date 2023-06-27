@@ -1,10 +1,12 @@
 body {
     font-family: 'Playfair', serif;
     padding: 0 6rem 0 6rem;
-    color: rgb(63, 63, 70);
+    /* color: rgb(63, 63, 70); */
+    color: #1e6091;
     font-size: 1.2rem;
-    font-weight: 400;
-    background-color: rgb(246, 245, 242);
+    /* font-weight: 400;
+    background-color: rgb(246, 245, 242); */
+    background-color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -18,7 +20,8 @@ h1 {
     font-weight: 800;
     font-size: 2.2rem;
     letter-spacing: 0.1rem;
-    color: #22577A;
+    /* color: #22577A; */
+    color: #1e6091;
     margin-bottom: 0rem;
 }
 
@@ -30,7 +33,8 @@ header h2 {
 h2, h3 {
     font-family: 'Wix Madefor Display', serif;
     letter-spacing: 0.02rem;
-    color: #38A3A5;
+    /* color: #38A3A5; */
+    color: #1e6091;
 }
 
 header {
@@ -55,10 +59,11 @@ header {
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
+    box-shadow: 2px 4px 12px -2px rgba(63, 63, 70, 0.2); /* horizontal-offset vertical-offset blur-radius(size of blur) spread-radius(size of shadow) color; */
 }
 
 .project:hover {
@@ -66,7 +71,7 @@ header {
 }
 
 .project-text {
-    padding: 1.8rem 1.2rem 2rem 1.2rem;
+    padding: 1.8rem 1.2rem 1.8rem 1.2rem;
     background: #fff;
     text-align: center;
     font-family: 'Wix Madefor Display', serif;
@@ -94,6 +99,7 @@ header {
 footer {
     text-align: center;
     padding: 10rem 0 24rem 0;
+    color: #1e6091;
 }
 
 #about {
@@ -134,10 +140,6 @@ footer a:hover i {
     margin-right: 16px;
 }
 
-.article {
-    background-color: white;
-}
-
 .home {
     text-decoration: none;
     color: inherit;
@@ -145,6 +147,7 @@ footer a:hover i {
     font-weight: 600;
     letter-spacing: 0.03rem;
     font-size: 1rem;
+    color: #1e6091;
 }
 
 .article-image {
@@ -161,7 +164,6 @@ footer a:hover i {
 }
 
 .article-viz-headline {
-    color: rgb(63, 63, 70);
     font-size: 1.6rem;
     line-height: 2.2rem;
 }
