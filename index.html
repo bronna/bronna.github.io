@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brianna Wilson - Designer & Engineer</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&family=Inria+Sans:wght@300;700&family=Inria+Serif:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <div class="graphic-container">
+            <div id="visual"></div>
+        </div>
+        <div class="text-content">
+            <header>
+                <p><span class="slash">/</span><span class="greeting">Hello! This is the page of</span><span class="slash">/</span></p>
+                <h1 id="name">Brianna Wilson -</h1>
+                <h1 id="role">Designer & Engineer</h1>
+            </header>
+        
+            <main>
+                <div id="intro">
+                    <p>
+                        <span class="subheading">Making data human-friendly.</span> Using technologies like 3D, web interactivity, and AR, Brianna explores novel and engaging ways to visualize information. Her work has appeared in the Washington Post, Nightingale Journal of Data Visualization, and more. Her training started at Stanford in the Product Design program, after which she worked as a product design engineer at Apple on the first several iPads. Since then, she's started a sustainable toy company, completed the Lede Program in Data Journalism at Columbia, and continues her work in data journalism and communication design.
+                    </p>
+                </div>
+                
+                <div id="projects">
+                    <h2>Recent work</h2>
+                    <div class="project-list">
+                        <div class="project" style="margin-bottom:0.3rem;">
+                            <h3 class="project-name">
+                                <a href="https://specialeducationdata.org/">IEPData</a>
+                            </h3>
+                            <div class="project-description">
+                                <span class="project-description-marker">&gt;</span>
+                                <p class="project-description-text">A tool to explore special education data around the state of Oregon</p>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <h3 class="project-name">
+                                <a href="https://leeway.studio/">Leeway</a>
+                            </h3>
+                            <div class="project-description">
+                                <span class="project-description-marker">&gt;</span>
+                                <p class="project-description-text">Resources for communication design and visualization on the web</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        
+            <footer>
+                <h2>Get in touch</h2>
+                <p id="email">briannadatajourn@proton.me</p>
+                <div class="links-container">
+                    <a href="https://linkedin.com/in/briannawil">LinkedIn</a>
+                    <a href="https://bsky.app/">Bluesky</a>
+                    <a href="https://github.com/bronna">Github</a>
+                    <a href="https://observablehq.com/@bronna">Observable</a>
+                    <a href="https://x.com/bronna">Twitter</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            }
+        }
+    </script>
+
+     <script type="module" src="floaty-glowy-orbs.js"></script>
+</body>
+
+</html>

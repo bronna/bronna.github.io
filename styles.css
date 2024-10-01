@@ -1,0 +1,267 @@
+:root {
+    --hover-color: rgba(255, 255, 255, 0.9);
+    --text-color: rgba(255, 255, 255, 1.0);
+    --accent-color: rgba(255, 255, 255, 0.7);
+    --button-background-color: #36343e;
+    --background-color: #1F1E25;
+    --orb-distribution: 1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    letter-spacing: 0.02rem;
+    line-height: 2rem;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body a {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-thickness: 1px;
+}
+
+body a:hover {
+    color: var(--hover-color);
+    transition: color 0.2s ease-in-out;
+}
+
+h1 {
+    font-family: 'Inria Serif', serif;
+    font-weight: 700;
+    font-size: 4rem;
+    letter-spacing: -0.2rem;
+    line-height: 4.6rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-family: 'Inria Serif', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+    line-height: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+h3 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    letter-spacing: -0.0rem;
+    line-height: 2.4rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* This reverses the order of the flex items */
+    min-height: 100vh;
+    width: 100%;
+}
+
+.graphic-container {
+    flex: 0 0 40%;
+    position: relative;
+    height: 100vh;
+}
+
+#visual {
+    position: absolute;
+    top: 0;
+    left: 0; /* Changed from right to left */
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 1000px) {
+    :root {
+        --orb-distribution: 0;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .graphic-container {
+        flex: none;
+        height: 10vh;
+    }
+    
+    #visual {
+        position: relative;
+    }
+}
+
+.text-content {
+    flex: 0 0 60%; /* This sets a fixed width for the text content */
+    padding: 8rem 4rem 8rem 1rem;
+    overflow-y: auto;
+    height: 100vh;
+    z-index: 1; /* Ensures text is above the 3D graph */
+}
+
+@media (max-width: 1000px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .text-content {
+        flex: none;
+        width: 100%;
+        padding: 2rem;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    header {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+header p {
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.greeting {
+    font-weight: 400;
+    font-family: 'Inria Serif', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.01rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+
+.slash {
+    color: var(--accent-color);
+    font-size: 1.7rem;
+}
+
+#name {
+    font-weight: 700;
+    font-size: 3.9rem;
+    margin-bottom: -0.5rem;
+    letter-spacing: 0.03rem;
+}
+
+#role {
+    font-weight: 300;
+    font-size: 3.9rem;
+    letter-spacing: -0.15rem;
+    color: var(--accent-color);
+    margin-bottom: 3rem;
+}
+
+#intro {
+    margin-bottom: 3rem;
+    color: var(--accent-color);
+    font-weight: 300;
+}
+
+.subheading {
+    padding-right: 2px;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+    color: var(--text-color);
+    font-family: 'Inria Serif', serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+#projects {
+    margin-bottom: 3rem;
+}
+
+.project {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.project-description {
+    display: flex;
+    gap: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.03rem;
+    color: var(--accent-color);
+}
+
+.project:hover .project-description {
+    opacity: 1;
+}
+
+.project-description {
+    height: 0;
+}
+
+#email {
+    margin-bottom: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    letter-spacing: 0.08rem;
+    color: var(--accent-color);
+}
+
+footer {
+    margin-bottom: 8rem;
+}
+
+footer .links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+footer i {
+    font-size: 1.6rem;
+}
+
+footer a {
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    padding: 0.4rem 1rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--button-background-color);
+    transition: all 0.2s ease-in-out;
+}
+
+footer a:hover {
+    color: var(--text-color);
+}
+
+footer a:active {
+    transform: scale(0.95);
+    background-color: #414141;
+}
+
+
+
