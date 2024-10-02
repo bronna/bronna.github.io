@@ -13,7 +13,7 @@ function init() {
     scene = new THREE.Scene()
 
     const containerRect = container.getBoundingClientRect();
-    camera = new THREE.PerspectiveCamera(50, containerRect.width / containerRect.height, 0.1, 10)
+    camera = new THREE.PerspectiveCamera(30, containerRect.width / containerRect.height, 0.1, 10)
     camera.position.set(0, 0, 3)
 
     scene.add(new THREE.HemisphereLight(0x808080, 0x606060))
@@ -150,7 +150,7 @@ function createOrbs(gradientMaterial) {
             object.position.z = Math.random() * -2 - 1     // Range: -3 to -1
             
             // Larger scale range for small screens
-            const baseScale = Math.random() * 0.7 + 0.8  // Range: 0.8 to 1.5
+            const baseScale = Math.random() * 0.8 + 0.5  // Range: 0.5 to 1.3
             object.scale.setScalar(baseScale)
         }
 
