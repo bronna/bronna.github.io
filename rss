@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Your site title here</title>
+<description>Your site description here</description>
+<link>https://your-domain.tld</link>
+<atom:link href="https://your-domain.tld/rss.xml" rel="self" type="application/rss+xml"/>
+<item>
+<guid isPermaLink="true">https://your-domain.tld/blog//blog/chaos-of-data</guid>
+<title>null</title>
+<link>https://your-domain.tld/blog//blog/chaos-of-data</link>
+<description>null</description>
+<pubDate>Tue, 22 Apr 2025 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://your-domain.tld/blog//blog/generative-art-lygia-clarke</guid>
+<title>Creating Generative Art with Threlte: A Tribute to Lygia Clarke</title>
+<link>https://your-domain.tld/blog//blog/generative-art-lygia-clarke</link>
+<description>Creating Generative Art with Threlte: A Tribute to Lygia Clarke</description>
+<pubDate>Thu, 22 May 2025 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://your-domain.tld/blog//blog/icon-drag</guid>
+<title>null</title>
+<link>https://your-domain.tld/blog//blog/icon-drag</link>
+<description>null</description>
+<pubDate>Thu, 13 Feb 2025 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://your-domain.tld/blog//blog/js-apis-intro</guid>
+<title>Beyond SVG: when to use Canvas and WebGL for data visualization</title>
+<link>https://your-domain.tld/blog//blog/js-apis-intro</link>
+<description>Beyond SVG: when to use Canvas and WebGL for data visualization</description>
+<pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://your-domain.tld/blog//blog/protagonists</guid>
+<title>Protagonists & Silicon Valley</title>
+<link>https://your-domain.tld/blog//blog/protagonists</link>
+<description>Protagonists & Silicon Valley</description>
+<pubDate>Sat, 08 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
